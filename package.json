@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"npm run dev:next\" \"npm run dev:json\"",
+    "dev:next": "next dev -p 3002",
+    "dev:json": "json-server --watch app/database/db.json --port 3004",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
