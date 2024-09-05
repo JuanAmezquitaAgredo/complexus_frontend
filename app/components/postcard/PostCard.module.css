@@ -1,0 +1,65 @@
+.card {
+  display: flex;
+  flex-direction: column;
+    width: 400px;
+    height: 200px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    position: relative;
+    gap: 30px
+    ;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .userInfo {
+    display: flex;
+    align-items: center;
+    
+  }
+  
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 20%;
+    margin-right: 10px;
+  }
+  
+  .userName {
+    font-weight: bold;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .icon {
+    width: 30px;
+    cursor: pointer;
+  }
+  
+  .message {
+    margin: 15px 0;
+  }
+  
+  .footer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer img {
+    width: 30px;
+    margin-right: 5px;
+  }
+  
+  .footer span {
+    font-size: 14px;
+  }
+  
