@@ -9,6 +9,7 @@
 .navbar{
     display: flex;
     justify-content: left;
+    align-items: center;
 }
 .Logo{
     width: 300px;
