@@ -1,10 +1,11 @@
-import InputField from "./components/common/input/input";
+
+import { Navbar } from "./components/common/navbar/navbar";
+
 
 export default function Home() {
   return (
     <div>
-      <h1>Hola mundo desde home page</h1>
-      <InputField label="Email" type="email" name="email" value="" placeholder="Email"/>
+      <Navbar />
     </div>
   );
 }
