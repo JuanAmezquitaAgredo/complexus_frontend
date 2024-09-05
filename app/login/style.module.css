@@ -2,6 +2,8 @@
     background: linear-gradient(115deg, #260e69 48%, #232323 50%);
     width: 100%;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 .navbar{
     display: flex;
