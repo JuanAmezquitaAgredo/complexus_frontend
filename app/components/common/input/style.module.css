@@ -1,4 +1,5 @@
 .InputContainer {
+    width: 80%;
     margin-bottom: 16px;
     background-color: #260e69;
 }
@@ -12,7 +13,7 @@
 }
 
 .Inputform{
-    width: 30%;
+    width: 100%;
     padding: 15px;
     font-size: 1.2rem;
     border-radius: 50px;
