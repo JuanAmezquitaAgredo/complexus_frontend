@@ -1,19 +1,17 @@
-import styled from "styled-components";
-
-export const InputContainer = styled.div`
+.InputContainer {
     margin-bottom: 16px;
     background-color: #260e69;
-`;
+}
 
-export const Label = styled.label`
+.Label {
     display: block;
     font-size: 1rem;
     font-weight: 600;
     color: #f3f4f6;
     margin-bottom: 8px;
-`;
+}
 
-export const Input = styled.input`
+.Inputform{
     width: 30%;
     padding: 15px;
     font-size: 1.2rem;
@@ -23,9 +21,9 @@ export const Input = styled.input`
     color: white;
     margin-bottom: 20px;
     outline: none;
-}
 
-input::placeholder {
-    color: rgba(255, 255, 255, 0.7); /* Placeholder semi-transparente */
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+    }
 }
-`;
