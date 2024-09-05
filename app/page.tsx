@@ -1,11 +1,10 @@
-
-import { Navbar } from "./components/navbar/navbar";
-
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div>
-      <Navbar />
-    </div>
+    <main>
+      <h1>Home</h1>
+      <Link href="/admin"> Admin</Link>
+    </main>
   );
 }

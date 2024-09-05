@@ -2,10 +2,11 @@
 import React from 'react'
 import style from './styles.module.css'
 import { Sidebar } from '../sidebar/sidebar';
+import PostCard from '../postcard/PostCard';
 
 export const Navbar = () => {
   return (
-      <><nav className={style.nav}>
+    <><nav className={style.nav}>
       <div>
         <img className={style.logo} src="/Logo_name.png" />
       </div>
@@ -16,7 +17,6 @@ export const Navbar = () => {
         <img className={style.user} src="/user.png" />
       </a>
     </nav>
-    <Sidebar />
     </>
   )
 }
