@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "../common/input/input";
 import Button from "../common/button/button";
 import Style from "./style.module.css";
@@ -7,6 +7,7 @@ import { UserLogin } from "@/app/types/common/common";
 import { useRouter } from "next/navigation";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
+import showAlert from "../alertcomponent/alertcomponent";
 
 const Login: React.FC = () => {
 
@@ -19,6 +20,13 @@ const Login: React.FC = () => {
     const [signInWithEmailAndPassword, , loading] = useSignInWithEmailAndPassword(auth);
     const router = useRouter();
 
+    useEffect(() => {
+        const token = sessionStorage.getItem('token');
+        if (token) {
+            router.push('/admin');
+        }
+    }, [router]);
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => { 
         event.preventDefault();
         try {
@@ -30,14 +38,40 @@ const Login: React.FC = () => {
                 const userEmailVerified = response.user.emailVerified;
                 
                 if (userEmailVerified) {
-                    alert('Login exitoso');
-                    setUser(initialState);
-                    sessionStorage.setItem('token', response.user.uid);
-                    router.push('/admin'); // Redirigir al inicio
+                    // Verificar en json-server
+                    const userResponse = await fetch(`http://localhost:3004/users?email=${user.email}`);
+                    const users = await userResponse.json();
+
+                    if (users.length > 0) {
+                        // Usuario encontrado en json-server
+                        await showAlert({
+                            title: "Sesión iniciada",
+                            text: "¡Bienvenido de nuevo!",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        })
+                        setUser(initialState);
+                        sessionStorage.setItem('token', response.user.uid);
+
+                        router.push('/admin'); // Redirigir al inicio
+                    } else {
+                        // Usuario no encontrado en json-server
+                        await showAlert({
+                            title: "Error",
+                            text: "Usuario no encontrado",
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        })
+                    }
                 } else {
                     // Si el correo no está verificado
-                    alert('Por favor, verifica tu correo antes de iniciar sesión.');
-                    console.log(response)
+                    await showAlert({
+                        title: "Error",
+                        text: "Correo no verificado, por favor verificalo",
+                        icon: "error",
+                        confirmButtonText: "OK"
+                    })
+                    console.log(response);
                 }
             }
         } catch (error) {
@@ -59,4 +93,5 @@ const Login: React.FC = () => {
         </form>
     );
 };
+
 export default Login;

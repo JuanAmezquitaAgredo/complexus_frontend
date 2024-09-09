@@ -5,4 +5,5 @@ export interface UserOwner {
     phone: string;
     tower: string;
     apto: string;
+    rol: string;
 }
