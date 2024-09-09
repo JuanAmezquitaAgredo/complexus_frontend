@@ -9,7 +9,8 @@ export interface InputFieldProps {
 }
 
 export interface ButtonProps{
-    onClick: () => void;
+    type?: string;
+    onClick?: () => void;
     label: string;
     backgroundColor?: string;
 }
@@ -17,4 +18,9 @@ export interface ButtonProps{
 export interface ButtonGradientProps{
     label: string;
     onClick: () => void;
+}
+
+export interface UserLogin {
+    email: string;
+    password: string;
 }

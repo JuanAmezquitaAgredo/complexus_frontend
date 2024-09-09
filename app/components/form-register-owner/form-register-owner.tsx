@@ -56,7 +56,7 @@ const FormRegisterOwner = () => {
             <InputField label="Tower" type="text" name="tower" value={owner.tower} placeholder="Tower" onChange={handleChange} />
             <InputField label="Apto" type="text" name="apto" value={owner.apto} placeholder="Apto" onChange={handleChange} />
             <div className={Style.form_buttons}>
-                <Button label="Register" onClick={() => handleSubmit} />
+                <Button label="Register" type="submit" />
             </div>
         </form>
     );
