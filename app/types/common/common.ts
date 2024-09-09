@@ -4,6 +4,7 @@ export interface InputFieldProps {
     name: string;
     value: string;
     placeholder: string;
+    boderColor?: string;
     // onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -14,4 +15,5 @@ export interface ButtonProps{
 
 export interface ButtonGradientProps{
     label: string;
+    onClick: () => void;
 }

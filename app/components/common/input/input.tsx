@@ -3,7 +3,7 @@ import React from "react";
 import { InputFieldProps } from "@/app/types/common/common";
 import Style from "./style.module.css";
 
-const InputField: React.FC<InputFieldProps> = ({ label, type, name, value, placeholder }) => {
+const InputField: React.FC<InputFieldProps> = ({ label, type, name, value, placeholder,boderColor }) => {
 
     return (
         <div className={Style.InputContainer}>
@@ -14,6 +14,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, type, name, value, place
                 name={name}
                 value={value}
                 placeholder={placeholder}
+                style={{borderColor: boderColor}}
             />
         </div>
     )

@@ -1,7 +1,6 @@
 .InputContainer {
     width: 80%;
-    margin-bottom: 16px;
-    background-color: #260e69;
+    background-color: transparent;
 }
 
 .Label {
