@@ -1,32 +1,36 @@
-'use client'
+'use client';
 import React from 'react';
 import styles from './PostCard.module.css';
 
-interface PostCardProps {
-  userName: string;
-  message: string;
+interface JobCardProps {
+  title: string;
+  user: string;
+  timePosted: string;
+  description: string;
   likes: number;
+  comments: number;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ userName, message, likes }) => {
+const PostCard: React.FC<JobCardProps> = ({ title, user, timePosted, description, likes, comments }) => {
   return (
     <div className={styles.card}>
-      <div className={styles.header}>
+      <div className={styles.cardHeader}>
         <div className={styles.userInfo}>
-          <img className={styles.avatar} src="/user-card.png" alt="User Avatar" />
-          <span className={styles.userName}>{userName}</span>
-        </div>
-        <div className={styles.actions}>
-          <img className={styles.icon} src="/edit.png" alt="Edit Icon" />
-          <img className={styles.icon} src="/delete.png" alt="Delete Icon" />
+          <h3>{title}</h3>
+          <span>{user} • {timePosted}</span>
         </div>
       </div>
-      <div className={styles.message}>
-        <p>{message}</p>
+      <div className={styles.cardContent}>
+        <p>{description}</p>
       </div>
-      <div className={styles.footer}>
-        <img className={styles.icon} src="/heart.png" alt="Heart Icon" />
-        <span>{likes}</span>
+      <div className={styles.containerImage}>
+        <img className={styles.image} src="/post1.webp" alt="" />
+      </div>
+      <div className={styles.cardActions}>
+        <div className={styles.likes}>
+          <span className={styles.followc}><img className={styles.follow} src="/heart.png" alt="" /> {likes}</span>
+        </div>
+        <button className={styles.sendBtn}>Send</button>
       </div>
     </div>
   );
