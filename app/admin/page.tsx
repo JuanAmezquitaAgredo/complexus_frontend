@@ -12,7 +12,35 @@ const adminPage = () => {
         <div className={styles.container}>
             <Sidebar />
             <div className={styles.posts}>
-              <PostCard userName='Juan' message='Hello Welcome' likes={25}/>
+              <PostCard title="Pago por trabajo"
+                user="Adrian Florez"
+                timePosted="48m"
+                description="¿Alguien sin empleo? Disponible para ganarse una buena liga escribir al privado solo hombres y al chat privado (trecients.k)"
+                likes={1}
+                comments={4}
+                />
+                <PostCard title="Pago por trabajo"
+                user="Adrian Florez"
+                timePosted="48m"
+                description="¿Alguien sin empleo? Disponible para ganarse una buena liga escribir al privado solo hombres y al chat privado (trecients.k)"
+                likes={1}
+                comments={4}
+                />
+                <PostCard title="Pago por trabajo"
+                user="Adrian Florez"
+                timePosted="48m"
+                description="¿Alguien sin empleo? Disponible para ganarse una buena liga escribir al privado solo hombres y al chat privado (trecients.k)"
+                likes={1}
+                comments={4}
+                />
+                <PostCard title="Pago por trabajo"
+                user="Adrian Florez"
+                timePosted="48m"
+                description="¿Alguien sin empleo? Disponible para ganarse una buena liga escribir al privado solo hombres y al chat privado (trecients.k)"
+                likes={1}
+                comments={4}
+                />
+                
             </div>
         </div>
     </main>

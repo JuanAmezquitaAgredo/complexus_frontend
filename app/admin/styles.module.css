@@ -3,5 +3,31 @@
     height: 150px;
 }
 .posts{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
     margin: 40px;
+    height: 75vh;
+    overflow: scroll;
+    overflow-x: hidden;
 }
+
+.posts::-webkit-scrollbar {
+    width: 10px; /* Ancho de la barra */
+  }
+  
+  .posts::-webkit-scrollbar-track {
+    background: transparent; /* Color del fondo de la barra */
+    border-radius: 10px; /* Redondeo del fondo de la barra */
+  }
+  
+  .posts::-webkit-scrollbar-thumb {
+    background-color: #260e69; /* Color del deslizador */
+    border-radius: 10px; /* Redondeo del deslizador */
+    border: 2px solid #260e69; /* Borde del deslizador */
+  }
+  
+  .posts::-webkit-scrollbar-thumb:hover {
+    background-color: #6c30cc; /* Color del deslizador cuando se pasa el ratón por encima */
+  }
