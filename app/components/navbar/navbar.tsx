@@ -7,6 +7,7 @@ import Modal from '../common/modal/modal';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { getAuth, signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
+import showAlert from '../alertcomponent/alertcomponent';
 
 export const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +26,14 @@ export const Navbar = () => {
     const auth = getAuth(); // Obtener la instancia de auth
     try {
       await signOut(auth); // Cerrar sesión
-      alert('Sesión cerrada exitosamente');
+      await showAlert({
+        title: 'Sesión cerrada',
+        text: 'Sesión cerrada correctamente',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      })
+      sessionStorage.removeItem('token');
+      router.push('/login');
       
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
