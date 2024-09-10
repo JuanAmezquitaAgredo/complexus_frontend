@@ -1,0 +1,24 @@
+.aside{
+    width: 18vh;
+    height: 85vh;
+    background-color: #260e69;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ul{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+.icons {
+    transition: transform 0.7s;
+    color: white;
+    width: 60px;
+    height: 50px;
+}
+
+.icons:hover {
+    transform: scale(1.2); /* Efecto de agrandar */
+}

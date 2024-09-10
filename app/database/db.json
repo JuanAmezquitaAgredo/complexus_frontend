@@ -1,3 +1,20 @@
 {
-  "users": []
+  "users": [],
+  "posts": [
+    {
+      "id": "04c3",
+      "title": "carro en venta",
+      "user": "juan",
+      "description": "vendo carro",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975075/proyecto/bjqon7w1mf6oc29yjri3.jpg"
+    },
+    {
+      "id": "e1de",
+      "title": "sofa",
+      "user": "carlos",
+      "description": "vendo sofa",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+    }
+  ],
+  "pin": []
 }

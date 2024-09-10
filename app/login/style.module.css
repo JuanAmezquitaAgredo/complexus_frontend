@@ -1,0 +1,80 @@
+.LoginPage{
+    background: linear-gradient(115deg, #260e69 48%, #232323 50%);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.navbar{
+    height: 20vh;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.Logo{
+    width: 300px;
+    height: auto;
+    margin: 10px 30px;
+}
+
+.loginContainer {
+    width: 100%;
+    height: 70vh;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient( #441fab 30%, rgba(255, 255, 255, 0) 70%);
+    z-index: 1; /* Asegura que el fondo esté detrás de la imagen */
+}
+
+.image {
+    position: relative;
+    width: 70%;
+    height: auto;
+    object-fit: cover; /* Ajusta el tamaño de la imagen para cubrir el contenedor */
+    z-index: 1; /* Asegura que la imagen esté encima del fondo */
+}
+
+.footer{
+    margin-top: 20px;
+    width: 100%;
+    height: 10vh;
+    background-color: #15004e;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    font-size: 8px;
+}
+
+.logoFooter{
+    width: 30px;
+}
+
+.RegisterContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 30px;
+}
