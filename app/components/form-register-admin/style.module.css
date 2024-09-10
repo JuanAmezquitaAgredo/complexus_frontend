@@ -18,3 +18,9 @@
     display: flex;
     justify-content: space-around;
 }
+
+.hr{
+    width: 100%;
+    background-color: aliceblue;
+    margin-bottom: 10px;
+}
