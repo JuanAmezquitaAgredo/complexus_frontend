@@ -14,9 +14,11 @@ interface JobCardProps {
   timePosted: string;
   description: string;
   likes: number;
+  imageUrl: string;
 }
 
-const PostCard: React.FC<JobCardProps> = ({ id, title, user, timePosted, description, likes }: JobCardProps) => {
+
+const PostCard: React.FC<JobCardProps> = ({ id, title, user, timePosted, description, likes, imageUrl }: JobCardProps) => {
   return (
       <div className={styles.card} key={id}>
         <div className={styles.cardHeader}>
@@ -34,7 +36,7 @@ const PostCard: React.FC<JobCardProps> = ({ id, title, user, timePosted, descrip
           <p>{description}</p>
         </div>
         <div className={styles.containerImage}>
-          <img className={styles.image} src="/post1.webp" alt="" />
+          <img className={styles.image} src={imageUrl} alt={title} /> {/* Usar la URL de la imagen */}
         </div>
         <div className={styles.cardActions}>
           <div className={styles.likes}>

@@ -2,6 +2,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 interface Post {
+  imageUrl: string;
   id: number;
   title: string;
   user: string;
@@ -43,7 +44,6 @@ const postSlice = createSlice({
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.loading = false;
         state.posts = action.payload;
-        console.log('posts', state.posts);
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.loading = false;

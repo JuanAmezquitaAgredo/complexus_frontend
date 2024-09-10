@@ -2,36 +2,18 @@
   "users": [],
   "posts": [
     {
-      "id": 1,
-      "title": "Hello World",
-      "users": "johana",
-      "timePosted": "2021-07-01T12:00:00",
-      "description": "This is a test post",
-      "likes": 22
+      "id": "04c3",
+      "title": "carro en venta",
+      "user": "juan",
+      "description": "vendo carro",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975075/proyecto/bjqon7w1mf6oc29yjri3.jpg"
     },
     {
-      "id": 2,
-      "title": "Hello",
-      "users": "helena",
-      "timePosted": "2021-07-01T12:00:00",
-      "description": "This  post",
-      "likes": 25
-    },
-    {
-      "id": 3,
-      "title": "SEBAS",
-      "users": "maicol",
-      "timePosted": "2021-07-01T12:00:00",
-      "description": "This  post",
-      "likes": 25
-    },
-    {
-      "id": 4,
-      "title": "juan",
-      "users": "maicol",
-      "timePosted": "2021-07-01T12:00:00",
-      "description": "This  post",
-      "likes": 7777
+      "id": "e1de",
+      "title": "sofa",
+      "user": "carlos",
+      "description": "vendo sofa",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
     }
   ],
   "pin": []

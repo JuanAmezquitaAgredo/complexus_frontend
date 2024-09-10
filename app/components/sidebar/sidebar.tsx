@@ -9,7 +9,7 @@ export const Sidebar = () => {
   return (
     <aside className={style.aside}>
         <ul className={style.ul}>
-          <a className={style.a} href="#">
+          <a className={style.a} href="/posts">
             <PostAddOutlinedIcon className={style.icons}/>
           </a>
           <a className={style.a} href="#">

@@ -5,7 +5,6 @@ import PostCard from '@/app/components/postcard/PostCard'
 import { Sidebar } from '@/app/components/sidebar/sidebar'
 import React, { useEffect } from 'react'
 import styles from './styles.module.css';
-import ProfileCard from '../components/profile/Profile';
 import { fetchPosts } from '@/app/redux/slices/postSlice';
 import { AppDispatch, RootState } from '@/app/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,7 +46,8 @@ const adminPage = () => {
               user={post.user}
               timePosted={post.timePosted}
               description={post.description}
-              likes={post.likes}  
+              likes={post.likes} 
+              imageUrl={post.imageUrl} 
             />
           ))}
 
