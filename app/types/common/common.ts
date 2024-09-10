@@ -5,10 +5,12 @@ export interface InputFieldProps {
     value: string;
     placeholder: string;
     boderColor?: string;
-    // onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface ButtonProps{
+    type?: string;
+    onClick?: () => void;
     label: string;
     backgroundColor?: string;
 }
@@ -16,4 +18,9 @@ export interface ButtonProps{
 export interface ButtonGradientProps{
     label: string;
     onClick: () => void;
+}
+
+export interface UserLogin {
+    email: string;
+    password: string;
 }
