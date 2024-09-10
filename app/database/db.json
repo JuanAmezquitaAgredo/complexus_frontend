@@ -1,24 +1,20 @@
 {
-  "users": [
+  "users": [],
+  "posts": [
     {
-      "id": "c1e7",
-      "name": "juan",
-      "email": "jagredo03@gmail.com",
-      "password": "abc.123",
-      "phone": "3176980852",
-      "tower": "2",
-      "apto": "201",
-      "rol": "owner"
+      "id": "04c3",
+      "title": "carro en venta",
+      "user": "juan",
+      "description": "vendo carro",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975075/proyecto/bjqon7w1mf6oc29yjri3.jpg"
     },
     {
-      "id": "d41c",
-      "name": "juan",
-      "email": "jagredo03@gmail.com",
-      "password": "abc.123",
-      "phone": "3176980852",
-      "tower": "2",
-      "apto": "201",
-      "rol": "owner"
+      "id": "e1de",
+      "title": "sofa",
+      "user": "carlos",
+      "description": "vendo sofa",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
     }
-  ]
+  ],
+  "pin": []
 }

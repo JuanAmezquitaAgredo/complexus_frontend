@@ -1,13 +1,14 @@
 /* styles/JobCard.module.css */
 .card {
   width: 45%;
-  height: 490px;
+  height: 470px;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 16px;
+  margin-top: 30px;
 }
 
 .follow{
@@ -63,10 +64,12 @@
 
 .followc{
   display: flex;
+  gap: 5px;
   align-items: center;
   justify-content: space-between;
-  width: 30px;
-}
+  width: auto;
+  height: 20px;
+} 
 
 .image{
   width: 100%;
@@ -74,4 +77,23 @@
   height: 300px;
   margin-right: 10px;
   margin-bottom: 10px;
+}
+
+.more{
+  height: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.icons1{
+  cursor: pointer;
+  color: #b2b2b2;
+}
+
+.foll{
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
 }
