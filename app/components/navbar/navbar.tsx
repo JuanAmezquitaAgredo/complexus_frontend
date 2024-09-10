@@ -5,9 +5,12 @@ import style from './styles.module.css';
 import ProfileCard from '../profile/Profile';
 import Modal from '../common/modal/modal';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { getAuth, signOut } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 
 export const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -18,9 +21,16 @@ export const Navbar = () => {
     // Aquí puedes agregar la lógica para editar el perfil
   };
 
-  const handleLogout = () => {
-    alert('Cerrar sesión');
-    // Aquí puedes agregar la lógica para cerrar sesión
+  const handleLogout = async () => {
+    const auth = getAuth(); // Obtener la instancia de auth
+    try {
+      await signOut(auth); // Cerrar sesión
+      alert('Sesión cerrada exitosamente');
+      
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+      alert('Error al cerrar sesión');
+    }
   };
 
   return (
