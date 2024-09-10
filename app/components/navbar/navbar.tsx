@@ -1,3 +1,4 @@
+
 'use client';
 import React, { useState } from 'react'; // Asegúrate de importar el componente ProfileCard
 import style from './styles.module.css';
@@ -33,17 +34,30 @@ export const Navbar = () => {
   };
 
   return (
-    <><nav className={style.nav}>
-      <div>
-        <img className={style.logo} src="/Logo_name.png" />
-      </div>
-      <ul className={style.ul}>
-        <h3 className={style.h3}>Username Role Profile</h3>
-      </ul>
-      <a href="#">
-        <img className={style.user} src="/user.png" />
-      </a>
-    </nav>
+    <>
+      <nav className={style.nav}>
+        <div>
+          <img className={style.logo} src="/Logo_name.png" alt="Logo" />
+        </div>
+        <ul className={style.ul}>
+          <h3 className={style.h3}>Username Role Profile</h3>
+        </ul>
+        <a href="#" onClick={toggleModal}>
+          <AccountCircleOutlinedIcon className={style.user} />
+        </a>
+      </nav>
+
+      {/* Mostrar el modal con la tarjeta de perfil */}
+      <Modal isOpen={isModalOpen} onClose={toggleModal}>
+        <ProfileCard
+          name="John Doe"
+          email="john.doe@example.com"
+          id="12345"
+          onEdit={handleEditProfile}
+          onLogout={handleLogout}
+        />
+      </Modal>
     </>
-  )
-}
+  );
+};
+
