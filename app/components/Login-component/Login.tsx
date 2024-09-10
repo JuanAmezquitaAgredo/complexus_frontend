@@ -30,20 +30,20 @@ const Login: React.FC = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => { 
         event.preventDefault();
         try {
-            // Intentar iniciar sesión con Firebase
+            
             const response = await signInWithEmailAndPassword(user.email, user.password);
 
             if (response) {
-                // Verificar si el correo del usuario está verificado
+                
                 const userEmailVerified = response.user.emailVerified;
                 
                 if (userEmailVerified) {
-                    // Verificar en json-server
+                    
                     const userResponse = await fetch(`http://localhost:3004/users?email=${user.email}`);
                     const users = await userResponse.json();
 
                     if (users.length > 0) {
-                        // Usuario encontrado en json-server
+                        
                         await showAlert({
                             title: "Sesión iniciada",
                             text: "¡Bienvenido de nuevo!",
@@ -53,9 +53,9 @@ const Login: React.FC = () => {
                         setUser(initialState);
                         sessionStorage.setItem('token', response.user.uid);
 
-                        router.push('/admin'); // Redirigir al inicio
+                        router.push('/admin');
                     } else {
-                        // Usuario no encontrado en json-server
+                        
                         await showAlert({
                             title: "Error",
                             text: "Usuario no encontrado",
@@ -64,7 +64,7 @@ const Login: React.FC = () => {
                         })
                     }
                 } else {
-                    // Si el correo no está verificado
+                    
                     await showAlert({
                         title: "Error",
                         text: "Correo no verificado, por favor verificalo",
