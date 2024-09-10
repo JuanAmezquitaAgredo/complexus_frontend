@@ -4,6 +4,7 @@ import React, { useState } from 'react'; // Asegúrate de importar el componente
 import style from './styles.module.css';
 import ProfileCard from '../profile/Profile';
 import Modal from '../common/modal/modal';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 export const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,7 +33,7 @@ export const Navbar = () => {
           <h3 className={style.h3}>Username Role Profile</h3>
         </ul>
         <a href="#" onClick={toggleModal}>
-          <img className={style.user} src="/user.png" alt="User" />
+          <AccountCircleOutlinedIcon className={style.user} />
         </a>
       </nav>
 

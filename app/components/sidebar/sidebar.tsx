@@ -1,19 +1,22 @@
 'use client'
 import React from 'react'
 import style from './styles.module.css'
+import PostAddOutlinedIcon from '@mui/icons-material/PostAddOutlined';
+import MapsHomeWorkOutlinedIcon from '@mui/icons-material/MapsHomeWorkOutlined';
+import PushPinIcon from '@mui/icons-material/PushPin';
 
 export const Sidebar = () => {
   return (
     <aside className={style.aside}>
         <ul className={style.ul}>
           <a className={style.a} href="#">
-            <img className={style.icons} src="/page-icon.png" alt="Page Icon"/>
+            <PostAddOutlinedIcon className={style.icons}/>
           </a>
           <a className={style.a} href="#">
-            <img className={style.icons} src="/recidentes.png" alt="Recidentes Icon"/>
+            <MapsHomeWorkOutlinedIcon className={style.icons}/>
           </a>
           <a className={style.a} href="#">
-            <img className={style.icons} src="/pin.png" alt="Pin Icon"/>
+            <PushPinIcon className={style.icons}/>
           </a>
         </ul>
     </aside>
