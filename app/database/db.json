@@ -1,13 +1,13 @@
 {
   "users": [
     {
-      "id": "ecb3",
+      "id": "7cfe",
       "name": "juan",
       "email": "jagredo03@gmail.com",
       "password": "abc.123",
-      "phone": "3176980852",
+      "phone": "123",
       "tower": "2",
-      "apto": "21",
+      "apto": "201",
       "rol": "owner"
     }
   ],
@@ -25,6 +25,13 @@
       "user": "carlos",
       "description": "vendo sofa",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+    },
+    {
+      "id": "04c9",
+      "title": "nuevo",
+      "user": "nuevo",
+      "description": "nuevo",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725985094/proyecto/aeg87bbqlnzxuakmqakr.png"
     }
   ],
   "pin": []

@@ -5,9 +5,10 @@ import style from './styles.module.css';
 import ProfileCard from '../profile/Profile';
 import Modal from '../common/modal/modal';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { getAuth, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import showAlert from '../alertcomponent/alertcomponent';
+import { auth } from '@/app/firebase/config';
 
 export const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +24,6 @@ export const Navbar = () => {
   };
 
   const handleLogout = async () => {
-    const auth = getAuth(); // Obtener la instancia de auth
     try {
       await signOut(auth); // Cerrar sesión
       await showAlert({
