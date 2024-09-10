@@ -1,5 +1,16 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "ecb3",
+      "name": "juan",
+      "email": "jagredo03@gmail.com",
+      "password": "abc.123",
+      "phone": "3176980852",
+      "tower": "2",
+      "apto": "21",
+      "rol": "owner"
+    }
+  ],
   "posts": [
     {
       "id": "04c3",
