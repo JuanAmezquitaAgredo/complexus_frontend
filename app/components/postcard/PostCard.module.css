@@ -1,0 +1,77 @@
+/* styles/JobCard.module.css */
+.card {
+  width: 45%;
+  height: 490px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+}
+
+.follow{
+  width: 20px;
+  cursor: pointer;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userInfo h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.userInfo span {
+  font-size: 12px;
+  color: #888;
+}
+
+.cardContent {
+  margin: 16px 0;
+}
+
+.cardContent p {
+  font-size: 16px;
+  color: #333;
+}
+
+.cardActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.likes, .comments {
+  font-size: 14px;
+  color: #555;
+}
+
+
+.sendBtn {
+  background-color: #260e69;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.followc{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30px;
+}
+
+.image{
+  width: 100%;
+  border-radius: 8px;
+  height: 300px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
