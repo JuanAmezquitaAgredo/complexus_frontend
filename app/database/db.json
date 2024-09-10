@@ -1,3 +1,24 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "c1e7",
+      "name": "juan",
+      "email": "jagredo03@gmail.com",
+      "password": "abc.123",
+      "phone": "3176980852",
+      "tower": "2",
+      "apto": "201",
+      "rol": "owner"
+    },
+    {
+      "id": "d41c",
+      "name": "juan",
+      "email": "jagredo03@gmail.com",
+      "password": "abc.123",
+      "phone": "3176980852",
+      "tower": "2",
+      "apto": "201",
+      "rol": "owner"
+    }
+  ]
 }
