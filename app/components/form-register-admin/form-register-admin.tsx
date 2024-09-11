@@ -7,6 +7,7 @@ import { auth } from "@/app/firebase/config";
 import showAlert from "../alertcomponent/alertcomponent";
 import { sendEmailVerification } from "firebase/auth";
 import { ResidentialUnit, UserAdmin } from "@/app/types/admins";
+import Spinner from "../common/spinner/spinner";
 
 const FormRegisterAdmin = () => {
     const initialState: UserAdmin = {
@@ -151,23 +152,29 @@ const FormRegisterAdmin = () => {
     };
 
     return (
-        <form className={Style.form} onSubmit={handleSubmit}>
-            <div className={Style.form__title}>Owner Registration</div>
-            <hr />
-            <InputField label="Name" type="text" name="name" value={admin.name} placeholder="Name" onChange={handleChange} />
-            <InputField label="Email" type="email" name="email" value={admin.email} placeholder="Email" onChange={handleChange} />
-            <InputField label="Password" type="password" name="password" value={admin.password} placeholder="Password" onChange={handleChange} />
-            <InputField label="Confirm Password" type="password" name="confirmPassword" value={confirmPassword} placeholder="Confirm Password" onChange={handleConfirmPasswordChange} />
-            <InputField label="Phone" type="text" name="phone" value={admin.phone} placeholder="Phone" onChange={handleChange} />
-            <InputField label="Towers" type="number" name="towers" value={admin.towers} placeholder="Towers" onChange={handleChange} />
-            <hr className={Style.hr}/>
-            <InputField label="Unit Name" type="text" name="name" value={unit.name} placeholder="Unit Name" onChange={handleChangeUnit} />
-            <InputField label="City" type="text" name="city" value={unit.city} placeholder="City" onChange={handleChangeUnit} />
-            <InputField label="Address" type="text" name="address" value={unit.address} placeholder="Address" onChange={handleChangeUnit} />
-            <div className={Style.form_buttons}>
-                <Button label="Register" type="submit" />
-            </div>
-        </form>
+        <>
+            {loading ? (
+                <Spinner loading={loading} /> 
+            ) : (
+                <form className={Style.form} onSubmit={handleSubmit}>
+                    <div className={Style.form__title}>Owner Registration</div>
+                    <hr />
+                    <InputField label="Name" type="text" name="name" value={admin.name} placeholder="Name" onChange={handleChange} />
+                    <InputField label="Email" type="email" name="email" value={admin.email} placeholder="Email" onChange={handleChange} />
+                    <InputField label="Password" type="password" name="password" value={admin.password} placeholder="Password" onChange={handleChange} />
+                    <InputField label="Confirm Password" type="password" name="confirmPassword" value={confirmPassword} placeholder="Confirm Password" onChange={handleConfirmPasswordChange} />
+                    <InputField label="Phone" type="text" name="phone" value={admin.phone} placeholder="Phone" onChange={handleChange} />
+                    <InputField label="Towers" type="number" name="towers" value={admin.towers} placeholder="Towers" onChange={handleChange} />
+                    <hr className={Style.hr}/>
+                    <InputField label="Unit Name" type="text" name="name" value={unit.name} placeholder="Unit Name" onChange={handleChangeUnit} />
+                    <InputField label="City" type="text" name="city" value={unit.city} placeholder="City" onChange={handleChangeUnit} />
+                    <InputField label="Address" type="text" name="address" value={unit.address} placeholder="Address" onChange={handleChangeUnit} />
+                    <div className={Style.form_buttons}>
+                        <Button label="Register" type="submit" />
+                    </div>
+                </form>
+            )}
+        </>
     );
 };
 
