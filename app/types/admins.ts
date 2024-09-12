@@ -13,3 +13,4 @@ export interface ResidentialUnit{
     address: string;
     admin_id: string;
 }
+
