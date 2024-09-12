@@ -10,6 +10,7 @@ import { fetchPinnedPosts } from '@/app/redux/slices/pinnedPostSlice';
 import { AppDispatch, RootState } from '@/app/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import PinnedPostCard from '../components/pinnedCard/PinnedPostCard';
+import PushPinIcon from '@mui/icons-material/PushPin';
 
 const AdminPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -40,7 +41,6 @@ const AdminPage: React.FC = () => {
           {/* Renderizar una publicación normal a la vez */}
           {posts.length > 0 && (
             <div className={styles.postCardContainer}>
-              <h2 className={styles.h2}>Publicaciones</h2>
               {posts.map((post) => (
                 <PostCard
                   key={post.id}
@@ -61,7 +61,10 @@ const AdminPage: React.FC = () => {
         <div className={styles.containerPin}>
           {pinnedPosts.length > 0 && (
             <div className={styles.pinnedCardContainer}>
-              <h2 className={styles.h2}>Ancladas</h2>
+              <div className={styles.h2Container}>
+                <h2 className={styles.h2}>Fixed</h2>
+                <PushPinIcon className={styles.icons} />
+              </div>
               {pinnedPosts.map((post) => (
                 <PinnedPostCard
                 title={post.title}
