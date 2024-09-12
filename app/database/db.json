@@ -32,6 +32,32 @@
       "user": "nuevo",
       "description": "nuevo",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725985094/proyecto/aeg87bbqlnzxuakmqakr.png"
+    },
+    {
+      "id": "7be3",
+      "title": "casa",
+      "description": "yo soy juan",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726157458/proyecto/yvs9nzufmzv3o9lowyvl.jpg"
+    },
+    {
+      "id": "3dbb",
+      "title": "juan",
+      "description": "jbsusus",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726157519/proyecto/piyrlbdz2ygx2iwbuylq.png"
+    },
+    {
+      "id": "04c5",
+      "title": "mi casa",
+      "description": "ksksksk",
+      "user": "",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726158218/proyecto/hftu57sckgdhdlhaqa7y.jpg"
+    },
+    {
+      "id": "c498",
+      "title": "casa",
+      "description": "vendo casa",
+      "user": "",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726160737/proyecto/qdqsmvaneyw0weimgs0s.png"
     }
   ],
   "units": [

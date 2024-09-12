@@ -1,0 +1,48 @@
+/* formCreatePost.module.css */
+
+.card {
+    width: 80%; /* Ajusta el ancho según sea necesario */
+    height: 75vh; /* Altura fija */
+    margin: 20px auto; /* Centra la tarjeta */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra */
+    overflow-y: auto;
+  }
+  
+  .form {
+    display: flex; /* Usa flexbox para alinear elementos */
+    flex-direction: column; /* Coloca elementos en una columna */
+  }
+  
+  .textField {
+    margin-bottom: 16px; /* Espaciado inferior entre los campos de texto */
+  }
+  
+  .iconCamera {
+    color: #260e69; /* Color del icono de la cámara */
+  }
+  
+  .previewImage {
+    margin-top: 16px; /* Espaciado superior para la imagen previa */
+    max-width: 100%; /* Limita el ancho de la imagen */
+    height: auto; /* Mantiene la relación de aspecto */
+  }
+
+  .card::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .card::-webkit-scrollbar-thumb {
+    background-color: #260e69;
+    border-radius: 10px;
+    border: 2px solid #260e69;
+  }
+  
+  .card::-webkit-scrollbar-thumb:hover {
+    background-color: #6c30cc;
+  }
+  
+  
+  /* Puedes agregar más estilos para adaptar el diseño según tus necesidades */
+  
