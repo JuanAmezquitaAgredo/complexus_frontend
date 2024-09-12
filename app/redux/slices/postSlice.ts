@@ -1,15 +1,6 @@
 // features/postSlice.ts
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
-interface Post {
-  imageUrl: string;
-  id: number;
-  title: string;
-  user: string;
-  timePosted: string;
-  description: string;
-  likes: number;
-}
+import { Post } from '../../types/posts';
 
 interface PostState {
   posts: Post[];

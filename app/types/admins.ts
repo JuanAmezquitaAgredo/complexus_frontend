@@ -13,3 +13,4 @@ export interface ResidentialUnit{
     city: string;
     address: string;
 }
+
