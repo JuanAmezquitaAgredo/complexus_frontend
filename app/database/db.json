@@ -1,14 +1,14 @@
 {
-  "users": [
+  "users": [],
+  "admins": [
     {
-      "id": "ecb3",
+      "id": "c58c",
       "name": "juan",
       "email": "jagredo03@gmail.com",
       "password": "abc.123",
       "phone": "3176980852",
-      "tower": "2",
-      "apto": "21",
-      "rol": "owner"
+      "towers": "3",
+      "rol": "admin"
     }
   ],
   "posts": [
@@ -27,11 +27,20 @@
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
     },
     {
-      "id": "f1de",
-      "title": "mesa",
-      "user": "carlos",
-      "description": "vendo mesa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+      "id": "04c9",
+      "title": "nuevo",
+      "user": "nuevo",
+      "description": "nuevo",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725985094/proyecto/aeg87bbqlnzxuakmqakr.png"
+    }
+  ],
+  "units": [
+    {
+      "id": "5e4c",
+      "name": "Juan Calderon",
+      "city": "med",
+      "address": "calle 6a#35a105",
+      "admin_id": "c58c"
     }
   ],
   "pin": [

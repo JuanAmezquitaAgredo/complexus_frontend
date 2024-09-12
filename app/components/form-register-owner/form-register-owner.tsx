@@ -7,6 +7,7 @@ import { UserOwner } from "@/app/types/owners";
 import { auth } from "@/app/firebase/config";
 import { sendEmailVerification } from "firebase/auth";
 import showAlert from "../alertcomponent/alertcomponent";
+import Spinner from "../common/spinner/spinner";
 
 const FormRegisterOwner = () => {
     const initialState: UserOwner = {
@@ -21,7 +22,7 @@ const FormRegisterOwner = () => {
 
     const [owner, setOwner] = React.useState<UserOwner>(initialState);
     const [confirmPassword, setConfirmPassword] = useState<string>(""); // Nuevo estado para la confirmación de contraseña
-    const [createUserWithEmailAndPassword, , loading] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, , loading] = useCreateUserWithEmailAndPassword(auth); // `loading` para el Spinner
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -69,7 +70,6 @@ const FormRegisterOwner = () => {
         }
 
         try {
-            
             const responseDB = await fetch('http://localhost:3004/users', {
                 method: 'POST',
                 headers: {
@@ -82,7 +82,6 @@ const FormRegisterOwner = () => {
                 throw new Error('Error al guardar los datos en la base de datos local.');
             }
 
-            
             const responseFirebase = await createUserWithEmailAndPassword(owner.email, owner.password);
             
             if (responseFirebase) {
@@ -93,7 +92,6 @@ const FormRegisterOwner = () => {
                     icon: "success",
                     confirmButtonText: "OK"
                 });
-                
                 
                 setOwner(initialState);
                 setConfirmPassword(""); 
@@ -121,20 +119,26 @@ const FormRegisterOwner = () => {
     };
 
     return (
-        <form className={Style.form} onSubmit={handleSubmit}>
-            <div className={Style.form__title}>Owner Registration</div>
-            <hr />
-            <InputField label="Name" type="text" name="name" value={owner.name} placeholder="Name" onChange={handleChange} />
-            <InputField label="Email" type="email" name="email" value={owner.email} placeholder="Email" onChange={handleChange} />
-            <InputField label="Password" type="password" name="password" value={owner.password} placeholder="Password" onChange={handleChange} />
-            <InputField label="Confirm Password" type="password" name="confirmPassword" value={confirmPassword} placeholder="Confirm Password" onChange={handleConfirmPasswordChange} />
-            <InputField label="Phone" type="text" name="phone" value={owner.phone} placeholder="Phone" onChange={handleChange} />
-            <InputField label="Tower" type="text" name="tower" value={owner.tower} placeholder="Tower" onChange={handleChange} />
-            <InputField label="Apto" type="text" name="apto" value={owner.apto} placeholder="Apto" onChange={handleChange} />
-            <div className={Style.form_buttons}>
-                <Button label="Register" type="submit" />
-            </div>
-        </form>
+        <>
+            {loading ? (
+                <Spinner loading={loading} />
+            ) : (
+                <form className={Style.form} onSubmit={handleSubmit}>
+                    <div className={Style.form__title}>Owner Registration</div>
+                    <hr />
+                    <InputField label="Name" type="text" name="name" value={owner.name} placeholder="Name" onChange={handleChange} />
+                    <InputField label="Email" type="email" name="email" value={owner.email} placeholder="Email" onChange={handleChange} />
+                    <InputField label="Password" type="password" name="password" value={owner.password} placeholder="Password" onChange={handleChange} />
+                    <InputField label="Confirm Password" type="password" name="confirmPassword" value={confirmPassword} placeholder="Confirm Password" onChange={handleConfirmPasswordChange} />
+                    <InputField label="Phone" type="text" name="phone" value={owner.phone} placeholder="Phone" onChange={handleChange} />
+                    <InputField label="Tower" type="text" name="tower" value={owner.tower} placeholder="Tower" onChange={handleChange} />
+                    <InputField label="Apto" type="text" name="apto" value={owner.apto} placeholder="Apto" onChange={handleChange} />
+                    <div className={Style.form_buttons}>
+                        <Button label="Register" type="submit" />
+                    </div>
+                </form>
+            )}
+        </>
     );
 };
 

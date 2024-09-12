@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
 import showAlert from "../alertcomponent/alertcomponent";
+import Spinner from "../common/spinner/spinner";
+
 
 const Login: React.FC = () => {
 
@@ -17,7 +19,7 @@ const Login: React.FC = () => {
     };
     
     const [user, setUser] = useState<UserLogin>(initialState);
-    const [signInWithEmailAndPassword, , loading] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPassword, , loading] = useSignInWithEmailAndPassword(auth); // Estado `loading` de firebase
     const router = useRouter();
 
     useEffect(() => {
@@ -29,6 +31,18 @@ const Login: React.FC = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => { 
         event.preventDefault();
+
+        // Validations
+        if(!user.email || !user.password) {
+            await showAlert({
+                title: "Error",
+                text: "Por favor, completa todos los campos.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            return;
+        }
+
         try {
             
             const response = await signInWithEmailAndPassword(user.email, user.password);
@@ -86,11 +100,17 @@ const Login: React.FC = () => {
     }
 
     return (
-        <form className={Style.LoginContainer} onSubmit={handleSubmit}>
-            <InputField label="Email" type="email" name="email" value={user.email} placeholder="Email" onChange={handleChange} />
-            <InputField label="Password" type="password" name="password" value={user.password} placeholder="Password" onChange={handleChange}/>
-            <Button label="Login" type="submit"/>
-        </form>
+        <>
+            {loading ? (
+                <Spinner loading={loading} />
+            ) : (
+                <form className={Style.LoginContainer} onSubmit={handleSubmit}>
+                    <InputField label="Email" type="email" name="email" value={user.email} placeholder="Email" onChange={handleChange} />
+                    <InputField label="Password" type="password" name="password" value={user.password} placeholder="Password" onChange={handleChange}/>
+                    <Button label="Login" type="submit"/>
+                </form>
+            )}
+        </>
     );
 };
 
