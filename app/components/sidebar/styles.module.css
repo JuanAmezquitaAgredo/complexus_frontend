@@ -1,5 +1,5 @@
 .aside{
-    width: 18vh;
+    width: 50vh;
     height: 85vh;
     background-color: #260e69;
     display: flex;
@@ -7,10 +7,22 @@
     align-items: center;
 }
 .ul{
+    width: 100%;
     margin-top: 30px;
     display: flex;
     flex-direction: column;
     gap: 4rem;
+}
+.aside_nav{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.aside_nav_h2{
+    width: 50%;
+    color: white;
+    font-size: 18px;
 }
 .icons {
     transition: transform 0.7s;
