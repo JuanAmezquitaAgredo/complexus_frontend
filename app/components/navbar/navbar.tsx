@@ -5,9 +5,13 @@ import style from './styles.module.css';
 import ProfileCard from '../profile/Profile';
 import Modal from '../common/modal/modal';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { getAuth, signOut } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
+import showAlert from '../alertcomponent/alertcomponent';
 
 export const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -18,9 +22,23 @@ export const Navbar = () => {
     // Aquí puedes agregar la lógica para editar el perfil
   };
 
-  const handleLogout = () => {
-    alert('Cerrar sesión');
-    // Aquí puedes agregar la lógica para cerrar sesión
+  const handleLogout = async () => {
+    const auth = getAuth(); // Obtener la instancia de auth
+    try {
+      await signOut(auth); // Cerrar sesión
+      await showAlert({
+        title: 'Sesión cerrada',
+        text: 'Sesión cerrada correctamente',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      })
+      sessionStorage.removeItem('token');
+      router.push('/login');
+      
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+      alert('Error al cerrar sesión');
+    }
   };
 
   return (
@@ -30,14 +48,17 @@ export const Navbar = () => {
           <img className={style.logo} src="/Logo_name.png" alt="Logo" />
         </div>
         <ul className={style.ul}>
-          <h3 className={style.h3}>Username Role Profile</h3>
+          <h3 className={style.h3}>Residential unit name</h3>
         </ul>
-        <a href="#" onClick={toggleModal}>
-          <AccountCircleOutlinedIcon className={style.user} />
-        </a>
+        <div className={style.user}>
+          <a href="#" onClick={toggleModal}>
+            <AccountCircleOutlinedIcon className={style.userLogo} />
+          </a>
+          <h4 className={style.userName}>User name</h4>
+        </div>
+        
       </nav>
 
-      {/* Mostrar el modal con la tarjeta de perfil */}
       <Modal isOpen={isModalOpen} onClose={toggleModal}>
         <ProfileCard
           name="John Doe"

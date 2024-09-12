@@ -26,8 +26,22 @@
 }
 
 .user{
-    margin-left: 90px;
-    width: 70px;
-    height: 70px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.userLogo{
+    width: 55px;
+    height: 55px;
     color: white;
+
+    &:hover {
+        color: rgba(255, 255, 255, 0.865);
+    }
+}
+
+.userName{
+    color: white;
+    font-size: 15px;
 }
