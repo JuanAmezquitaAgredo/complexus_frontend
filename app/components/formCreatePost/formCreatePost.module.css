@@ -22,6 +22,10 @@
   .iconCamera {
     color: #260e69; /* Color del icono de la cámara */
   }
+  .iconSearch{
+    color: white; /* Color del icono de la cámara */
+    background-color: #260e69;
+  }
   
   .previewImage {
     margin-top: 16px; /* Espaciado superior para la imagen previa */

@@ -291,7 +291,7 @@ const CreatePostForm: React.FC = () => {
             />
           )}
           <Box mt={2}>
-            <Button variant="contained" color="primary" type="submit" disabled={loading || uploading}>
+            <Button className={styles.iconSearch} variant="contained" color="primary" type="submit" disabled={loading || uploading}>
               {loading || uploading ? 'Subiendo...' : 'Publicar'}
             </Button>
           </Box>
