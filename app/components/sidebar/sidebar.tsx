@@ -1,33 +1,41 @@
-'use client'
-import React from 'react'
-import style from './styles.module.css'
+'use client';
+import React, { useEffect, useState } from 'react';
+import style from './styles.module.css';
 import PostAddOutlinedIcon from '@mui/icons-material/PostAddOutlined';
 import MapsHomeWorkOutlinedIcon from '@mui/icons-material/MapsHomeWorkOutlined';
-import PushPinIcon from '@mui/icons-material/PushPin';
+import HomeIcon from '@mui/icons-material/Home';
 
 export const Sidebar = () => {
+  const [currentPath, setCurrentPath] = useState('');
+
+  useEffect(() => {
+    setCurrentPath(window.location.pathname);
+  }, []); 
+
   return (
     <aside className={style.aside}>
       <ul className={style.ul}>
-        <div className={style.aside_nav}>
-          <a className={style.a} href="/posts">
+        <a className={style.a} href="/admin">
+          <div className={`${style.aside_nav} ${currentPath === '/admin' ? style.active : ''}`}>
+            <HomeIcon className={style.icons} />
+            <h2 className={style.aside_nav_h2}>Home</h2>
+          </div>
+        </a>
+
+        <a className={style.a} href="/posts">
+          <div className={`${style.aside_nav} ${currentPath === '/posts' ? style.active : ''}`}>
             <PostAddOutlinedIcon className={style.icons} />
-          </a>
-          <h2 className={style.aside_nav_h2}>Home</h2>
-        </div>
-        <div className={style.aside_nav}>
-          <a className={style.a} href="#">
+            <h2 className={style.aside_nav_h2}>Create post</h2>
+          </div>
+        </a>
+
+        <a className={style.a} href="/owners">
+          <div className={`${style.aside_nav} ${currentPath === '/owners' ? style.active : ''}`}>
             <MapsHomeWorkOutlinedIcon className={style.icons} />
-          </a>
-          <h2 className={style.aside_nav_h2}>Create post</h2>
-        </div>
-        <div className={style.aside_nav}>
-          <a className={style.a} href="#">
-            <PushPinIcon className={style.icons} />
-          </a>
-          <h2 className={style.aside_nav_h2}>Owners</h2>
-        </div>
+            <h2 className={style.aside_nav_h2}>Owners</h2>
+          </div>
+        </a>
       </ul>
     </aside>
-  )
-}
+  );
+};
