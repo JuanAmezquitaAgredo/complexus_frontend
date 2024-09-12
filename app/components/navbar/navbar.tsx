@@ -48,14 +48,17 @@ export const Navbar = () => {
           <img className={style.logo} src="/Logo_name.png" alt="Logo" />
         </div>
         <ul className={style.ul}>
-          <h3 className={style.h3}>Username Role Profile</h3>
+          <h3 className={style.h3}>Residential unit name</h3>
         </ul>
-        <a href="#" onClick={toggleModal}>
-          <AccountCircleOutlinedIcon className={style.user} />
-        </a>
+        <div className={style.user}>
+          <a href="#" onClick={toggleModal}>
+            <AccountCircleOutlinedIcon className={style.userLogo} />
+          </a>
+          <h4 className={style.userName}>User name</h4>
+        </div>
+        
       </nav>
 
-      {/* Mostrar el modal con la tarjeta de perfil */}
       <Modal isOpen={isModalOpen} onClose={toggleModal}>
         <ProfileCard
           name="John Doe"
