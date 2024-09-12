@@ -9,11 +9,11 @@
   width: 30%;
   height: 100%;
   overflow-y: scroll; /* Scroll independiente para ambas secciones */
-  margin: 40px;
+  margin-top: 40px;
+  margin-right: 4px;
 }
 
 .posts {
-  margin: 40px;
   width: 60%;
 }
 
@@ -39,8 +39,8 @@
   gap: 20px;
 }
 
-.postCardContainer{
-  width: 100%;
+.containerPin{
+  width: 500px;
 }
 
 .h2 {
