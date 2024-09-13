@@ -1,0 +1,45 @@
+.footer{
+    margin-top: 20px;
+    width: 100%;
+    height: 10vh;
+    background-color: #15004e;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    font-size: 8px;
+}
+
+.footer_logo{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.footer_Title{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoFooter{
+    width: 30px;
+}
+
+.footer_icons{
+    width: 15%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Icon{
+    color: white;
+    font-size: 35px;
+}
