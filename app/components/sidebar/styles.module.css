@@ -1,13 +1,12 @@
 .aside{
-    width: 50vh;
-    height: 85vh;
+    width: 40vh;
+    height: 89vh;
     background-color: #260e69;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .ul{
-    margin-top: 20px;
     width: 100%;
     height: auto;
     display: flex;
@@ -19,7 +18,7 @@
 .aside_nav{
     border-bottom: 1px solid white;
     width: 100%;
-    height: 12vh;
+    height: 10vh;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -31,14 +30,14 @@
 .aside_nav_h2{
     width: 50%;
     color: white;
-    font-size: 18px;
-    text-align: center;
+    font-size: 16px;
+    font-weight: unset;
 }
 .icons {
     transition: transform 0.7s;
     color: white;
-    width: 45px;
-    height: 45px;
+    width: 32px;
+    height: 32px;
 }
 
 .active {
