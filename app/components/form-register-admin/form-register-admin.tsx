@@ -12,18 +12,21 @@ import Spinner from "../common/spinner/spinner";
 const FormRegisterAdmin = () => {
     const initialState: UserAdmin = {
         name: "",
+        lastName: "",
         email: "",
         password: "",
         phone: "",
-        towers: "",
-        rol: "admin"
+        tower: "N/A",
+        residential_id: "",
+        rol_id: "2"
     };
 
     const initialStateUnit: ResidentialUnit = {
         name: "",
         city: "",
         address: "",
-        admin_id: "" // Nuevo campo para relacionar la unidad con el administrador
+        has_tower: "",
+        admin_id: ""
     };
 
     const [admin, setAdmin] = React.useState<UserAdmin>(initialState);
@@ -35,7 +38,7 @@ const FormRegisterAdmin = () => {
         event.preventDefault();
     
         // Validations
-        if (!admin.name || !admin.email || !admin.password || !admin.phone || !admin.towers || !unit.name || !unit.city || !unit.address) {
+        if (!admin.name || !admin.email || !admin.password || !admin.phone || !admin.tower || !unit.name || !unit.city || !unit.address) {
             await showAlert({
                 title: "Error",
                 text: "Por favor, completa todos los campos.",
@@ -83,35 +86,53 @@ const FormRegisterAdmin = () => {
             if (responseFirebase) {
                 await sendEmailVerification(responseFirebase.user);
                 
-                // Paso 2: Guardar el administrador en la base de datos local
-                const responseDBOwner = await fetch('http://localhost:3004/admins', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(admin), 
-                });
-    
-                if (!responseDBOwner.ok) {
-                    throw new Error('Error al guardar los datos del administrador en la base de datos local.');
-                }
-
-                // Obtener el ID del administrador recién creado
-                const createdAdmin = await responseDBOwner.json();
-                const adminId = createdAdmin.id;
-    
-                // Paso 3: Crear la unidad con el admin_id
-                const updatedUnit = { ...unit, admin_id: adminId }; // Asignar admin_id al objeto unit
+                // Paso 2: Guardar la unidad en la base de datos local
                 const responseDBUnit = await fetch('http://localhost:3004/units', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(updatedUnit), 
+                    body: JSON.stringify(unit), 
                 });
     
                 if (!responseDBUnit.ok) {
                     throw new Error('Error al guardar los datos de la unidad en la base de datos local.');
+                }
+    
+                // Obtener el ID de la unidad recién creada
+                const createdUnit = await responseDBUnit.json();
+                const unitId = createdUnit.id;
+    
+                // Actualizar el objeto del administrador con el ID de la unidad
+                const updatedAdmin = { ...admin, residential_id: unitId }; // Asignar residential_id al objeto admin
+                const responseDBOwner = await fetch('http://localhost:3004/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedAdmin), 
+                });
+    
+                if (!responseDBOwner.ok) {
+                    throw new Error('Error al guardar los datos del administrador en la base de datos local.');
+                }
+    
+                // Obtener el ID del administrador recién creado
+                const createdAdmin = await responseDBOwner.json();
+                const adminId = createdAdmin.id;
+    
+                // Actualizar la unidad con el ID del administrador
+                const updatedUnitWithAdmin = { ...unit, admin_id: adminId }; // Asignar admin_id al objeto unit
+                const responseUpdateUnit = await fetch(`http://localhost:3004/units/${unitId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedUnitWithAdmin), 
+                });
+    
+                if (!responseUpdateUnit.ok) {
+                    throw new Error('Error al actualizar los datos de la unidad en la base de datos local.');
                 }
     
                 await showAlert({
@@ -157,18 +178,19 @@ const FormRegisterAdmin = () => {
                 <Spinner loading={loading} /> 
             ) : (
                 <form className={Style.form} onSubmit={handleSubmit}>
-                    <div className={Style.form__title}>Owner Registration</div>
+                    <div className={Style.form__title}>Admin Registration</div>
                     <hr />
                     <InputField label="Name" type="text" name="name" value={admin.name} placeholder="Name" onChange={handleChange} />
+                    <InputField label="Last Name" type="text" name="lastName" value={admin.lastName} placeholder="Last Name" onChange={handleChange} />
                     <InputField label="Email" type="email" name="email" value={admin.email} placeholder="Email" onChange={handleChange} />
                     <InputField label="Password" type="password" name="password" value={admin.password} placeholder="Password" onChange={handleChange} />
                     <InputField label="Confirm Password" type="password" name="confirmPassword" value={confirmPassword} placeholder="Confirm Password" onChange={handleConfirmPasswordChange} />
                     <InputField label="Phone" type="text" name="phone" value={admin.phone} placeholder="Phone" onChange={handleChange} />
-                    <InputField label="Towers" type="number" name="towers" value={admin.towers} placeholder="Towers" onChange={handleChange} />
                     <hr className={Style.hr}/>
                     <InputField label="Unit Name" type="text" name="name" value={unit.name} placeholder="Unit Name" onChange={handleChangeUnit} />
                     <InputField label="City" type="text" name="city" value={unit.city} placeholder="City" onChange={handleChangeUnit} />
                     <InputField label="Address" type="text" name="address" value={unit.address} placeholder="Address" onChange={handleChangeUnit} />
+                    <InputField label="Has Tower" type="text" name="has_tower" value={unit.has_tower} placeholder="Has Tower" onChange={handleChangeUnit} />
                     <div className={Style.form_buttons}>
                         <Button label="Register" type="submit" />
                     </div>

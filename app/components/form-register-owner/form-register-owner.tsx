@@ -12,12 +12,15 @@ import Spinner from "../common/spinner/spinner";
 const FormRegisterOwner = () => {
     const initialState: UserOwner = {
         name: "",
+        lastName: "",
         email: "",
         password: "",
         phone: "",
         tower: "",
         apto: "",
-        rol: "owner",
+        rol_id: "3",
+        residential_id: "", // Se establecerá al tomarlo de sessionStorage
+        active: true
     };
 
     const [owner, setOwner] = React.useState<UserOwner>(initialState);
@@ -26,7 +29,19 @@ const FormRegisterOwner = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        
+
+        // Validar que el Residential_id existe en sessionStorage
+        const residential_id = sessionStorage.getItem('residential_id');
+        if (!residential_id) {
+            await showAlert({
+                title: "Error",
+                text: "No se encontró el Residential ID en la sesión.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            return;
+        }
+
         // Validations
         if(!owner.name || !owner.email || !owner.password || !owner.phone || !owner.tower || !owner.apto) {
             await showAlert({
@@ -70,12 +85,15 @@ const FormRegisterOwner = () => {
         }
 
         try {
+            // Asignar el Residential_id al owner antes de enviarlo
+            const ownerWithResidentialId = { ...owner, residential_id };
+
             const responseDB = await fetch('http://localhost:3004/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(owner), 
+                body: JSON.stringify(ownerWithResidentialId), 
             });
 
             if (!responseDB.ok) {
@@ -127,6 +145,7 @@ const FormRegisterOwner = () => {
                     <div className={Style.form__title}>Owner Registration</div>
                     <hr />
                     <InputField label="Name" type="text" name="name" value={owner.name} placeholder="Name" onChange={handleChange} />
+                    <InputField label="Last Name" type="text" name="lastName" value={owner.lastName} placeholder="Last Name" onChange={handleChange} />
                     <InputField label="Email" type="email" name="email" value={owner.email} placeholder="Email" onChange={handleChange} />
                     <InputField label="Password" type="password" name="password" value={owner.password} placeholder="Password" onChange={handleChange} />
                     <InputField label="Confirm Password" type="password" name="confirmPassword" value={confirmPassword} placeholder="Confirm Password" onChange={handleConfirmPasswordChange} />

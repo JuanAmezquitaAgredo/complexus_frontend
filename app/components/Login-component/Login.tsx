@@ -10,7 +10,6 @@ import { auth } from "@/app/firebase/config";
 import showAlert from "../alertcomponent/alertcomponent";
 import Spinner from "../common/spinner/spinner";
 
-
 const Login: React.FC = () => {
 
     const initialState: UserLogin = {
@@ -31,9 +30,9 @@ const Login: React.FC = () => {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => { 
         event.preventDefault();
-
-        // Validations
-        if(!user.email || !user.password) {
+    
+        // Validaciones
+        if (!user.email || !user.password) {
             await showAlert({
                 title: "Error",
                 text: "Por favor, completa todos los campos.",
@@ -42,57 +41,77 @@ const Login: React.FC = () => {
             });
             return;
         }
-
+    
         try {
-            
             const response = await signInWithEmailAndPassword(user.email, user.password);
-
+    
             if (response) {
-                
                 const userEmailVerified = response.user.emailVerified;
                 
                 if (userEmailVerified) {
-                    
+                    // Consulta a la base de datos para obtener la información del usuario
                     const userResponse = await fetch(`http://localhost:3004/users?email=${user.email}`);
                     const users = await userResponse.json();
-
+    
                     if (users.length > 0) {
-                        
-                        await showAlert({
-                            title: "Sesión iniciada",
-                            text: "¡Bienvenido de nuevo!",
-                            icon: "success",
-                            confirmButtonText: "OK"
-                        })
-                        setUser(initialState);
-                        sessionStorage.setItem('token', response.user.uid);
+                        const userFound = users.find((user: any) => user.email === user.email);
+    
+                        if (userFound) {
+                            
+                            sessionStorage.setItem('residential_id', userFound.residential_id);
 
-                        router.push('/admin');
-                    } else {
-                        
-                        await showAlert({
-                            title: "Error",
-                            text: "Usuario no encontrado",
-                            icon: "error",
-                            confirmButtonText: "OK"
-                        })
+                            if (userFound.rol_id === "1") {
+                                router.push('/superadmin');
+                            } else if (userFound.rol_id === "2") {
+                                router.push('/admin');
+                            } else if (userFound.rol_id === "3") {
+                                router.push('/owner');
+                            } else {
+                                await showAlert({
+                                    title: "Error",
+                                    text: "Rol no válido.",
+                                    icon: "error",
+                                    confirmButtonText: "OK"
+                                });
+                            }
+    
+                            await showAlert({
+                                title: "Sesión iniciada",
+                                text: "¡Bienvenido de nuevo!",
+                                icon: "success",
+                                confirmButtonText: "OK"
+                            });
+    
+                            sessionStorage.setItem('token', response.user.uid);
+                        } else {
+                            await showAlert({
+                                title: "Error",
+                                text: "Usuario no encontrado.",
+                                icon: "error",
+                                confirmButtonText: "OK"
+                            });
+                        }
                     }
                 } else {
-                    
                     await showAlert({
                         title: "Error",
-                        text: "Correo no verificado, por favor verificalo",
+                        text: "Correo no verificado, por favor verifícalo.",
                         icon: "error",
                         confirmButtonText: "OK"
-                    })
-                    console.log(response);
+                    });
                 }
             }
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
-            alert('Hubo un error al iniciar sesión. Por favor, intenta de nuevo.');
+            await showAlert({
+                title: "Error",
+                text: "Hubo un error al iniciar sesión. Por favor, intenta de nuevo.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
         }
     }
+    
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
