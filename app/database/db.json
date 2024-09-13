@@ -1,8 +1,31 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "d8e3",
+      "name": "Juan Sebastian Amezquita",
+      "email": "jagredo03@gmail.com",
+      "password": "abc.123",
+      "phone": "1376980852",
+      "tower": "123",
+      "apto": "3",
+      "rol_id": "1",
+      "residential_id": "Superadmin"
+    },
+    {
+      "id": "79cd",
+      "name": "pepe",
+      "lastName": "pope",
+      "email": "jsamezquia@eafit.edu.co",
+      "password": "abc.123",
+      "phone": "1376980852",
+      "tower": "N/A",
+      "residential_id": "b8ba",
+      "rol_id": "2"
+    }
+  ],
   "admins": [
     {
-      "id": "c58c",
+      "id": "c58sa",
       "name": "juan",
       "email": "jagredo03@gmail.com",
       "password": "abc.123",
@@ -41,6 +64,14 @@
       "city": "med",
       "address": "calle 6a#35a105",
       "admin_id": "c58c"
+    },
+    {
+      "name": "pope",
+      "city": "pope",
+      "address": "pope",
+      "has_tower": "4",
+      "admin_id": "79cd",
+      "id": "b8ba"
     }
   ],
   "pin": [
