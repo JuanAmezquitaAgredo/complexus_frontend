@@ -1,284 +1,308 @@
-
 // import React, { useState, useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { createPost, resetCreatePost } from '../../redux/slices/createPostSlice';
-// import { TextField, Button, CircularProgress, Input } from '@mui/material';
+// import { TextField, Button, Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
+// import { PhotoCamera } from '@mui/icons-material';
 // import { AppDispatch, RootState } from '@/app/redux/store';
 // import axios from 'axios';
+// import styles from './formCreatePost.module.css'
+// import showAlert from '../alertcomponent/alertcomponent';
 
 // const cloudinary_url = 'https://api.cloudinary.com/v1_1/dnwpj75xg/image/upload';
 // const cloudinary_code = 'rsulligy';
 
-// const CreatePostForm = () => {
-//     const dispatch: AppDispatch = useDispatch();
-//     const { loading, success, error } = useSelector((state: RootState) => state.createPost);
+// const CreatePostForm: React.FC = () => {
+//   const dispatch: AppDispatch = useDispatch();
+//   const { loading, success, error } = useSelector((state: RootState) => state.createPost);
 
-//     const [formData, setFormData] = useState({
-//         title: '',
-//         user: '',
-//         description: '',
-//         image: null as File | null, // Estado para el archivo de imagen
-//     });
-//     const [imageUrl, setImageUrl] = useState<string | null>(null); // Estado para almacenar la URL de la imagen
-//     const [uploading, setUploading] = useState(false); // Estado para manejar la carga de la imagen
+//   const [title, setTitle] = useState('');
+//   const [description, setDescription] = useState('');
+//   const [image, setImage] = useState<string | null>(null);
+//   const [imageFile, setImageFile] = useState<File | null>(null);
+//   const [uploading, setUploading] = useState(false);
 
-//     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//         setFormData({
-//             ...formData,
-//             [e.target.name]: e.target.value,
+//   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     if (e.target.files && e.target.files.length > 0) {
+//       const file = e.target.files[0];
+//       setImageFile(file);
+//       const reader = new FileReader();
+//       reader.onloadend = () => {
+//         setImage(reader.result as string);
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   };
+
+//   const uploadImageToCloudinary = async (image: File) => {
+//     const formData = new FormData();
+//     formData.append('file', image);
+//     formData.append('upload_preset', cloudinary_code);
+
+//     try {
+//       setUploading(true);
+//       const res = await axios.post(cloudinary_url, formData, {
+//         headers: {
+//           'Content-Type': 'multipart/form-data',
+//         },
+//       });
+//       setUploading(false);
+//       return res.data.secure_url; // Retorna la URL de la imagen subida
+//     } catch (error) {
+//       console.error('Error al subir la imagen:', error);
+//       setUploading(false);
+//       return null; // Retorna null en caso de error
+//     }
+//   };
+
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+
+//     let imageUrl: string | null = null;
+
+//     if (imageFile) {
+//       imageUrl = await uploadImageToCloudinary(imageFile);
+//     }
+
+//     const postData = {
+//       title,
+//       description,
+//       user: '',
+//       imageUrl: imageUrl || '', // Usar la URL de la imagen si existe
+//     };
+
+//     dispatch(createPost(postData));
+//   };
+
+//   useEffect(() => {
+//     if (success) {
+//         showAlert({
+//             title: "Post creado",
+//             text: "Tu post ha sido creado exitosamente.",
+//             icon: "success",
+//             confirmButtonText: "OK"
 //         });
-//     };
+//       setTitle('');
+//       setDescription('');
+//       setImage(null);
+//       setImageFile(null);
+//       dispatch(resetCreatePost());
+//     }
+//   }, [success, dispatch]);
 
-//     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//         if (e.target.files && e.target.files.length > 0) {
-//             setFormData({
-//                 ...formData,
-//                 image: e.target.files[0], // Guardar el archivo de imagen
-//             });
-//         }
-//     };
-
-//     const uploadImageToCloudinary = async (image: File) => {
-//         const formData = new FormData();
-//         formData.append('file', image);
-//         formData.append('upload_preset', cloudinary_code);
-
-//         try {
-//             setUploading(true);
-//             const res = await axios.post(cloudinary_url, formData, {
-//                 headers: {
-//                     'Content-Type': 'multipart/form-data',
-//                 },
-//             });
-//             setImageUrl(res.data.secure_url); // Guardar la URL de la imagen en el estado
-//             setUploading(false);
-//         } catch (error) {
-//             console.error('Error al subir la imagen:', error);
-//             setUploading(false);
-//         }
-//     };
-
-//     const handleSubmit = async (e: React.FormEvent) => {
-//         e.preventDefault();
-
-//         if (formData.image) {
-//             // Subir la imagen primero si hay un archivo seleccionado
-//             await uploadImageToCloudinary(formData.image);
-//         }
-
-//         // Crear el post después de que la imagen haya sido subida
-//         const postData = {
-//             ...formData,
-//             imageUrl, // Incluir la URL de la imagen en el post
-//         };
-//         dispatch(createPost(postData));
-//     };
-
-//     useEffect(() => {
-//         if (success) {
-//             alert('Post creado exitosamente!');
-//             setFormData({
-//                 title: '',
-//                 user: '',
-//                 description: '',
-//                 image: null,
-//             });
-//             setImageUrl(null);
-//             dispatch(resetCreatePost());
-//         }
-//     }, [success, dispatch]);
-
-//     return (
+//   return (
+//     <Card sx={{ maxWidth: 1200, margin: 'auto', padding: 2 }}>
+//       <CardContent>
+//         <Typography variant="h5" component="div" gutterBottom>
+//           Crear un Post
+//         </Typography>
 //         <form onSubmit={handleSubmit}>
-//             <TextField
-//                 label="Title"
-//                 name="title"
-//                 value={formData.title}
-//                 onChange={handleChange}
-//                 fullWidth
-//                 margin="normal"
+//           <TextField
+//             fullWidth
+//             label="Título"
+//             variant="outlined"
+//             margin="normal"
+//             value={title}
+//             onChange={(e) => setTitle(e.target.value)}
+//             required
+//           />
+//           <TextField
+//             fullWidth
+//             label="Descripción"
+//             variant="outlined"
+//             margin="normal"
+//             multiline
+//             rows={4}
+//             value={description}
+//             onChange={(e) => setDescription(e.target.value)}
+//             required
+//           />
+//           <input
+//             accept="image/*"
+//             style={{ display: 'none' }}
+//             id="image-upload"
+//             type="file"
+//             onChange={handleImageChange}
+//           />
+//           <label htmlFor="image-upload">
+//             <IconButton color="primary" component="span">
+//               <PhotoCamera className={styles.iconCamera} />
+//             </IconButton>
+//           </label>
+//           {image && (
+//             <CardMedia
+//               component="img"
+//               image={image}
+//               alt="Vista previa de la imagen"
+//               sx={{ marginTop: 2, height: 140 }}
 //             />
-//             <TextField
-//                 label="User"
-//                 name="user"
-//                 value={formData.user}
-//                 onChange={handleChange}
-//                 fullWidth
-//                 margin="normal"
-//             />
-//             <TextField
-//                 label="Description"
-//                 name="description"
-//                 value={formData.description}
-//                 onChange={handleChange}
-//                 fullWidth
-//                 margin="normal"
-//                 multiline
-//                 rows={4}
-//             />
-
-//             {/* Input para cargar imagen */}
-//             <Input
-//                 type="file"
-//                 onChange={handleFileChange}
-//                 fullWidth
-//             />
-
-//             {/* Mostrar progreso de carga de la imagen */}
-//             {uploading && <p>Subiendo imagen...</p>}
-
-//             {/* Mostrar error si hay */}
-//             {error && <p style={{ color: 'red' }}>{error}</p>}
-
-//             <Button type="submit" variant="contained" color="primary" disabled={loading || uploading}>
-//                 {loading ? <CircularProgress size={24} /> : 'Create Post'}
+//           )}
+//           <Box mt={2}>
+//             <Button className={styles.icons} variant="contained"  type="submit" disabled={loading || uploading}>
+//               {loading || uploading ? 'Subiendo...' : 'Publicar'}
 //             </Button>
+//           </Box>
+//           {error && <Typography color="error" sx={{ marginTop: 2 }}>{error}</Typography>}
 //         </form>
-//     );
+//       </CardContent>
+//     </Card>
+//   );
 // };
 
 // export default CreatePostForm;
 
+
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, resetCreatePost } from '../../redux/slices/createPostSlice';
-import { TextField, Button, CircularProgress, Input } from '@mui/material';
+import { TextField, Button, Box, Card, CardContent, IconButton, Typography } from '@mui/material';
+import { PhotoCamera } from '@mui/icons-material';
 import { AppDispatch, RootState } from '@/app/redux/store';
 import axios from 'axios';
+import styles from './formCreatePost.module.css'; // Asegúrate de definir los estilos
+import showAlert from '../alertcomponent/alertcomponent';
 
 const cloudinary_url = 'https://api.cloudinary.com/v1_1/dnwpj75xg/image/upload';
 const cloudinary_code = 'rsulligy';
 
-const CreatePostForm = () => {
-    const dispatch: AppDispatch = useDispatch();
-    const { loading, success, error } = useSelector((state: RootState) => state.createPost);
+const CreatePostForm: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const { loading, success, error } = useSelector((state: RootState) => state.createPost);
 
-    const [formData, setFormData] = useState({
-        title: '',
-        user: '',
-        description: '',
-        image: null as File | null, // Archivo de la imagen
-    });
-    const [uploading, setUploading] = useState(false); // Estado de carga
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const uploadImageToCloudinary = async (image: File) => {
+    const formData = new FormData();
+    formData.append('file', image);
+    formData.append('upload_preset', cloudinary_code);
+
+    try {
+      setUploading(true);
+      const res = await axios.post(cloudinary_url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      setUploading(false);
+      return res.data.secure_url; // Retorna la URL de la imagen subida
+    } catch (error) {
+      console.error('Error al subir la imagen:', error);
+      setUploading(false);
+      return null; // Retorna null en caso de error
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    let imageUrl: string | null = null;
+
+    if (imageFile) {
+      imageUrl = await uploadImageToCloudinary(imageFile);
+    }
+
+    const postData = {
+      title,
+      description,
+      user: '',
+      imageUrl: imageUrl || '', // Usar la URL de la imagen si existe
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setFormData({
-                ...formData,
-                image: e.target.files[0],
-            });
-        }
-    };
+    dispatch(createPost(postData));
+  };
 
-    const uploadImageToCloudinary = async (image: File) => {
-        const formData = new FormData();
-        formData.append('file', image);
-        formData.append('upload_preset', cloudinary_code);
+  useEffect(() => {
+    if (success) {
+      showAlert({
+        title: "Post creado",
+        text: "Tu post ha sido creado exitosamente.",
+        icon: "success",
+        confirmButtonText: "OK"
+      });
+      setTitle('');
+      setDescription('');
+      setImage(null);
+      setImageFile(null);
+      dispatch(resetCreatePost());
+    }
+  }, [success, dispatch]);
 
-        try {
-            setUploading(true);
-            const res = await axios.post(cloudinary_url, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            setImageUrl(res.data.secure_url);
-            setUploading(false);
-        } catch (error) {
-            console.error('Error al subir la imagen:', error);
-            setUploading(false);
-        }
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-    
-        if (formData.image) {
-            await uploadImageToCloudinary(formData.image);
-        }
-    
-        if (imageUrl || !formData.image) {
-            const postData = {
-                title: formData.title,
-                user: formData.user,
-                description: formData.description,
-                imageUrl: imageUrl || '',
-            };
-    
-            dispatch(createPost(postData));
-        }
-    };
-    
-
-    useEffect(() => {
-        if (success) {
-            alert('Post creado exitosamente!');
-            setFormData({
-                title: '',
-                user: '',
-                description: '',
-                image: null,
-            });
-            setImageUrl(null);
-            dispatch(resetCreatePost());
-        }
-    }, [success, dispatch]);
-
-    return (
-        <form onSubmit={handleSubmit}>
-            <TextField
-                label="Title"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
+  return (
+    <Card className={styles.card} raised>
+      <CardContent>
+        <Typography variant="h5" component="div" gutterBottom>
+          Crear un Post
+        </Typography>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <TextField
+            fullWidth
+            label="Título"
+            variant="outlined"
+            margin="normal"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            className={styles.textField}
+          />
+          <TextField
+            fullWidth
+            label="Descripción"
+            variant="outlined"
+            margin="normal"
+            multiline
+            rows={4}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+            className={styles.textField}
+          />
+          <input
+            accept="image/*"
+            style={{ display: 'none' }}
+            id="image-upload"
+            type="file"
+            onChange={handleImageChange}
+          />
+          <label htmlFor="image-upload">
+            <IconButton className={styles.containerButton} component="span">
+              <PhotoCamera className={styles.iconCamera} />
+              <p className={styles.p}>Add image</p>
+            </IconButton>
+          </label>
+          {image && (
+            <img
+              src={image}
+              alt="Vista previa de la imagen"
+              className={styles.previewImage}
             />
-            <TextField
-                label="User"
-                name="user"
-                value={formData.user}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-            />
-            <TextField
-                label="Description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-                multiline
-                rows={4}
-            />
-
-            {/* Input para seleccionar la imagen */}
-            <Input
-                type="file"
-                onChange={handleFileChange}
-                fullWidth
-            />
-
-            {/* Mostrar indicador de carga de la imagen */}
-            {uploading && <p>Subiendo imagen...</p>}
-
-            {/* Mostrar error si hay */}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-
-            <Button type="submit" variant="contained" color="primary" disabled={loading || uploading}>
-                {loading ? <CircularProgress size={24} /> : 'Create Post'}
+          )}
+          <Box mt={2}>
+            <Button className={styles.iconSearch} variant="contained" color="primary" type="submit" disabled={loading || uploading}>
+              {loading || uploading ? 'Subiendo...' : 'Publicar'}
             </Button>
+          </Box>
+          {error && <Typography color="error" sx={{ marginTop: 2 }}>{error}</Typography>}
         </form>
-    );
+      </CardContent>
+    </Card>
+  );
 };
 
 export default CreatePostForm;
+
+
