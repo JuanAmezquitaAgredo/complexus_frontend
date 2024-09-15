@@ -279,8 +279,9 @@ const CreatePostForm: React.FC = () => {
             onChange={handleImageChange}
           />
           <label htmlFor="image-upload">
-            <IconButton color="primary" component="span">
+            <IconButton className={styles.containerButton} component="span">
               <PhotoCamera className={styles.iconCamera} />
+              <p className={styles.p}>Add image</p>
             </IconButton>
           </label>
           {image && (

@@ -6,7 +6,6 @@
     margin: 20px auto; /* Centra la tarjeta */
     padding: 20px; /* Espaciado interno */
     border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra */
     overflow-y: auto;
   }
   
@@ -21,7 +20,26 @@
   
   .iconCamera {
     color: #260e69; /* Color del icono de la cámara */
+    background-color: white; /* Fondo del icono de la cámara */
   }
+
+  .containerButton{
+    display: flex; /* Usa flexbox para alinear elementos */
+    justify-content: left;
+    gap: 10px;
+    width: 175px;
+  }
+
+  .containerButton:hover{
+    cursor: pointer;
+    background-color: white;
+  }
+
+  .p{
+    color: #260e69;
+    font-size: 18px;
+  }
+
   .iconSearch{
     color: white; /* Color del icono de la cámara */
     background-color: #260e69;
