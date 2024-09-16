@@ -29,8 +29,8 @@ export const Sidebar = () => {
           </div>
         </a>
 
-        <a className={style.a} href="/owners">
-          <div className={`${style.aside_nav} ${currentPath === '/owners' ? style.active : ''}`}>
+        <a className={style.a} href="/ownerscrud">
+          <div className={`${style.aside_nav} ${currentPath === '/ownerscrud' ? style.active : ''}`}>
             <MapsHomeWorkOutlinedIcon className={style.icons} />
             <h2 className={style.aside_nav_h2}>Owners</h2>
           </div>

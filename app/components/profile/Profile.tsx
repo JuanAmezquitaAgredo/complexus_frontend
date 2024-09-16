@@ -7,12 +7,11 @@ import InputField from '../common/input/input';
 interface ProfileCardProps {
   name: string;
   email: string;
-  id: string;
   onEdit: () => void;
   onLogout: () => void;
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ name, email, id, onEdit, onLogout }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ name, email, onEdit, onLogout }) => {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
@@ -29,7 +28,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ name, email, id, onEdit, onLo
       <div className={styles.inputs}>
         <InputField label="Name" type="text" name="name" value={name} placeholder="Name" boderColor="black" />
         <InputField label="Email" type="email" name="email" value={email} placeholder="Email" boderColor="black" />
-        <InputField label="ID" type="text" name="id" value={id} placeholder="ID" boderColor="black" />
       </div>
       <button className={styles.logoutButton} onClick={onLogout}>
         <img className={styles.icons} src="/logout.png" alt="" />
