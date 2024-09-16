@@ -135,6 +135,7 @@ const OwnersCrud = () => {
                             <tr className={styles.tr}>
                                 <th className={styles.th}>Name</th>
                                 <th className={styles.th}>Email</th>
+                                <th className={styles.th}>Apto</th>
                                 <th className={styles.th}>Phone</th>
                                 <th className={styles.th}>Actions</th>
                             </tr>
@@ -144,6 +145,7 @@ const OwnersCrud = () => {
                                 <tr key={user.id} className={styles.tr}>
                                     <td className={styles.td}>{`${user.name} ${user.lastName}`}</td>
                                     <td className={styles.td}>{user.email}</td>
+                                    <td className={styles.td}>{user.apto}</td>
                                     <td className={styles.td}>{user.phone}</td>
                                     <td className={styles["action-icons"]}>
                                         <button onClick={() => handleEditClick(user.id)}>

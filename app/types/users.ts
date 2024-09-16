@@ -5,7 +5,8 @@ export interface User{
     email: string;
     password: string;
     phone: string;
-    tower: string;
+    apto?: string;
+    tower?: string;
     rol_id: string;
     residential_id: string;
 }
