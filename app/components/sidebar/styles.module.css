@@ -1,21 +1,24 @@
-.aside{
+.aside {
     width: 40vh;
-    height: 89vh;
+    height: 90vh;
     background-color: #260e69;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.ul{
+
+.ul {
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
 }
-.a{
+
+.a {
     text-decoration: none;
 }
-.aside_nav{
+
+.aside_nav {
     border-bottom: 1px solid white;
     width: 100%;
     height: 10vh;
@@ -23,16 +26,18 @@
     align-items: center;
     justify-content: space-around;
 
-    &:hover{
+    &:hover {
         background: linear-gradient(to right, #9340ff, #6400c8);
     }
 }
-.aside_nav_h2{
+
+.aside_nav_h2 {
     width: 50%;
     color: white;
     font-size: 16px;
     font-weight: unset;
 }
+
 .icons {
     transition: transform 0.7s;
     color: white;
@@ -41,7 +46,7 @@
 }
 
 .active {
-    background-color: #390073; /* El mismo color que el background */
+    background-color: #390073;
+    /* El mismo color que el background */
     background: linear-gradient(to right, #9340ff, #390073);
-  }
-  
+}

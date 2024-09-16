@@ -246,12 +246,12 @@ const CreatePostForm: React.FC = () => {
     <Card className={styles.card} raised>
       <CardContent>
         <Typography variant="h5" component="div" gutterBottom>
-          Crear un Post
+          Create a New Post
         </Typography>
         <form onSubmit={handleSubmit} className={styles.form}>
           <TextField
             fullWidth
-            label="Título"
+            label="Títle"
             variant="outlined"
             margin="normal"
             value={title}
@@ -261,7 +261,7 @@ const CreatePostForm: React.FC = () => {
           />
           <TextField
             fullWidth
-            label="Descripción"
+            label="Description"
             variant="outlined"
             margin="normal"
             multiline
@@ -293,7 +293,7 @@ const CreatePostForm: React.FC = () => {
           )}
           <Box mt={2}>
             <Button className={styles.iconSearch} variant="contained" color="primary" type="submit" disabled={loading || uploading}>
-              {loading || uploading ? 'Subiendo...' : 'Publicar'}
+              {loading || uploading ? 'Uploading...' : 'Post'}
             </Button>
           </Box>
           {error && <Typography color="error" sx={{ marginTop: 2 }}>{error}</Typography>}
