@@ -9,12 +9,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from "../components/common/modal/modal";
 import FormRegisterAdmin from "../components/form-register-admin/form-register-admin";
+import FormEditAdmin from "../components/form-edit-admin/form-edit-admin";
 import ConfirmDialog from "../components/alertDelete/alertDelete";
 
 const SuperadminPage = () => {
     const [units, setUnits] = useState<Unit[]>([]);
     const [users, setUsers] = useState<User[]>([]);
-    const [isModalOpen, setIsModalOpen] = useState(false); // Control del modal
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Control del modal de creación
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Control del modal de edición
+    const [selectedAdminId, setSelectedAdminId] = useState<string>(""); // ID del administrador seleccionado para editar
 
     useEffect(() => {
         // Fetch units and users from json-server
@@ -37,12 +40,8 @@ const SuperadminPage = () => {
     }, []);
 
     const getAdminData = (adminId: string) => {
-        const admin = users.find(user => user.id === adminId);
+        const admin = users.find(user => user.id === adminId && user.rol_id === '2');
         return admin;
-    };
-
-    const handleEditClick = (unit: Unit) => {
-        setIsModalOpen(true); // Abre el modal
     };
 
     const handleDeleteClick = async (unit: Unit) => {
@@ -71,10 +70,19 @@ const SuperadminPage = () => {
             }
         }
     };
-    
 
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
+    const handleEditClick = (adminId: string) => {
+        setSelectedAdminId(adminId);
+        setIsEditModalOpen(true);
+    };
+
+    const handleCloseCreateModal = () => {
+        setIsCreateModalOpen(false);
+    };
+
+    const handleCloseEditModal = () => {
+        setIsEditModalOpen(false);
+        setSelectedAdminId(""); // Reset selected admin ID
     };
 
     return (
@@ -105,7 +113,7 @@ const SuperadminPage = () => {
                                         <td className={styles.td}>{admin?.email}</td>
                                         <td className={styles.td}>{admin?.phone}</td>
                                         <td className={styles["action-icons"]}>
-                                            <button onClick={() => handleEditClick(unit)}>
+                                            <button onClick={() => handleEditClick(admin?.id || "")}>
                                                 <EditIcon />
                                             </button>
                                             <button onClick={() => handleDeleteClick(unit)}>
@@ -118,14 +126,15 @@ const SuperadminPage = () => {
                         </tbody>
                     </table>
                     <div className={styles.createAdmin}>
-                        <button className={styles.button} onClick={() => setIsModalOpen(true)}>Add Residential Unit</button>
+                        <button className={styles.button} onClick={() => setIsCreateModalOpen(true)}>Add Residential Unit</button>
                     </div>
                 </div>
             </div>
-
-            {/* Modal para editar */}
-            <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+            <Modal isOpen={isCreateModalOpen} onClose={handleCloseCreateModal}>
                 <FormRegisterAdmin/>
+            </Modal>
+            <Modal isOpen={isEditModalOpen} onClose={handleCloseEditModal}>
+                {selectedAdminId && <FormEditAdmin adminId={selectedAdminId} />}
             </Modal>
         </main>
     );

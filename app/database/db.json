@@ -2,36 +2,49 @@
   "users": [
     {
       "id": "d8e3",
-      "name": "Juan Sebastian Amezquita",
+      "name": "Juan",
       "email": "jagredo03@gmail.com",
       "password": "abc.123",
       "phone": "1376980852",
       "tower": "123",
       "apto": "3",
       "rol_id": "1",
-      "residential_id": "3eg32"
+      "residential_id": "3eg32",
+      "lastName": "Amezquita"
     },
     {
       "id": "79cd",
-      "name": "pepe",
-      "lastName": "pope",
+      "name": "juan",
+      "lastName": "calderon",
       "email": "jsamezquia@eafit.edu.co",
       "password": "abc.123",
       "phone": "1376980852",
       "tower": "N/A",
       "residential_id": "b8ba",
       "rol_id": "2"
-    }
-  ],
-  "admins": [
+    },
     {
-      "id": "c58sa",
+      "id": "79cd",
       "name": "juan",
+      "lastName": "calderon",
+      "email": "jsamezquia@eafit.edu.co",
+      "password": "abc.123",
+      "phone": "1376980852",
+      "tower": "N/A",
+      "residential_id": "N/A",
+      "rol_id": "2"
+    },
+    {
+      "id": "d8e3mf",
+      "name": "Juan",
       "email": "jagredo03@gmail.com",
       "password": "abc.123",
-      "phone": "3176980852",
-      "towers": "3",
-      "rol": "admin"
+      "phone": "1376980852",
+      "tower": "123",
+      "apto": "3",
+      "rol_id": "2",
+      "residential_id": "3eg32",
+      "lastName": "Amezquita"
     }
   ],
   "posts": [
@@ -96,7 +109,7 @@
       "city": "medellin",
       "address": "pope",
       "has_tower": "4",
-      "admin_id": "d8e3",
+      "admin_id": "d8e3mf",
       "id": "3eg32"
     },
     {

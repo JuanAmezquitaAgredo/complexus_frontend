@@ -10,6 +10,7 @@ export interface UserAdmin {
 }
 
 export interface ResidentialUnit{
+    id?: string;
     name: string;
     city: string;
     address: string;
