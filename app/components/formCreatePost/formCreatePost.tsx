@@ -1,11 +1,11 @@
 // import React, { useState, useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { createPost, resetCreatePost } from '../../redux/slices/createPostSlice';
-// import { TextField, Button, Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
+// import { TextField, Button, Box, Card, CardContent, IconButton, Typography } from '@mui/material';
 // import { PhotoCamera } from '@mui/icons-material';
 // import { AppDispatch, RootState } from '@/app/redux/store';
 // import axios from 'axios';
-// import styles from './formCreatePost.module.css'
+// import styles from './formCreatePost.module.css'; // Asegúrate de definir los estilos
 // import showAlert from '../alertcomponent/alertcomponent';
 
 // const cloudinary_url = 'https://api.cloudinary.com/v1_1/dnwpj75xg/image/upload';
@@ -75,12 +75,12 @@
 
 //   useEffect(() => {
 //     if (success) {
-//         showAlert({
-//             title: "Post creado",
-//             text: "Tu post ha sido creado exitosamente.",
-//             icon: "success",
-//             confirmButtonText: "OK"
-//         });
+//       showAlert({
+//         title: "Post creado",
+//         text: "Tu post ha sido creado exitosamente.",
+//         icon: "success",
+//         confirmButtonText: "OK"
+//       });
 //       setTitle('');
 //       setDescription('');
 //       setImage(null);
@@ -90,24 +90,25 @@
 //   }, [success, dispatch]);
 
 //   return (
-//     <Card sx={{ maxWidth: 1200, margin: 'auto', padding: 2 }}>
+//     <Card className={styles.card} raised>
 //       <CardContent>
 //         <Typography variant="h5" component="div" gutterBottom>
-//           Crear un Post
+//           Create a New Post
 //         </Typography>
-//         <form onSubmit={handleSubmit}>
+//         <form onSubmit={handleSubmit} className={styles.form}>
 //           <TextField
 //             fullWidth
-//             label="Título"
+//             label="Títle"
 //             variant="outlined"
 //             margin="normal"
 //             value={title}
 //             onChange={(e) => setTitle(e.target.value)}
 //             required
+//             className={styles.textField}
 //           />
 //           <TextField
 //             fullWidth
-//             label="Descripción"
+//             label="Description"
 //             variant="outlined"
 //             margin="normal"
 //             multiline
@@ -115,6 +116,7 @@
 //             value={description}
 //             onChange={(e) => setDescription(e.target.value)}
 //             required
+//             className={styles.textField}
 //           />
 //           <input
 //             accept="image/*"
@@ -124,21 +126,21 @@
 //             onChange={handleImageChange}
 //           />
 //           <label htmlFor="image-upload">
-//             <IconButton color="primary" component="span">
+//             <IconButton className={styles.containerButton} component="span">
 //               <PhotoCamera className={styles.iconCamera} />
+//               <p className={styles.p}>Add image</p>
 //             </IconButton>
 //           </label>
 //           {image && (
-//             <CardMedia
-//               component="img"
-//               image={image}
+//             <img
+//               src={image}
 //               alt="Vista previa de la imagen"
-//               sx={{ marginTop: 2, height: 140 }}
+//               className={styles.previewImage}
 //             />
 //           )}
 //           <Box mt={2}>
-//             <Button className={styles.icons} variant="contained"  type="submit" disabled={loading || uploading}>
-//               {loading || uploading ? 'Subiendo...' : 'Publicar'}
+//             <Button className={styles.iconSearch} variant="contained" color="primary" type="submit" disabled={loading || uploading}>
+//               {loading || uploading ? 'Uploading...' : 'Post'}
 //             </Button>
 //           </Box>
 //           {error && <Typography color="error" sx={{ marginTop: 2 }}>{error}</Typography>}
@@ -149,7 +151,6 @@
 // };
 
 // export default CreatePostForm;
-
 
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -216,11 +217,16 @@ const CreatePostForm: React.FC = () => {
       imageUrl = await uploadImageToCloudinary(imageFile);
     }
 
+    const userName = localStorage.getItem('userName') || 'Usuario Anónimo';
+
+    const publicationDate = new Date().toLocaleString();
+
     const postData = {
       title,
       description,
-      user: '',
-      imageUrl: imageUrl || '', // Usar la URL de la imagen si existe
+      user: userName,
+      imageUrl: imageUrl || '',
+      timePosted: publicationDate,
     };
 
     dispatch(createPost(postData));
@@ -304,5 +310,3 @@ const CreatePostForm: React.FC = () => {
 };
 
 export default CreatePostForm;
-
-

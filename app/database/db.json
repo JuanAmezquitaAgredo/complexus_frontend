@@ -36,51 +36,12 @@
   ],
   "posts": [
     {
-      "id": "04c3",
-      "title": "carro en venta",
-      "user": "juan",
-      "description": "vendo carro",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975075/proyecto/bjqon7w1mf6oc29yjri3.jpg"
-    },
-    {
-      "id": "e1de",
-      "title": "sofa",
-      "user": "carlos",
-      "description": "vendo sofa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
-    },
-    {
-      "id": "04c9",
-      "title": "nuevo",
-      "user": "nuevo",
-      "description": "nuevo",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725985094/proyecto/aeg87bbqlnzxuakmqakr.png"
-    },
-    {
-      "id": "7be3",
+      "id": "af74",
       "title": "casa",
-      "description": "yo soy juan",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726157458/proyecto/yvs9nzufmzv3o9lowyvl.jpg"
-    },
-    {
-      "id": "3dbb",
-      "title": "juan",
-      "description": "jbsusus",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726157519/proyecto/piyrlbdz2ygx2iwbuylq.png"
-    },
-    {
-      "id": "04c5",
-      "title": "mi casa",
-      "description": "ksksksk",
-      "user": "",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726158218/proyecto/hftu57sckgdhdlhaqa7y.jpg"
-    },
-    {
-      "id": "c498",
-      "title": "casa",
-      "description": "vendo casa",
-      "user": "",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726160737/proyecto/qdqsmvaneyw0weimgs0s.png"
+      "description": "ksksks",
+      "user": "Usuario Anónimo",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726488438/proyecto/rozjjd8dywodpb6waez9.jpg",
+      "timePosted": "16/9/2024, 7:07:19"
     }
   ],
   "units": [
