@@ -8,8 +8,8 @@
       "phone": "1376980852",
       "tower": "123",
       "apto": "3",
-      "rol_id": "2",
-      "residential_id": "Superadmin"
+      "rol_id": "1",
+      "residential_id": "3eg32"
     },
     {
       "id": "79cd",
@@ -81,19 +81,27 @@
       "description": "vendo casa",
       "user": "",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726160737/proyecto/qdqsmvaneyw0weimgs0s.png"
+    },
+    {
+      "id": "01a0",
+      "title": "nuevo",
+      "description": "nuevo",
+      "user": "",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726485735/proyecto/u3rr3bgeborefyefv9z4.png"
     }
   ],
   "units": [
     {
-      "id": "5e4c",
-      "name": "Juan Calderon",
-      "city": "med",
-      "address": "calle 6a#35a105",
-      "admin_id": "c58c"
+      "name": "maderos 2",
+      "city": "medellin",
+      "address": "pope",
+      "has_tower": "4",
+      "admin_id": "d8e3",
+      "id": "3eg32"
     },
     {
-      "name": "pope",
-      "city": "pope",
+      "name": "maderos 1",
+      "city": "medellin",
       "address": "pope",
       "has_tower": "4",
       "admin_id": "79cd",
