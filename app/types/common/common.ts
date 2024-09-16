@@ -5,7 +5,8 @@ export interface InputFieldProps {
     value: string;
     placeholder: string;
     boderColor?: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    disabled?: boolean;
 }
 
 export interface ButtonProps{
