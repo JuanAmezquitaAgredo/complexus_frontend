@@ -8,7 +8,7 @@
       "phone": "1376980852",
       "tower": "123",
       "apto": "3",
-      "rol_id": "1",
+      "rol_id": "2",
       "residential_id": "3eg32",
       "lastName": "Amezquita"
     },
@@ -34,6 +34,19 @@
       "tower": "N/A",
       "residential_id": "b8ba",
       "rol_id": "2"
+    },
+    {
+      "id": "dac9",
+      "name": "camilo",
+      "lastName": "dado",
+      "email": "ejempl@gmial.ejemplo",
+      "password": "abc.123",
+      "phone": "12342",
+      "tower": "3",
+      "apto": "123",
+      "rol_id": "3",
+      "residential_id": "3eg32",
+      "active": true
     }
   ],
   "posts": [

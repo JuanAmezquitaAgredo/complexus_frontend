@@ -10,12 +10,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from "../components/common/modal/modal";
 import FormRegisterOwner from "../components/form-register-owner/form-register-owner";
 import FormEditOwner from "../components/form-edit-owner/form-edit-owner"; // Asegúrate de tener este componente
+import * as XLSX from 'xlsx'; // Importa la librería xlsx
 
 const OwnersCrud = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Control del modal de creación
     const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Control del modal de edición
     const [selectedUserId, setSelectedUserId] = useState<string>(""); // ID del usuario seleccionado para editar
+    const [file, setFile] = useState<File | null>(null); // Estado para el archivo de Excel
 
     useEffect(() => {
         // Fetch users from json-server
@@ -70,6 +72,58 @@ const OwnersCrud = () => {
         setSelectedUserId(""); // Reset selected user ID
     };
 
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            setFile(file); // Guardar el archivo en el estado
+        }
+    };
+
+    const handleUploadClick = async () => {
+        if (!file) {
+            alert("Please select a file first.");
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = async (event) => {
+            const data = new Uint8Array(event.target?.result as ArrayBuffer);
+            const workbook = XLSX.read(data, { type: "array" });
+
+            const sheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[sheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+            if (jsonData) {
+                alert("File uploaded successfully!");
+            }
+
+            // try {
+            //     // Envía los datos al backend
+            //     const response = await fetch("http://localhost:3004/upload", {
+            //         method: "POST",
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //         },
+            //         body: JSON.stringify({ data: jsonData }),
+            //     });
+
+            //     if (response.ok) {
+            //         alert("File uploaded successfully!");
+            //     } else {
+            //         console.error("Error uploading file:", response.statusText);
+            //         alert("Error uploading file.");
+            //     }
+            // } catch (error) {
+            //     console.error("Error uploading file:", error);
+            //     alert("Error uploading file.");
+            // }
+        };
+
+        reader.readAsArrayBuffer(file);
+    };
+
     return (
         <main>
             <Navbar />
@@ -105,6 +159,13 @@ const OwnersCrud = () => {
                     </table>
                     <div className={styles.createAdmin}>
                         <button className={styles.button} onClick={() => setIsCreateModalOpen(true)}>Add Owner</button>
+                    </div>
+                    <div className={styles.fileUpload}>
+                        <label htmlFor="fileUpload">Select Excel File</label>
+                        <input type="file" id="fileUpload" accept=".xlsx, .xls" onChange={handleFileChange} />
+                        <button className={styles.uploadButton} onClick={handleUploadClick} disabled={!file}>
+                            Upload Excel
+                        </button>
                     </div>
                 </div>
             </div>
