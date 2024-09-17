@@ -14,7 +14,7 @@ import PushPinIcon from '@mui/icons-material/PushPin';
 
 const AdminPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  
+
   // Obtener los estados de posts y pinnedPosts
   const { posts, loading: postsLoading, error: postsError } = useSelector((state: RootState) => state.posts);
   const { pinnedPosts, loading: pinnedPostsLoading, error: pinnedPostsError } = useSelector((state: RootState) => state.pinnedPosts);
@@ -43,13 +43,13 @@ const AdminPage: React.FC = () => {
             <div className={styles.postCardContainer}>
               {posts.map((post) => (
                 <PostCard
-                  key={post.id}
+                  key={post.id} // Ya tienes una key aquí
                   id={post.id}
                   title={post.title}
                   user={post.user}
                   timePosted={post.timePosted}
                   description={post.description}
-                  likes={post.likes} 
+                  likes={post.likes}
                   imageUrl={post.imageUrl}
                 />
               ))}
@@ -67,11 +67,12 @@ const AdminPage: React.FC = () => {
               </div>
               {pinnedPosts.map((post) => (
                 <PinnedPostCard
-                title={post.title}
-                user={post.user}
-                content={post.description}
-                imageUrl={post.imageUrl}
-              />
+                  key={post.id}
+                  title={post.title}
+                  user={post.user}
+                  content={post.description}
+                  imageUrl={post.imageUrl}
+                />
               ))}
             </div>
           )}
