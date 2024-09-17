@@ -1,0 +1,170 @@
+{
+  "users": [
+    {
+      "id": "d8e3",
+      "name": "Juan",
+      "email": "jagredo03@gmail.com",
+      "password": "abc.123",
+      "phone": "1376980852",
+      "tower": "123",
+      "apto": "3",
+      "rol_id": "1",
+      "residential_id": "3eg32",
+      "lastName": "Amezquita"
+    },
+    {
+      "id": "79cdde",
+      "name": "juan",
+      "lastName": "calderon",
+      "email": "jsamezquia@eafit.edu.co",
+      "password": "abc.123",
+      "phone": "1376980852",
+      "tower": "N/A",
+      "residential_id": "b8ba",
+      "rol_id": "3",
+      "apto": "805"
+    },
+    {
+      "id": "79cd",
+      "name": "juan",
+      "lastName": "calderon",
+      "email": "jsamezquia@eafit.edu.co",
+      "password": "abc.123",
+      "phone": "1376980852",
+      "tower": "N/A",
+      "residential_id": "b8ba",
+      "rol_id": "2"
+    },
+    {
+      "id": "dac9",
+      "name": "camilo",
+      "lastName": "dado",
+      "email": "ejempl@gmial.ejemplo",
+      "password": "abc.123",
+      "phone": "12342",
+      "tower": "3",
+      "apto": "123",
+      "rol_id": "2",
+      "residential_id": "3eg32",
+      "active": true
+    }
+  ],
+  "posts": [
+    {
+      "id": "04c3",
+      "title": "carro en venta",
+      "user": "juan",
+      "description": "vendo carro",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975075/proyecto/bjqon7w1mf6oc29yjri3.jpg"
+    },
+    {
+      "id": "e1de",
+      "title": "sofa",
+      "user": "carlos",
+      "description": "vendo sofa",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+    },
+    {
+      "id": "04c9",
+      "title": "nuevo",
+      "user": "nuevo",
+      "description": "nuevo",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725985094/proyecto/aeg87bbqlnzxuakmqakr.png"
+    },
+    {
+      "id": "7be3",
+      "title": "casa",
+      "description": "yo soy juan",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726157458/proyecto/yvs9nzufmzv3o9lowyvl.jpg"
+    },
+    {
+      "id": "3dbb",
+      "title": "juan",
+      "description": "jbsusus",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726157519/proyecto/piyrlbdz2ygx2iwbuylq.png"
+    },
+    {
+      "id": "04c5",
+      "title": "mi casa",
+      "description": "ksksksk",
+      "user": "",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726158218/proyecto/hftu57sckgdhdlhaqa7y.jpg"
+    },
+    {
+      "id": "c498",
+      "title": "casa",
+      "description": "vendo casa",
+      "user": "",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726160737/proyecto/qdqsmvaneyw0weimgs0s.png"
+    },
+    {
+      "id": "01a0",
+      "title": "nuevo",
+      "description": "nuevo",
+      "user": "",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726485735/proyecto/u3rr3bgeborefyefv9z4.png"
+    }
+  ],
+  "units": [
+    {
+      "name": "maderos 2",
+      "city": "medellin",
+      "address": "pope",
+      "has_tower": "4",
+      "admin_id": "dac9",
+      "id": "3eg32"
+    },
+    {
+      "name": "maderos 1",
+      "city": "medellin",
+      "address": "pope",
+      "has_tower": "4",
+      "admin_id": "79cd",
+      "id": "b8ba"
+    }
+  ],
+  "pin": [
+    {
+      "id": "04c3",
+      "title": "carro en venta",
+      "user": "juan",
+      "description": "vendo carro",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975075/proyecto/bjqon7w1mf6oc29yjri3.jpg"
+    },
+    {
+      "id": "e1de",
+      "title": "sofa",
+      "user": "carlos",
+      "description": "vendo sofa",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+    },
+    {
+      "id": "f1de",
+      "title": "mesa",
+      "user": "carlos",
+      "description": "vendo mesa",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+    },
+    {
+      "id": "f1de",
+      "title": "mesa",
+      "user": "carlos",
+      "description": "vendo mesa",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+    },
+    {
+      "id": "f1de",
+      "title": "mesa",
+      "user": "carlos",
+      "description": "vendo mesa",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+    },
+    {
+      "id": "f1de",
+      "title": "mesa",
+      "user": "carlos",
+      "description": "vendo mesa",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+    }
+  ]
+}

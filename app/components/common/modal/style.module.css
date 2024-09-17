@@ -1,0 +1,64 @@
+.modal_overlay {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_content {
+  background: #260e69;
+  border: solid 1px white;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 95vh; /* Limita la altura máxima al 90% del viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.modal_close_button {
+  color: white;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal_body {
+  margin-top: 10px;
+  overflow-y: auto; /* Activa el scroll vertical */
+  flex-grow: 1; /* Permite que el cuerpo del modal ocupe el espacio restante */
+}
+
+/* Estilos para navegadores basados en WebKit (Chrome, Safari) */
+.modal_body::-webkit-scrollbar {
+  width: 10px; /* Ancho de la barra */
+}
+
+.modal_body::-webkit-scrollbar-track {
+  background: transparent; /* Color del fondo de la barra */
+  border-radius: 10px; /* Redondeo del fondo de la barra */
+}
+
+.modal_body::-webkit-scrollbar-thumb {
+  background-color: white; /* Color del deslizador */
+  border-radius: 10px; /* Redondeo del deslizador */
+  border: 2px solid #f1f1f1; /* Borde del deslizador */
+}
+
+.modal_body::-webkit-scrollbar-thumb:hover {
+  background-color: #6c30cc; /* Color del deslizador cuando se pasa el ratón por encima */
+}
