@@ -105,15 +105,25 @@ const SuperadminPage = () => {
                         <tbody className={styles.tbody}>
                             {units.map((unit) => {
                                 const admin = getAdminData(unit.admin_id); // Obtener detalles del administrador
+
+                                if (!admin) {
+                                    // Manejar el caso en que no se encuentre el administrador
+                                    return (
+                                        <tr key={unit.id} className={styles.tr}>
+                                            <td className={styles.td} colSpan={6}>No admin data available for this unit.</td>
+                                        </tr>
+                                    );
+                                }
+
                                 return (
                                     <tr key={unit.id} className={styles.tr}>
                                         <td className={styles.td}>{unit.name}</td>
                                         <td className={styles.td}>{unit.city}</td>
-                                        <td className={styles.td}>{`${admin?.name} ${admin?.lastName}`}</td>
-                                        <td className={styles.td}>{admin?.email}</td>
-                                        <td className={styles.td}>{admin?.phone}</td>
+                                        <td className={styles.td}>{`${admin.name} ${admin.lastName}`}</td>
+                                        <td className={styles.td}>{admin.email}</td>
+                                        <td className={styles.td}>{admin.phone}</td>
                                         <td className={styles["action-icons"]}>
-                                            <button onClick={() => handleEditClick(admin?.id || "")}>
+                                            <button onClick={() => handleEditClick(admin.id)}>
                                                 <EditIcon />
                                             </button>
                                             <button onClick={() => handleDeleteClick(unit)}>
@@ -131,7 +141,7 @@ const SuperadminPage = () => {
                 </div>
             </div>
             <Modal isOpen={isCreateModalOpen} onClose={handleCloseCreateModal}>
-                <FormRegisterAdmin/>
+                <FormRegisterAdmin />
             </Modal>
             <Modal isOpen={isEditModalOpen} onClose={handleCloseEditModal}>
                 {selectedAdminId && <FormEditAdmin adminId={selectedAdminId} />}
