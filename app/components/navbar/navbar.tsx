@@ -72,6 +72,8 @@ export const Navbar = () => {
         confirmButtonText: 'OK'
       });
       sessionStorage.removeItem('token');
+      sessionStorage.removeItem('id');
+      sessionStorage.removeItem('residential_id');
       router.push('/login');
     } catch (error) {
       console.error('Error al cerrar sesión:', error);

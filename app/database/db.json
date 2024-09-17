@@ -8,7 +8,7 @@
       "phone": "1376980852",
       "tower": "123",
       "apto": "3",
-      "rol_id": "2",
+      "rol_id": "1",
       "residential_id": "3eg32",
       "lastName": "Amezquita"
     },
@@ -44,7 +44,7 @@
       "phone": "12342",
       "tower": "3",
       "apto": "123",
-      "rol_id": "3",
+      "rol_id": "2",
       "residential_id": "3eg32",
       "active": true
     }
@@ -111,7 +111,7 @@
       "city": "medellin",
       "address": "pope",
       "has_tower": "4",
-      "admin_id": "d8e3mf",
+      "admin_id": "dac9",
       "id": "3eg32"
     },
     {
