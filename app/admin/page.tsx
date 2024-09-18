@@ -67,10 +67,11 @@ const AdminPage: React.FC = () => {
               </div>
               {pinnedPosts.map((post) => (
                 <PinnedPostCard
+                id={post.id}
                 title={post.title}
                 user={post.user}
                 content={post.description}
-                imageUrl={post.imageUrl}
+                imageUrl={post.imageUrl}  
               />
               ))}
             </div>

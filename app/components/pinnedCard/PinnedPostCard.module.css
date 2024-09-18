@@ -47,4 +47,9 @@
     color: #333;
     margin-top: 8px;
   }
+
+  .pin{
+    cursor: pointer;
+    color: #b2b2b2;
+  }
   
