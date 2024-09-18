@@ -31,7 +31,7 @@ const OwnerPage: React.FC = () => {
   if (postsError || pinnedPostsError) {
     return <div>Error: {postsError || pinnedPostsError}</div>;
   }
-
+  
   return (
     <main>
       <Navbar />
