@@ -40,6 +40,7 @@ const FormEditAdmin: React.FC<FormEditAdminProps> = ({ adminId }) => {
             try {
                 const responseAdmin = await fetch(`http://localhost:3004/users/${adminId}`);
                 if (!responseAdmin.ok) throw new Error('Error al obtener datos del administrador.');
+                
                 const adminData = await responseAdmin.json();
                 setAdmin(adminData);
 
@@ -86,6 +87,10 @@ const FormEditAdmin: React.FC<FormEditAdminProps> = ({ adminId }) => {
                 },
                 body: JSON.stringify(admin),
             });
+
+
+            sessionStorage.removeItem('name'); // Remove the name from the session storage
+            sessionStorage.setItem('name', admin.name); // Update the name in the session storage
 
             if (!responseDBAdmin.ok) throw new Error('Error al actualizar los datos del administrador en la base de datos local.');
 

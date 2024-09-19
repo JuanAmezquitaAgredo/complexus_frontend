@@ -21,7 +21,7 @@
       "phone": "1376980852",
       "tower": "N/A",
       "residential_id": "b8ba",
-      "rol_id": "3",
+      "rol_id": "2",
       "apto": "805"
     },
     {
@@ -51,58 +51,28 @@
   ],
   "posts": [
     {
-      "id": "04c3",
-      "title": "carro en venta",
-      "user": "juan",
-      "description": "vendo carro",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975075/proyecto/bjqon7w1mf6oc29yjri3.jpg"
-    },
-    {
-      "id": "e1de",
-      "title": "sofa",
+      "id": "5ab3",
+      "title": "vendo mi casa",
+      "description": "estoy vendiendo mi casa",
       "user": "carlos",
-      "description": "vendo sofa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726630255/proyecto/xfuhxrih4ujmykzggxps.jpg",
+      "timePosted": "17/9/2024, 22:30:56"
     },
     {
-      "id": "04c9",
-      "title": "nuevo",
-      "user": "nuevo",
-      "description": "nuevo",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725985094/proyecto/aeg87bbqlnzxuakmqakr.png"
-    },
-    {
-      "id": "7be3",
+      "id": "971e",
       "title": "casa",
-      "description": "yo soy juan",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726157458/proyecto/yvs9nzufmzv3o9lowyvl.jpg"
+      "description": "a",
+      "user": "juan",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726631359/proyecto/okxicvpnnrp1d24vgjue.jpg",
+      "timePosted": "17/9/2024, 22:49:19"
     },
     {
-      "id": "3dbb",
-      "title": "juan",
-      "description": "jbsusus",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726157519/proyecto/piyrlbdz2ygx2iwbuylq.png"
-    },
-    {
-      "id": "04c5",
-      "title": "mi casa",
-      "description": "ksksksk",
-      "user": "",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726158218/proyecto/hftu57sckgdhdlhaqa7y.jpg"
-    },
-    {
-      "id": "c498",
-      "title": "casa",
-      "description": "vendo casa",
-      "user": "",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726160737/proyecto/qdqsmvaneyw0weimgs0s.png"
-    },
-    {
-      "id": "01a0",
-      "title": "nuevo",
-      "description": "nuevo",
-      "user": "",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726485735/proyecto/u3rr3bgeborefyefv9z4.png"
+      "id": "b0ce",
+      "title": "carro",
+      "description": "kdkdkdkkdkdkd",
+      "user": "juan",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726746329/proyecto/ncgw5rwi7jwyasieubdb.jpg",
+      "timePosted": "19/9/2024, 6:45:30"
     }
   ],
   "units": [
@@ -119,52 +89,9 @@
       "city": "medellin",
       "address": "pope",
       "has_tower": "4",
-      "admin_id": "79cd",
+      "admin_id": "79cdde",
       "id": "b8ba"
     }
   ],
-  "pin": [
-    {
-      "id": "04c3",
-      "title": "carro en venta",
-      "user": "juan",
-      "description": "vendo carro",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975075/proyecto/bjqon7w1mf6oc29yjri3.jpg"
-    },
-    {
-      "id": "e1de",
-      "title": "sofa",
-      "user": "carlos",
-      "description": "vendo sofa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
-    },
-    {
-      "id": "f1de",
-      "title": "mesa",
-      "user": "carlos",
-      "description": "vendo mesa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
-    },
-    {
-      "id": "f1de",
-      "title": "mesa",
-      "user": "carlos",
-      "description": "vendo mesa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
-    },
-    {
-      "id": "f1de",
-      "title": "mesa",
-      "user": "carlos",
-      "description": "vendo mesa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
-    },
-    {
-      "id": "f1de",
-      "title": "mesa",
-      "user": "carlos",
-      "description": "vendo mesa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
-    }
-  ]
+  "pin": []
 }

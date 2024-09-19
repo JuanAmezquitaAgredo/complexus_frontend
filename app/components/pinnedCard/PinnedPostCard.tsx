@@ -1,26 +1,65 @@
-import React from 'react';
+// import React from 'react';
+// import styles from './PinnedPostCard.module.css';
+// import PushPinIcon from '@mui/icons-material/PushPin';
+// import DeleteIcon from '@mui/icons-material/Delete';
+
+
+// interface PinnedPostCardProps {
+//   title: string;
+//   user: string;
+//   description: string;
+//   imageUrl: string;
+// }
+
+// const PinnedPostCard: React.FC<PinnedPostCardProps> = ({ title, user, description, imageUrl }) => {
+//   return (
+//     <div className={styles.card}>
+//       <div className={styles.imageContainer}>
+//         <img src={imageUrl} alt={title} className={styles.image} />
+//       </div>
+//       <div className={styles.content}>
+//         <h3 className={styles.title}>{title}</h3>
+//         <p className={styles.user}>{user}</p>
+//         <p className={styles.text}>{description}</p>
+//       </div>
+//       <div className={styles.pinIconContainer}>
+//         <DeleteIcon className={styles.deleteIcon} />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default PinnedPostCard;
+
+import React, { useState } from 'react';
 import styles from './PinnedPostCard.module.css';
+import PushPinIcon from '@mui/icons-material/PushPin';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface PinnedPostCardProps {
-  title: string;
-  user: string;
-  content: string;
-  imageUrl: string;
+    title: string;
+    user: string;
+    description: string;
+    imageUrl: string;
+    onDelete: () => void; // Add onDelete prop
 }
 
-const PinnedPostCard: React.FC<PinnedPostCardProps> = ({ title, user, content, imageUrl }) => {
-  return (
-    <div className={styles.card}>
-      <div className={styles.imageContainer}>
-        <img src={imageUrl} alt={title} className={styles.image} />
-      </div>
-      <div className={styles.content}>
-        <h3 className={styles.title}>{title}</h3>
-        <p className={styles.user}>{user}</p>
-        <p className={styles.text}>{content}</p>
-      </div>
-    </div>
-  );
+const PinnedPostCard: React.FC<PinnedPostCardProps> = ({ title, user, description, imageUrl, onDelete }) => {
+    return (
+        <div className={styles.card}>
+            <div className={styles.imageContainer}>
+                <img src={imageUrl} alt={title} className={styles.image} />
+            </div>
+            <div className={styles.content}>
+                <h3 className={styles.title}>{title}</h3>
+                <p className={styles.user}>{user}</p>
+                <p className={styles.text}>{description}</p>
+            </div>
+            <div className={styles.pinIconContainer}>
+                <DeleteIcon className={styles.deleteIcon} onClick={onDelete} />
+            </div>
+        </div>
+    );
 };
 
 export default PinnedPostCard;
