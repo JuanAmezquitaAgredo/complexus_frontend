@@ -23,8 +23,8 @@ const Login: React.FC = () => {
 
     useEffect(() => {
         const token = sessionStorage.getItem('token');
-        if (token) {
-            router.push('/admin');
+        if (!token) {
+            router.push('/login');
         }
     }, [router]);
 
@@ -49,26 +49,30 @@ const Login: React.FC = () => {
                 const userEmailVerified = response.user.emailVerified;
                 
                 if (userEmailVerified) {
-                    // Fetch user information from the database
-                    const userResponse = await fetch(`http://localhost:3004/users?email=${user.email}`);
-                    const users = await userResponse.json();
-    
-                    if (users.length > 0) {
-                        const userFound = users.find((user: any) => user.email === user.email)
+                    // Fetch user information from the Next.js API
+                    const userResponse = await fetch('/api/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email: user.email, password: user.password }),
+                    });
 
-                        if (userFound) {
-                            
-                            sessionStorage.setItem('residential_id', userFound.residential_id);
-                            sessionStorage.setItem('id', userFound.id);
-                            sessionStorage.setItem('name', userFound.name);
+                    const userData = await userResponse.json();
 
-                            if (userFound.rol_id === "1") {
+                    if (userResponse.ok && userData.email) {
+                        sessionStorage.setItem('token', response.user.uid);
+
+                        if (userData.email === user.email) {
+                            sessionStorage.setItem('email', userData.email);
+                            sessionStorage.setItem('role', userData.role_id);
+                            if (userData.role_id === "1") {
                                 router.push('/superadmin');
-                            } else if (userFound.rol_id === "2") {
+                            } else if (userData.role_id === "2") {
                                 router.push('/admin');
-                            } else if (userFound.rol_id === "3") {
+                            } else if (userData.role_id === "3") {
                                 router.push('/owner');
-                            } else {
+                            }else {
                                 await showAlert({
                                     title: "Error",
                                     text: "Invalid role.",
@@ -76,15 +80,13 @@ const Login: React.FC = () => {
                                     confirmButtonText: "OK"
                                 });
                             }
-    
+
                             await showAlert({
                                 title: "Session Started",
                                 text: "Welcome back!",
                                 icon: "success",
                                 confirmButtonText: "OK"
                             });
-    
-                            sessionStorage.setItem('token', response.user.uid);
                         } else {
                             await showAlert({
                                 title: "Error",
@@ -93,6 +95,13 @@ const Login: React.FC = () => {
                                 confirmButtonText: "OK"
                             });
                         }
+                    } else {
+                        await showAlert({
+                            title: "Error",
+                            text: userData.error || "User not found.",
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        });
                     }
                 } else {
                     await showAlert({
@@ -113,7 +122,6 @@ const Login: React.FC = () => {
             });
         }
     }
-    
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
