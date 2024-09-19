@@ -2,7 +2,7 @@
 
 import { Navbar } from '@/app/components/navbar/navbar';
 import PostCard from '@/app/components/postcard/PostCard';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 import { fetchPosts } from '@/app/redux/slices/postSlice';
 import { fetchPinnedPosts } from '@/app/redux/slices/pinnedPostSlice';
@@ -15,21 +15,30 @@ import { useRouter } from 'next/navigation';
 
 const OwnerPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-
-  const token = sessionStorage.getItem('token');
   const router = useRouter();
-  if (!token) {
-    router.push('/login');
-  }
+  
+  // Estado para el token
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedToken = sessionStorage.getItem('token');
+    setToken(storedToken);
+
+    if (!storedToken) {
+      router.push('/login');
+    }
+  }, [router]);
 
   // Obtener los estados de posts y pinnedPosts
   const { posts, loading: postsLoading, error: postsError } = useSelector((state: RootState) => state.posts);
   const { pinnedPosts, loading: pinnedPostsLoading, error: pinnedPostsError } = useSelector((state: RootState) => state.pinnedPosts);
 
   useEffect(() => {
-    dispatch(fetchPosts());
-    dispatch(fetchPinnedPosts());  // Llamada para obtener pinned posts
-  }, [dispatch]);
+    if (token) {
+      dispatch(fetchPosts());
+      dispatch(fetchPinnedPosts());  // Llamada para obtener pinned posts
+    }
+  }, [dispatch, token]);
 
   if (postsLoading || pinnedPostsLoading) {
     return <div>Loading...</div>;

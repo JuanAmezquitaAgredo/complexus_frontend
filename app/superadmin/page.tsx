@@ -19,15 +19,22 @@ const SuperadminPage = () => {
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Control del modal de creación
     const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Control del modal de edición
     const [selectedAdminId, setSelectedAdminId] = useState<string>(""); // ID del administrador seleccionado para editar
+    const [token, setToken] = useState<string | null>(null); // Estado para el token
 
-    const token = sessionStorage.getItem('token');
     const router = useRouter();
-    if (!token) {
-        router.push('/login');
-    }
 
+    // Comprobar si existe el token en sessionStorage
     useEffect(() => {
-        // Fetch units and users from json-server
+        const storedToken = sessionStorage.getItem('token');
+        if (!storedToken) {
+            router.push('/login');
+        } else {
+            setToken(storedToken);
+        }
+    }, [router]);
+
+    // Obtener las unidades y los usuarios
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 const unitsResponse = await fetch("http://localhost:3004/units");
@@ -43,14 +50,17 @@ const SuperadminPage = () => {
             }
         };
 
-        fetchData();
-    }, []);
+        if (token) {
+            fetchData();
+        }
+    }, [token]);
 
+    // Obtener los datos del administrador
     const getAdminData = (adminId: string) => {
-        const admin = users.find(user => user.id === adminId && user.rol_id === '2');
-        return admin;
+        return users.find(user => user.id === adminId && user.rol_id === '2');
     };
 
+    // Manejar eliminación de una unidad y su administrador relacionado
     const handleDeleteClick = async (unit: Unit) => {
         const result = await ConfirmDialog({
             title: 'Are you sure?',
@@ -78,18 +88,21 @@ const SuperadminPage = () => {
         }
     };
 
+    // Manejar clic en el botón de edición
     const handleEditClick = (adminId: string) => {
         setSelectedAdminId(adminId);
         setIsEditModalOpen(true);
     };
 
+    // Cerrar modal de creación
     const handleCloseCreateModal = () => {
         setIsCreateModalOpen(false);
     };
 
+    // Cerrar modal de edición
     const handleCloseEditModal = () => {
         setIsEditModalOpen(false);
-        setSelectedAdminId(""); // Reset selected admin ID
+        setSelectedAdminId(""); // Reiniciar el ID del administrador seleccionado
     };
 
     return (
@@ -114,7 +127,6 @@ const SuperadminPage = () => {
                                 const admin = getAdminData(unit.admin_id); // Obtener detalles del administrador
 
                                 if (!admin) {
-                                    // Manejar el caso en que no se encuentre el administrador
                                     return (
                                         <tr key={unit.id} className={styles.tr}>
                                             <td className={styles.td} colSpan={6}>No admin data available for this unit.</td>
@@ -147,9 +159,11 @@ const SuperadminPage = () => {
                     </div>
                 </div>
             </div>
+            {/* Modal para crear administrador */}
             <Modal isOpen={isCreateModalOpen} onClose={handleCloseCreateModal}>
                 <FormRegisterAdmin />
             </Modal>
+            {/* Modal para editar administrador */}
             <Modal isOpen={isEditModalOpen} onClose={handleCloseEditModal}>
                 {selectedAdminId && <FormEditAdmin adminId={selectedAdminId} />}
             </Modal>
