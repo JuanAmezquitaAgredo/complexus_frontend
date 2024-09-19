@@ -55,19 +55,23 @@ const Login: React.FC = () => {
     
                     if (users.length > 0) {
                         const userFound = users.find((user: any) => user.email === user.email)
-
+    
                         if (userFound) {
                             
                             sessionStorage.setItem('residential_id', userFound.residential_id);
                             sessionStorage.setItem('id', userFound.id);
                             sessionStorage.setItem('name', userFound.name);
-
+    
+                            // Store token immediately
+                            sessionStorage.setItem('token', response.user.uid);
+    
+                            // Redirect based on role
                             if (userFound.rol_id === "1") {
-                                router.push('/superadmin');
+                                router.replace('/superadmin'); // Use replace instead of push
                             } else if (userFound.rol_id === "2") {
-                                router.push('/admin');
+                                router.replace('/admin');
                             } else if (userFound.rol_id === "3") {
-                                router.push('/owner');
+                                router.replace('/owner');
                             } else {
                                 await showAlert({
                                     title: "Error",
@@ -77,6 +81,7 @@ const Login: React.FC = () => {
                                 });
                             }
     
+                            // Show success message after redirection
                             await showAlert({
                                 title: "Session Started",
                                 text: "Welcome back!",
@@ -84,7 +89,6 @@ const Login: React.FC = () => {
                                 confirmButtonText: "OK"
                             });
     
-                            sessionStorage.setItem('token', response.user.uid);
                         } else {
                             await showAlert({
                                 title: "Error",
@@ -113,6 +117,7 @@ const Login: React.FC = () => {
             });
         }
     }
+    
     
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
