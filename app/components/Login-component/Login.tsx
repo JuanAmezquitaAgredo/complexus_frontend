@@ -55,11 +55,12 @@ const Login: React.FC = () => {
     
                     if (users.length > 0) {
                         const userFound = users.find((user: any) => user.email === user.email)
-    
+
                         if (userFound) {
                             
                             sessionStorage.setItem('residential_id', userFound.residential_id);
                             sessionStorage.setItem('id', userFound.id);
+                            sessionStorage.setItem('name', userFound.name);
 
                             if (userFound.rol_id === "1") {
                                 router.push('/superadmin');
