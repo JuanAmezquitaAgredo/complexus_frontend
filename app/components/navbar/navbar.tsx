@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react'; // Asegúrate de importar el componente ProfileCard
+import React, { useState, useEffect } from 'react'; // Ensure ProfileCard component is imported
 import style from './styles.module.css';
 import ProfileCard from '../profile/Profile';
 import Modal from '../common/modal/modal';
@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import showAlert from '../alertcomponent/alertcomponent';
 import { auth } from '@/app/firebase/config';
 import { UserAdmin } from '@/app/types/admins';
-import { Unit } from '@/app/types/units'; // Asegúrate de tener esta importación si usas el tipo Unit
+import { Unit } from '@/app/types/units'; // Ensure this import if using Unit type
 
 export const Navbar = () => {
   const initialStateUser: UserAdmin = {
@@ -34,12 +34,12 @@ export const Navbar = () => {
       if (!userId) return;
 
       try {
-        // Obtener datos del usuario
+        // Fetch user data
         const userResponse = await fetch(`http://localhost:3004/users/${userId}`);
         const userData = await userResponse.json();
         setUser(userData);
 
-        // Obtener nombre de la unidad residencial
+        // Fetch residential unit name
         if (userData.residential_id) {
           const unitResponse = await fetch(`http://localhost:3004/units/${userData.residential_id}`);
           const unitData = await unitResponse.json();
@@ -58,16 +58,16 @@ export const Navbar = () => {
   };
 
   const handleEditProfile = () => {
-    alert('Editar perfil');
-    // Aquí puedes agregar la lógica para editar el perfil
+    alert('Edit profile');
+    // Here you can add logic to edit profile
   };
 
   const handleLogout = async () => {
     try {
-      await signOut(auth); // Cerrar sesión
+      await signOut(auth); // Sign out
       await showAlert({
-        title: 'Sesión cerrada',
-        text: 'Sesión cerrada correctamente',
+        title: 'Logged Out',
+        text: 'You have been logged out successfully.',
         icon: 'success',
         confirmButtonText: 'OK'
       });
@@ -76,8 +76,13 @@ export const Navbar = () => {
       sessionStorage.removeItem('residential_id');
       router.push('/login');
     } catch (error) {
-      console.error('Error al cerrar sesión:', error);
-      alert('Error al cerrar sesión');
+      console.error('Error logging out:', error);
+      await showAlert({
+        title: 'Error',
+        text: 'There was an error logging out. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     }
   };
 
@@ -88,13 +93,13 @@ export const Navbar = () => {
           <img className={style.logo} src="/Logo_name.png" alt="Logo" />
         </div>
         <ul className={style.ul}>
-          <h3 className={style.h3}>{unitName || 'Nombre de la unidad residencial'}</h3>
+          <h3 className={style.h3}>{unitName || 'Residential Unit Name'}</h3>
         </ul>
         <div className={style.user}>
           <a href="#" onClick={toggleModal}>
             <AccountCircleOutlinedIcon className={style.userLogo} />
           </a>
-          <h4 className={style.userName}>{user.name || 'Nombre de usuario'}</h4>
+          <h4 className={style.userName}>{user.name || 'User Name'}</h4>
         </div>
       </nav>
 

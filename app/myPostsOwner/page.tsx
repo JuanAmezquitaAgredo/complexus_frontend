@@ -15,13 +15,13 @@ import { SidebarOwner } from '../components/sidebarOwner/sidebarOwner';
 const OwnerPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  // Obtener los estados de posts y pinnedPosts
+  
   const { posts, loading: postsLoading, error: postsError } = useSelector((state: RootState) => state.posts);
   const { pinnedPosts, loading: pinnedPostsLoading, error: pinnedPostsError } = useSelector((state: RootState) => state.pinnedPosts);
 
   useEffect(() => {
     dispatch(fetchPosts());
-    dispatch(fetchPinnedPosts());  // Llamada para obtener pinned posts
+    dispatch(fetchPinnedPosts());  
   }, [dispatch]);
 
   if (postsLoading || pinnedPostsLoading) {
@@ -38,12 +38,12 @@ const OwnerPage: React.FC = () => {
       <div className={styles.container}>
         <SidebarOwner />
         <div className={styles.posts}>
-          {/* Renderizar una publicación normal a la vez */}
+          
           {posts.length > 0 && (
             <div className={styles.postCardContainer}>
               {posts.map((post) => (
                 <PostCard
-                  key={post.id} // Ya tienes una key aquí
+                  key={post.id} 
                   id={post.id}
                   title={post.title}
                   user={post.user}
@@ -57,7 +57,6 @@ const OwnerPage: React.FC = () => {
           )}
         </div>
 
-        {/* Renderizar una publicación anclada a la vez */}
         <div className={styles.containerPin}>
           {pinnedPosts.length > 0 && (
             <div className={styles.pinnedCardContainer}>

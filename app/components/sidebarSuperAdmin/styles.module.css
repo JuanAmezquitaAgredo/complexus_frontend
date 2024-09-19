@@ -41,7 +41,7 @@
 }
 
 .active {
-    background-color: #390073; /* El mismo color que el background */
+    background-color: #390073; 
     background: linear-gradient(to right, #9340ff, #390073);
   }
   

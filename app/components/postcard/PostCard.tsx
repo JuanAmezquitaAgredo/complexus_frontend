@@ -80,7 +80,7 @@ const PostCard: React.FC<PostCardProps> = ({
         <p>{description}</p>
       </div>
       <div className={styles.containerImage}>
-        <img className={styles.image} src={imageUrl} alt={title} /> {/* Usar la URL de la imagen */}
+        <img className={styles.image} src={imageUrl} alt={title} /> 
       </div>
       <div className={styles.cardActions}>
         <div className={styles.likes}>

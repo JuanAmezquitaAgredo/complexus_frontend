@@ -6,7 +6,7 @@ import { TextField, Button, Box, Card, CardContent, IconButton, Typography } fro
 import { PhotoCamera } from '@mui/icons-material';
 import { AppDispatch, RootState } from '@/app/redux/store';
 import axios from 'axios';
-import styles from './formCreatePost.module.css'; // Asegúrate de definir los estilos
+import styles from './formCreatePost.module.css'; // Ensure the styles are defined
 import showAlert from '../alertcomponent/alertcomponent';
 
 const cloudinary_url = 'https://api.cloudinary.com/v1_1/dnwpj75xg/image/upload';
@@ -47,11 +47,11 @@ const CreatePostForm: React.FC = () => {
         },
       });
       setUploading(false);
-      return res.data.secure_url; // Retorna la URL de la imagen subida
+      return res.data.secure_url; // Return the uploaded image URL
     } catch (error) {
-      console.error('Error al subir la imagen:', error);
+      console.error('Error uploading the image:', error);
       setUploading(false);
-      return null; // Retorna null en caso de error
+      return null; // Return null in case of error
     }
   };
 
@@ -68,7 +68,7 @@ const CreatePostForm: React.FC = () => {
       title,
       description,
       user: '',
-      imageUrl: imageUrl || '', // Usar la URL de la imagen si existe
+      imageUrl: imageUrl || '', // Use the uploaded image URL if it exists
       timePosted: new Date().toLocaleString(),
     };
 
@@ -78,8 +78,8 @@ const CreatePostForm: React.FC = () => {
   useEffect(() => {
     if (success) {
       showAlert({
-        title: "Post creado",
-        text: "Tu post ha sido creado exitosamente.",
+        title: "Post Created",
+        text: "Your post has been successfully created.",
         icon: "success",
         confirmButtonText: "OK"
       });
@@ -100,7 +100,7 @@ const CreatePostForm: React.FC = () => {
         <form onSubmit={handleSubmit} className={styles.form}>
           <TextField
             fullWidth
-            label="Títle"
+            label="Title"
             variant="outlined"
             margin="normal"
             value={title}
@@ -136,7 +136,7 @@ const CreatePostForm: React.FC = () => {
           {image && (
             <img
               src={image}
-              alt="Vista previa de la imagen"
+              alt="Image Preview"
               className={styles.previewImage}
             />
           )}
@@ -153,5 +153,3 @@ const CreatePostForm: React.FC = () => {
 };
 
 export default CreatePostForm;
-
-

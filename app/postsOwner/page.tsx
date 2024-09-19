@@ -16,7 +16,7 @@ const PostOwnerPage = () => {
   const { pinnedPosts, loading: pinnedPostsLoading, error: pinnedPostsError } = useSelector((state: RootState) => state.pinnedPosts);
 
   useEffect(() => {
-    dispatch(fetchPinnedPosts());  // Llamada para obtener pinned posts
+    dispatch(fetchPinnedPosts());  
   }, [dispatch]);
   
   return (
@@ -37,11 +37,11 @@ const PostOwnerPage = () => {
               <div className={styles.pinnedCardContainer}>
                 {pinnedPosts.map((post) => (
                   <PinnedPostCard
-                    key={post.id} // Asegúrate de usar una clave única
+                    key={post.id} 
                     title={post.title}
                     user={post.user}
-                    content={post.description}
-                    imageUrl={post.imageUrl} // Añade la clase de estilo
+                    description={post.description}
+                    imageUrl={post.imageUrl} 
                   />
                 ))}
               </div>

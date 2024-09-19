@@ -7,7 +7,7 @@ import showAlert from "../alertcomponent/alertcomponent";
 import Button from "../common/button/button";
 
 interface FormEditAdminProps {
-    adminId: string; // Cambiado a string
+    adminId: string;
 }
 
 const FormEditAdmin: React.FC<FormEditAdminProps> = ({ adminId }) => {

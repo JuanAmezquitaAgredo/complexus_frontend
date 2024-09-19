@@ -26,7 +26,7 @@ interface PinnedPost {
   id: number;
   title: string;
   user: string;
-  description: string; // O description, según tu estructura
+  description: string; // Or description, depending on your structure
   imageUrl: string;
 }
 
@@ -34,7 +34,7 @@ const AdminPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
   
-  // Estado para el token y redireccionamiento
+  // State for token and redirection
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
@@ -46,15 +46,15 @@ const AdminPage: React.FC = () => {
     }
   }, [router]);
 
-  // Estado para publicaciones fijadas
+  // State for pinned posts
   const [pinnedPosts, setPinnedPosts] = useState<PinnedPost[]>([]);
 
-  // Obtener publicaciones normales de Redux
+  // Get normal posts from Redux
   const { posts, loading: postsLoading, error: postsError } = useSelector(
     (state: RootState) => state.posts
   );
 
-  // Obtener publicaciones fijadas inicialmente y en cualquier cambio en posts
+  // Fetch pinned posts initially and on any changes in posts
   useEffect(() => {
     const fetchPinnedPosts = async () => {
       try {
@@ -62,7 +62,7 @@ const AdminPage: React.FC = () => {
         const data: PinnedPost[] = await response.json();
         setPinnedPosts(data);
       } catch (error) {
-        console.error('Error al obtener las publicaciones fijadas:', error);
+        console.error('Error fetching pinned posts:', error);
       }
     };
 
@@ -72,7 +72,7 @@ const AdminPage: React.FC = () => {
     }
   }, [dispatch, token]);
 
-  // Manejar la eliminación de publicaciones fijadas
+  // Handle the deletion of pinned posts
   const handleDeletePost = async (postId: number): Promise<void> => {
     try {
       const response = await fetch(`http://localhost:3004/pin/${postId}`, {
@@ -80,22 +80,22 @@ const AdminPage: React.FC = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Error al eliminar la publicación fijada');
+        throw new Error('Error deleting pinned post');
       }
 
-      // Actualizar el estado sin necesidad de recargar la página
+      // Update state without needing to reload the page
       setPinnedPosts(pinnedPosts.filter((post) => post.id !== postId));
     } catch (error) {
-      console.error('Error al eliminar la publicación fijada:', error);
+      console.error('Error deleting pinned post:', error);
     }
   };
 
-  // Si los posts están cargando
+  // If the posts are loading
   if (postsLoading) {
-    return <div>Cargando...</div>;
+    return <div>Loading...</div>;
   }
 
-  // Si hay algún error
+  // If there is any error
   if (postsError) {
     return <div>Error: {postsError}</div>;
   }
@@ -124,12 +124,12 @@ const AdminPage: React.FC = () => {
           )}
         </div>
 
-        {/* Renderizar publicaciones fijadas */}
+        {/* Render pinned posts */}
         <div className={styles.containerPin}>
           {pinnedPosts.length > 0 && (
             <div className={styles.pinnedCardContainer}>
               <div className={styles.h2Container}>
-                <h2 className={styles.h2}>Fijadas</h2>
+                <h2 className={styles.h2}>Pinned</h2>
                 <PushPinIcon className={styles.icons} />
               </div>
               {pinnedPosts.map((post: PinnedPost) => (

@@ -1,16 +1,15 @@
-/* styles.module.css */
 
 .container {
-  display: flex; /* Utiliza flexbox para el diseño */
-  justify-content: space-between; /* Espaciado entre el formulario y las tarjetas */
-  width: 100%; /* Ancho total */
+  display: flex; 
+  justify-content: space-between; 
+  width: 100%; 
 }
 
 .content {
-  flex: 1; /* Permite que el contenido ocupe el espacio disponible */
-  padding: 16px; /* Espaciado interno */
+  flex: 1; 
+  padding: 16px; 
   display: flex;
-  flex-direction: column; /* Coloca los elementos en una columna */
+  flex-direction: column; 
   align-items: center;
   justify-content: center;
 }
@@ -25,10 +24,10 @@
 }
 
 .containerPin {
-  width: 450px; /* Ancho fijo para las tarjetas fijadas */
-  max-height: 69vh; /* Altura máxima para el scroll */
-  overflow-y: auto; /* Permite el desplazamiento vertical */
-  padding-left: 16px; /* Espaciado interno a la izquierda */
+  width: 450px; 
+  max-height: 69vh; 
+  overflow-y: auto; 
+  padding-left: 16px; 
   margin-right: 10px;
   margin-top: 20px;
 }
@@ -47,23 +46,23 @@
 
 .pinnedCardContainer {
   display: flex;
-  flex-direction: column; /* Coloca las tarjetas en una columna */
+  flex-direction: column; 
   gap: 10px;
 }
 
 .h2Container {
   display: flex;
-  align-items: center; /* Alinea verticalmente los elementos */
+  align-items: center; 
   margin-right: 70px;
 }
 
 .icons {
-  margin-left: 8px; /* Espaciado entre el título y el ícono */
+  margin-left: 8px; 
 }
 
-/* Estilo adicional para tarjetas */
+
 .pinnedCard {
-  margin-bottom: 16px; /* Espaciado entre tarjetas */
+  margin-bottom: 16px; 
 }
 
 .containerPin::-webkit-scrollbar {

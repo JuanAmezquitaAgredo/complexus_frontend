@@ -16,14 +16,14 @@ import { useRouter } from "next/navigation";
 const SuperadminPage = () => {
     const [units, setUnits] = useState<Unit[]>([]);
     const [users, setUsers] = useState<User[]>([]);
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Control del modal de creación
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Control del modal de edición
-    const [selectedAdminId, setSelectedAdminId] = useState<string>(""); // ID del administrador seleccionado para editar
-    const [token, setToken] = useState<string | null>(null); // Estado para el token
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); 
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false); 
+    const [selectedAdminId, setSelectedAdminId] = useState<string>(""); 
+    const [token, setToken] = useState<string | null>(null); 
 
     const router = useRouter();
 
-    // Comprobar si existe el token en sessionStorage
+    
     useEffect(() => {
         const storedToken = sessionStorage.getItem('token');
         if (!storedToken) {
@@ -33,7 +33,7 @@ const SuperadminPage = () => {
         }
     }, [router]);
 
-    // Obtener las unidades y los usuarios
+    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -55,12 +55,12 @@ const SuperadminPage = () => {
         }
     }, [token]);
 
-    // Obtener los datos del administrador
+    
     const getAdminData = (adminId: string) => {
         return users.find(user => user.id === adminId && user.rol_id === '2');
     };
 
-    // Manejar eliminación de una unidad y su administrador relacionado
+    
     const handleDeleteClick = async (unit: Unit) => {
         const result = await ConfirmDialog({
             title: 'Are you sure?',
@@ -71,15 +71,12 @@ const SuperadminPage = () => {
 
         if (result.isConfirmed) {
             try {
-                // Eliminar la unidad
                 await fetch(`http://localhost:3004/units/${unit.id}`, {
                     method: 'DELETE',
                 });
-                // Eliminar el administrador relacionado
                 await fetch(`http://localhost:3004/users/${unit.admin_id}`, {
                     method: 'DELETE',
                 });
-                // Actualizar el estado local después de la eliminación
                 setUnits(units.filter(u => u.id !== unit.id));
                 setUsers(users.filter(user => user.id !== unit.admin_id));
             } catch (error) {
@@ -88,21 +85,18 @@ const SuperadminPage = () => {
         }
     };
 
-    // Manejar clic en el botón de edición
     const handleEditClick = (adminId: string) => {
         setSelectedAdminId(adminId);
         setIsEditModalOpen(true);
     };
 
-    // Cerrar modal de creación
     const handleCloseCreateModal = () => {
         setIsCreateModalOpen(false);
     };
 
-    // Cerrar modal de edición
     const handleCloseEditModal = () => {
         setIsEditModalOpen(false);
-        setSelectedAdminId(""); // Reiniciar el ID del administrador seleccionado
+        setSelectedAdminId(""); 
     };
 
     return (
@@ -124,7 +118,7 @@ const SuperadminPage = () => {
                         </thead>
                         <tbody className={styles.tbody}>
                             {units.map((unit) => {
-                                const admin = getAdminData(unit.admin_id); // Obtener detalles del administrador
+                                const admin = getAdminData(unit.admin_id); 
 
                                 if (!admin) {
                                     return (
@@ -159,11 +153,9 @@ const SuperadminPage = () => {
                     </div>
                 </div>
             </div>
-            {/* Modal para crear administrador */}
             <Modal isOpen={isCreateModalOpen} onClose={handleCloseCreateModal}>
                 <FormRegisterAdmin />
             </Modal>
-            {/* Modal para editar administrador */}
             <Modal isOpen={isEditModalOpen} onClose={handleCloseEditModal}>
                 {selectedAdminId && <FormEditAdmin adminId={selectedAdminId} />}
             </Modal>

@@ -55,7 +55,7 @@ const postSlice = createSlice({
             })
             .addCase(createPost.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload as string; // Captura el error
+                state.error = action.payload as string; 
             });
     },
 });
