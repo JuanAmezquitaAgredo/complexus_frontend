@@ -41,7 +41,7 @@ interface PinnedPostCardProps {
     user: string;
     description: string;
     imageUrl: string;
-    onDelete: () => void; // Add onDelete prop
+    onDelete?: () => void; // Add onDelete prop
 }
 
 const PinnedPostCard: React.FC<PinnedPostCardProps> = ({ title, user, description, imageUrl, onDelete }) => {

@@ -123,6 +123,7 @@ import { AppDispatch, RootState } from '@/app/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import PinnedPostCard from '../components/pinnedCard/PinnedPostCard';
 import PushPinIcon from '@mui/icons-material/PushPin';
+import { useRouter } from 'next/navigation';
 
 interface Post {
   id: number;
@@ -144,6 +145,12 @@ interface PinnedPost {
 
 const AdminPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
+
+  const token = sessionStorage.getItem('token');
+  const router = useRouter();
+  if (!token) {
+    router.push('/login');
+  }
 
   // Estado para publicaciones fijadas
   const [pinnedPosts, setPinnedPosts] = useState<PinnedPost[]>([]);

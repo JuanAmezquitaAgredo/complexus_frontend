@@ -11,9 +11,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import PinnedPostCard from '../components/pinnedCard/PinnedPostCard';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import { SidebarOwner } from '../components/sidebarOwner/sidebarOwner';
+import { useRouter } from 'next/navigation';
 
 const OwnerPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
+
+  const token = sessionStorage.getItem('token');
+  const router = useRouter();
+  if (!token) {
+    router.push('/login');
+  }
 
   // Obtener los estados de posts y pinnedPosts
   const { posts, loading: postsLoading, error: postsError } = useSelector((state: RootState) => state.posts);
@@ -70,7 +77,7 @@ const OwnerPage: React.FC = () => {
                   key={post.id}
                   title={post.title}
                   user={post.user}
-                  content={post.description}
+                  description={post.description}
                   imageUrl={post.imageUrl}
                 />
               ))}

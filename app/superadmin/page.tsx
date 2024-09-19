@@ -11,6 +11,7 @@ import Modal from "../components/common/modal/modal";
 import FormRegisterAdmin from "../components/form-register-admin/form-register-admin";
 import FormEditAdmin from "../components/form-edit-admin/form-edit-admin";
 import ConfirmDialog from "../components/alertDelete/alertDelete";
+import { useRouter } from "next/navigation";
 
 const SuperadminPage = () => {
     const [units, setUnits] = useState<Unit[]>([]);
@@ -18,6 +19,12 @@ const SuperadminPage = () => {
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Control del modal de creación
     const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Control del modal de edición
     const [selectedAdminId, setSelectedAdminId] = useState<string>(""); // ID del administrador seleccionado para editar
+
+    const token = sessionStorage.getItem('token');
+    const router = useRouter();
+    if (!token) {
+        router.push('/login');
+    }
 
     useEffect(() => {
         // Fetch units and users from json-server
@@ -51,7 +58,7 @@ const SuperadminPage = () => {
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'Cancel'
         });
-    
+
         if (result.isConfirmed) {
             try {
                 // Eliminar la unidad
