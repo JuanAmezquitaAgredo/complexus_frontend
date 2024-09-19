@@ -70,7 +70,7 @@ const OwnerPage: React.FC = () => {
                   key={post.id}
                   title={post.title}
                   user={post.user}
-                  content={post.description}
+                  description={post.description}
                   imageUrl={post.imageUrl}
                 />
               ))}
