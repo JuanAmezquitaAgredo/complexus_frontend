@@ -207,28 +207,36 @@
   ],
   "posts": [
     {
-      "id": "5ab3",
-      "title": "vendo mi casa",
-      "description": "estoy vendiendo mi casa",
-      "user": "carlos",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726630255/proyecto/xfuhxrih4ujmykzggxps.jpg",
-      "timePosted": "17/9/2024, 22:30:56"
+      "id": "8ac6",
+      "title": "Mis Empanadas",
+      "description": "Estoy vendiendo empanadas en la torre A 506",
+      "user": "juan",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727146805/proyecto/ltqonny2ofsu1ayo9rgb.webp",
+      "timePosted": "23/9/2024, 22:00:06"
     },
     {
-      "id": "971e",
-      "title": "casa",
-      "description": "a",
+      "id": "58b2",
+      "title": "Habitacion Disponible",
+      "description": "Tengo habitacion disponible en la torre B 203",
       "user": "juan",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726631359/proyecto/okxicvpnnrp1d24vgjue.jpg",
-      "timePosted": "17/9/2024, 22:49:19"
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727146894/proyecto/apj4hkfe27hsbcvd7j4n.webp",
+      "timePosted": "23/9/2024, 22:01:36"
     },
     {
-      "id": "b0ce",
-      "title": "carro",
-      "description": "kdkdkdkkdkdkd",
+      "id": "de96",
+      "title": "Desalojo",
+      "description": "Para el residente del apto 507 d la torre A, por favor comunicarse URGENTE con el administrador del complejo",
       "user": "juan",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726746329/proyecto/ncgw5rwi7jwyasieubdb.jpg",
-      "timePosted": "19/9/2024, 6:45:30"
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727147048/proyecto/tsvwu8tipjyrm61vjenp.jpg",
+      "timePosted": "23/9/2024, 22:04:09"
+    },
+    {
+      "id": "3974",
+      "title": "Lasaña",
+      "description": "Compañeros voy a vender lasaña para el fin de semana a $8.000 ::)\n",
+      "user": "Juan Camilo",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727148875/proyecto/nhvcpbhjev0glk1yexa8.jpg",
+      "timePosted": "23/9/2024, 22:34:37"
     }
   ],
   "units": [
@@ -289,5 +297,14 @@
       "id": "j8jk"
     }
   ],
-  "pin": []
+  "pin": [
+    {
+      "id": "de96",
+      "title": "Desalojo",
+      "user": "juan",
+      "timePosted": "23/9/2024, 22:04:09",
+      "description": "Para el residente del apto 507 d la torre A, por favor comunicarse URGENTE con el administrador del complejo",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727147048/proyecto/tsvwu8tipjyrm61vjenp.jpg"
+    }
+  ]
 }
