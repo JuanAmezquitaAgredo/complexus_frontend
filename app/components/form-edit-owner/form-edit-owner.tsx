@@ -20,7 +20,7 @@ const FormEditOwner: React.FC<FormEditOwnerProps> = ({ ownerId }) => {
         tower: "",
         apto: "",
         rol_id: "3",
-        residential_id: "", // Este campo será establecido al tomarlo de sessionStorage o de otro lugar
+        residential_id: "", 
         active: true
     };
 

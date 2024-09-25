@@ -2,7 +2,7 @@
 
 import { Navbar } from '@/app/components/navbar/navbar';
 import PostCard from '@/app/components/postcard/PostCard';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './styles.module.css';
 import { fetchPosts } from '@/app/redux/slices/postSlice';
 import { fetchPinnedPosts } from '@/app/redux/slices/pinnedPostSlice';
@@ -11,34 +11,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import PinnedPostCard from '../components/pinnedCard/PinnedPostCard';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import { SidebarOwner } from '../components/sidebarOwner/sidebarOwner';
-import { useRouter } from 'next/navigation';
 
 const OwnerPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const router = useRouter();
-  
-
-  const [token, setToken] = useState<string | null>(null);
-
-  useEffect(() => {
-    const storedToken = sessionStorage.getItem('token');
-    setToken(storedToken);
-
-    if (!storedToken) {
-      router.push('/login');
-    }
-  }, [router]);
 
   
   const { posts, loading: postsLoading, error: postsError } = useSelector((state: RootState) => state.posts);
   const { pinnedPosts, loading: pinnedPostsLoading, error: pinnedPostsError } = useSelector((state: RootState) => state.pinnedPosts);
 
   useEffect(() => {
-    if (token) {
-      dispatch(fetchPosts());
-      dispatch(fetchPinnedPosts());  
-    }
-  }, [dispatch, token]);
+    dispatch(fetchPosts());
+    dispatch(fetchPinnedPosts());  
+  }, [dispatch]);
 
   if (postsLoading || pinnedPostsLoading) {
     return <div>Loading...</div>;
@@ -47,7 +31,7 @@ const OwnerPage: React.FC = () => {
   if (postsError || pinnedPostsError) {
     return <div>Error: {postsError || pinnedPostsError}</div>;
   }
-
+  
   return (
     <main>
       <Navbar />
@@ -73,7 +57,6 @@ const OwnerPage: React.FC = () => {
           )}
         </div>
 
-        
         <div className={styles.containerPin}>
           {pinnedPosts.length > 0 && (
             <div className={styles.pinnedCardContainer}>

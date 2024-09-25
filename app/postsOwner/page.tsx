@@ -9,28 +9,29 @@ import { AppDispatch, RootState } from '../redux/store';
 import { fetchPinnedPosts } from '../redux/slices/pinnedPostSlice';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import PinnedPostCard from '../components/pinnedCard/PinnedPostCard';
+import { SidebarOwner } from '../components/sidebarOwner/sidebarOwner';
 
-const AdminPage = () => {
+const PostOwnerPage = () => {
   const dispatch: AppDispatch = useDispatch();
   const { pinnedPosts, loading: pinnedPostsLoading, error: pinnedPostsError } = useSelector((state: RootState) => state.pinnedPosts);
 
   useEffect(() => {
     dispatch(fetchPinnedPosts());  
   }, [dispatch]);
-
+  
   return (
     <main>
       <Navbar />
       <div className={styles.container}>
-        <Sidebar />
+        <SidebarOwner />
         <div className={styles.content}>
           <CreatePostForm />
         </div>
         <div className={styles.containers}>
-          <div className={styles.h2Container}>
-            <h2 className={styles.h2}>Fixed</h2>
-            <PushPinIcon className={styles.icons} />
-          </div>
+        <div className={styles.h2Container}>
+                <h2 className={styles.h2}>Fixed</h2>
+                <PushPinIcon className={styles.icons} />
+              </div>
           <div className={styles.containerPin}>
             {pinnedPosts.length > 0 && (
               <div className={styles.pinnedCardContainer}>
@@ -52,4 +53,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default PostOwnerPage;

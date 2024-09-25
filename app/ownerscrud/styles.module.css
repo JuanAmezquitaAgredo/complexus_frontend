@@ -81,7 +81,7 @@
 }
 
 .fileUpload input[type="file"] {
-    display: none; /* Ocultar el input de archivo */
+    display: none; 
 }
 
 .fileUpload label {

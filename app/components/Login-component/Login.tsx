@@ -18,7 +18,7 @@ const Login: React.FC = () => {
     };
     
     const [user, setUser] = useState<UserLogin>(initialState);
-    const [signInWithEmailAndPassword, , loading] = useSignInWithEmailAndPassword(auth); // Estado `loading` de firebase
+    const [signInWithEmailAndPassword, , loading] = useSignInWithEmailAndPassword(auth); // Firebase `loading` state
     const router = useRouter();
 
     useEffect(() => {
@@ -31,11 +31,11 @@ const Login: React.FC = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => { 
         event.preventDefault();
     
-        // Validaciones
+        // Validations
         if (!user.email || !user.password) {
             await showAlert({
                 title: "Error",
-                text: "Por favor, completa todos los campos.",
+                text: "Please fill out all fields.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
@@ -49,7 +49,7 @@ const Login: React.FC = () => {
                 const userEmailVerified = response.user.emailVerified;
                 
                 if (userEmailVerified) {
-                    // Consulta a la base de datos para obtener la información del usuario
+                    // Fetch user information from the database
                     const userResponse = await fetch(`http://localhost:3004/users?email=${user.email}`);
                     const users = await userResponse.json();
     
@@ -60,34 +60,39 @@ const Login: React.FC = () => {
                             
                             sessionStorage.setItem('residential_id', userFound.residential_id);
                             sessionStorage.setItem('id', userFound.id);
-
+                            sessionStorage.setItem('name', userFound.name);
+    
+                            // Store token immediately
+                            sessionStorage.setItem('token', response.user.uid);
+    
+                            // Redirect based on role
                             if (userFound.rol_id === "1") {
-                                router.push('/superadmin');
+                                router.replace('/superadmin'); // Use replace instead of push
                             } else if (userFound.rol_id === "2") {
-                                router.push('/admin');
+                                router.replace('/admin');
                             } else if (userFound.rol_id === "3") {
-                                router.push('/owner');
+                                router.replace('/owner');
                             } else {
                                 await showAlert({
                                     title: "Error",
-                                    text: "Rol no válido.",
+                                    text: "Invalid role.",
                                     icon: "error",
                                     confirmButtonText: "OK"
                                 });
                             }
     
+                            // Show success message after redirection
                             await showAlert({
-                                title: "Sesión iniciada",
-                                text: "¡Bienvenido de nuevo!",
+                                title: "Session Started",
+                                text: "Welcome back!",
                                 icon: "success",
                                 confirmButtonText: "OK"
                             });
     
-                            sessionStorage.setItem('token', response.user.uid);
                         } else {
                             await showAlert({
                                 title: "Error",
-                                text: "Usuario no encontrado.",
+                                text: "User not found.",
                                 icon: "error",
                                 confirmButtonText: "OK"
                             });
@@ -96,22 +101,23 @@ const Login: React.FC = () => {
                 } else {
                     await showAlert({
                         title: "Error",
-                        text: "Correo no verificado, por favor verifícalo.",
+                        text: "Email not verified. Please verify your email.",
                         icon: "error",
                         confirmButtonText: "OK"
                     });
                 }
             }
         } catch (error) {
-            console.error('Error al iniciar sesión:', error);
+            console.error('Login error:', error);
             await showAlert({
                 title: "Error",
-                text: "Hubo un error al iniciar sesión. Por favor, intenta de nuevo.",
+                text: "There was an error logging in. Please try again.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
         }
     }
+    
     
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

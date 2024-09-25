@@ -19,23 +19,24 @@ const FormRegisterOwner = () => {
         tower: "",
         apto: "",
         rol_id: "3",
-        residential_id: "", // Se establecerá al tomarlo de sessionStorage
+        residential_id: "", // Will be set from sessionStorage
         active: true
     };
 
-    const [owner, setOwner] = React.useState<UserOwner>(initialState);
-    const [confirmPassword, setConfirmPassword] = useState<string>(""); // Nuevo estado para la confirmación de contraseña
-    const [createUserWithEmailAndPassword, , loading] = useCreateUserWithEmailAndPassword(auth); // `loading` para el Spinner
+    const [owner, setOwner] = useState<UserOwner>(initialState);
+    const [confirmPassword, setConfirmPassword] = useState<string>(""); // New state for password confirmation
+    const [createUserWithEmailAndPassword, , loading] = useCreateUserWithEmailAndPassword(auth); // `loading` for Spinner
 
+    // Handle form submission
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        // Validar que el Residential_id existe en sessionStorage
+        // Validate that Residential_id exists in sessionStorage
         const residential_id = sessionStorage.getItem('residential_id');
         if (!residential_id) {
             await showAlert({
                 title: "Error",
-                text: "No se encontró el Residential ID en la sesión.",
+                text: "Residential ID not found in session.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
@@ -46,38 +47,41 @@ const FormRegisterOwner = () => {
         if(!owner.name || !owner.email || !owner.password || !owner.phone || !owner.tower || !owner.apto) {
             await showAlert({
                 title: "Error",
-                text: "Por favor, completa todos los campos.",
+                text: "Please complete all fields.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
             return;
         }
 
+        // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(owner.email)) {
             await showAlert({
-                title: "Correo inválido",
-                text: "Por favor ingresa un correo electrónico válido.",
+                title: "Invalid Email",
+                text: "Please enter a valid email address.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
             return;
         }
 
+        // Validate matching passwords
         if (owner.password !== confirmPassword) {
             await showAlert({
-                title: "Error de contraseña",
-                text: "Las contraseñas no coinciden.",
+                title: "Password Error",
+                text: "Passwords do not match.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
             return;
         }
 
+        // Validate password length
         if (owner.password.length < 6) {
             await showAlert({
-                title: "Contraseña débil",
-                text: "La contraseña debe tener al menos 6 caracteres.",
+                title: "Weak Password",
+                text: "Password must be at least 6 characters long.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
@@ -85,9 +89,10 @@ const FormRegisterOwner = () => {
         }
 
         try {
-            // Asignar el Residential_id al owner antes de enviarlo
+            // Assign the Residential_id to the owner before sending it
             const ownerWithResidentialId = { ...owner, residential_id };
 
+            // Step 1: Save owner data in local database
             const responseDB = await fetch('http://localhost:3004/users', {
                 method: 'POST',
                 headers: {
@@ -97,41 +102,46 @@ const FormRegisterOwner = () => {
             });
 
             if (!responseDB.ok) {
-                throw new Error('Error al guardar los datos en la base de datos local.');
+                throw new Error('Error saving data in the local database.');
             }
 
+            // Step 2: Create owner in Firebase Authentication
             const responseFirebase = await createUserWithEmailAndPassword(owner.email, owner.password);
             
             if (responseFirebase) {
+                // Send email verification
                 await sendEmailVerification(responseFirebase.user);
                 await showAlert({
-                    title: "Enlace de verificación enviado",
-                    text: "El enlace de verificación ha sido enviado a tu correo electrónico.",
+                    title: "Verification Email Sent",
+                    text: "A verification link has been sent to your email.",
                     icon: "success",
                     confirmButtonText: "OK"
                 });
-                
+
+                // Reset form after successful submission
                 setOwner(initialState);
                 setConfirmPassword(""); 
 
                 window.location.reload();
             }
         } catch (error) {
-            console.error('Error en el proceso de registro:', error);
+            console.error('Registration process error:', error);
             await showAlert({
                 title: "Error",
-                text: "Hubo un error al procesar tu registro. Intenta nuevamente.",
+                text: "There was an error processing your registration. Please try again.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
         }
     };
 
+    // Handle input change for owner data
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setOwner(prevState => ({ ...prevState, [name]: value }));
     };
 
+    // Handle input change for confirm password
     const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setConfirmPassword(event.target.value);
     };

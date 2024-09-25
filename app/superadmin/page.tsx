@@ -11,16 +11,30 @@ import Modal from "../components/common/modal/modal";
 import FormRegisterAdmin from "../components/form-register-admin/form-register-admin";
 import FormEditAdmin from "../components/form-edit-admin/form-edit-admin";
 import ConfirmDialog from "../components/alertDelete/alertDelete";
+import { useRouter } from "next/navigation";
 
 const SuperadminPage = () => {
     const [units, setUnits] = useState<Unit[]>([]);
     const [users, setUsers] = useState<User[]>([]);
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // Control del modal de creación
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Control del modal de edición
-    const [selectedAdminId, setSelectedAdminId] = useState<string>(""); // ID del administrador seleccionado para editar
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); 
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false); 
+    const [selectedAdminId, setSelectedAdminId] = useState<string>(""); 
+    const [token, setToken] = useState<string | null>(null); 
 
+    const router = useRouter();
+
+    
     useEffect(() => {
-        // Fetch units and users from json-server
+        const storedToken = sessionStorage.getItem('token');
+        if (!storedToken) {
+            router.push('/login');
+        } else {
+            setToken(storedToken);
+        }
+    }, [router]);
+
+    
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 const unitsResponse = await fetch("http://localhost:3004/units");
@@ -36,14 +50,17 @@ const SuperadminPage = () => {
             }
         };
 
-        fetchData();
-    }, []);
+        if (token) {
+            fetchData();
+        }
+    }, [token]);
 
+    
     const getAdminData = (adminId: string) => {
-        const admin = users.find(user => user.id === adminId && user.rol_id === '2');
-        return admin;
+        return users.find(user => user.id === adminId && user.rol_id === '2');
     };
 
+    
     const handleDeleteClick = async (unit: Unit) => {
         const result = await ConfirmDialog({
             title: 'Are you sure?',
@@ -51,18 +68,15 @@ const SuperadminPage = () => {
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'Cancel'
         });
-    
+
         if (result.isConfirmed) {
             try {
-                // Eliminar la unidad
                 await fetch(`http://localhost:3004/units/${unit.id}`, {
                     method: 'DELETE',
                 });
-                // Eliminar el administrador relacionado
                 await fetch(`http://localhost:3004/users/${unit.admin_id}`, {
                     method: 'DELETE',
                 });
-                // Actualizar el estado local después de la eliminación
                 setUnits(units.filter(u => u.id !== unit.id));
                 setUsers(users.filter(user => user.id !== unit.admin_id));
             } catch (error) {
@@ -82,7 +96,7 @@ const SuperadminPage = () => {
 
     const handleCloseEditModal = () => {
         setIsEditModalOpen(false);
-        setSelectedAdminId(""); // Reset selected admin ID
+        setSelectedAdminId(""); 
     };
 
     return (
@@ -104,10 +118,9 @@ const SuperadminPage = () => {
                         </thead>
                         <tbody className={styles.tbody}>
                             {units.map((unit) => {
-                                const admin = getAdminData(unit.admin_id); // Obtener detalles del administrador
+                                const admin = getAdminData(unit.admin_id); 
 
                                 if (!admin) {
-                                    // Manejar el caso en que no se encuentre el administrador
                                     return (
                                         <tr key={unit.id} className={styles.tr}>
                                             <td className={styles.td} colSpan={6}>No admin data available for this unit.</td>

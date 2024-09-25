@@ -17,12 +17,20 @@ const initialState: PostState = {
 // Async thunk para crear un post
 export const createPost = createAsyncThunk(
     'posts/createPost',
-    async (postData: { title: string; user: string; description: string; imageUrl: string }, { rejectWithValue }) => {
+    async (postData: { title: string; user: string; description: string; imageUrl: string, timePosted: string }, { rejectWithValue }) => {
         try {
-            const response = await axios.post('http://localhost:3004/posts', postData); // Ajusta la URL a tu endpoint
-            return response.data; // Devuelve los datos del post creado
-        } catch (error: any) { 
-            return rejectWithValue(error.response.data.message || 'Error al crear el post');
+            const currentTime = new Date().toLocaleString();
+
+            const updatedPostData = {
+                ...postData,
+                user: sessionStorage.getItem('name'), // Assuming you have the user's name
+                timePosted: currentTime,
+            };
+
+            const response = await axios.post('http://localhost:3004/posts', updatedPostData); // Adjust URL to your endpoint
+            return response.data; // Return the created post data
+        } catch (error: any) {
+            return rejectWithValue(error.response.data.message || 'Error creating post');
         }
     }
 );
@@ -47,7 +55,7 @@ const postSlice = createSlice({
             })
             .addCase(createPost.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload as string; // Captura el error
+                state.error = action.payload as string; 
             });
     },
 });

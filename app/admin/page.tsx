@@ -3,33 +3,101 @@
 import { Navbar } from '@/app/components/navbar/navbar';
 import PostCard from '@/app/components/postcard/PostCard';
 import { Sidebar } from '@/app/components/sidebar/sidebar';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import { fetchPosts } from '@/app/redux/slices/postSlice';
-import { fetchPinnedPosts } from '@/app/redux/slices/pinnedPostSlice';
 import { AppDispatch, RootState } from '@/app/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import PinnedPostCard from '../components/pinnedCard/PinnedPostCard';
 import PushPinIcon from '@mui/icons-material/PushPin';
+import { useRouter } from 'next/navigation';
+
+interface Post {
+  id: number;
+  title: string;
+  user: string;
+  timePosted: string;
+  description: string;
+  likes: number;
+  imageUrl: string;
+}
+
+interface PinnedPost {
+  id: number;
+  title: string;
+  user: string;
+  description: string; // Or description, depending on your structure
+  imageUrl: string;
+}
 
 const AdminPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-
-  // Obtener los estados de posts y pinnedPosts
-  const { posts, loading: postsLoading, error: postsError } = useSelector((state: RootState) => state.posts);
-  const { pinnedPosts, loading: pinnedPostsLoading, error: pinnedPostsError } = useSelector((state: RootState) => state.pinnedPosts);
+  const router = useRouter();
+  
+  // State for token and redirection
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    dispatch(fetchPosts());
-    dispatch(fetchPinnedPosts());  // Llamada para obtener pinned posts
-  }, [dispatch]);
+    const storedToken = sessionStorage.getItem('token');
+    if (!storedToken) {
+      router.push('/login');
+    } else {
+      setToken(storedToken);
+    }
+  }, [router]);
 
-  if (postsLoading || pinnedPostsLoading) {
+  // State for pinned posts
+  const [pinnedPosts, setPinnedPosts] = useState<PinnedPost[]>([]);
+
+  // Get normal posts from Redux
+  const { posts, loading: postsLoading, error: postsError } = useSelector(
+    (state: RootState) => state.posts
+  );
+
+  // Fetch pinned posts initially and on any changes in posts
+  useEffect(() => {
+    const fetchPinnedPosts = async () => {
+      try {
+        const response = await fetch('http://localhost:3004/pin');
+        const data: PinnedPost[] = await response.json();
+        setPinnedPosts(data);
+      } catch (error) {
+        console.error('Error fetching pinned posts:', error);
+      }
+    };
+
+    if (token) {
+      fetchPinnedPosts();
+      dispatch(fetchPosts());
+    }
+  }, [dispatch, token]);
+
+  // Handle the deletion of pinned posts
+  const handleDeletePost = async (postId: number): Promise<void> => {
+    try {
+      const response = await fetch(`http://localhost:3004/pin/${postId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Error deleting pinned post');
+      }
+
+      // Update state without needing to reload the page
+      setPinnedPosts(pinnedPosts.filter((post) => post.id !== postId));
+    } catch (error) {
+      console.error('Error deleting pinned post:', error);
+    }
+  };
+
+  // If the posts are loading
+  if (postsLoading) {
     return <div>Loading...</div>;
   }
 
-  if (postsError || pinnedPostsError) {
-    return <div>Error: {postsError || pinnedPostsError}</div>;
+  // If there is any error
+  if (postsError) {
+    return <div>Error: {postsError}</div>;
   }
 
   return (
@@ -38,12 +106,11 @@ const AdminPage: React.FC = () => {
       <div className={styles.container}>
         <Sidebar />
         <div className={styles.posts}>
-          {/* Renderizar una publicación normal a la vez */}
           {posts.length > 0 && (
             <div className={styles.postCardContainer}>
               {posts.map((post) => (
                 <PostCard
-                  key={post.id} // Ya tienes una key aquí
+                  key={post.id}
                   id={post.id}
                   title={post.title}
                   user={post.user}
@@ -57,21 +124,22 @@ const AdminPage: React.FC = () => {
           )}
         </div>
 
-        {/* Renderizar una publicación anclada a la vez */}
+        {/* Render pinned posts */}
         <div className={styles.containerPin}>
           {pinnedPosts.length > 0 && (
             <div className={styles.pinnedCardContainer}>
               <div className={styles.h2Container}>
-                <h2 className={styles.h2}>Fixed</h2>
+                <h2 className={styles.h2}>Pinned</h2>
                 <PushPinIcon className={styles.icons} />
               </div>
-              {pinnedPosts.map((post) => (
+              {pinnedPosts.map((post: PinnedPost) => (
                 <PinnedPostCard
                   key={post.id}
                   title={post.title}
                   user={post.user}
-                  content={post.description}
+                  description={post.description}
                   imageUrl={post.imageUrl}
+                  onDelete={() => handleDeletePost(post.id)}
                 />
               ))}
             </div>

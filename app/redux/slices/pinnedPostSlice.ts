@@ -16,7 +16,7 @@ const initialState: PinnedPostState = {
 
 // Define the async thunk to fetch pinned posts
 export const fetchPinnedPosts = createAsyncThunk('pinnedPosts/fetchPinnedPosts', async () => {
-  const response = await axios.get('http://localhost:3004/pin'); // Cambia la ruta según tu API
+  const response = await axios.get('http://localhost:3004/pin'); 
   return response.data;
 });
 

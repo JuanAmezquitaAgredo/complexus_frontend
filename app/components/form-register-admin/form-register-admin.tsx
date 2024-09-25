@@ -10,6 +10,7 @@ import { ResidentialUnit, UserAdmin } from "@/app/types/admins";
 import Spinner from "../common/spinner/spinner";
 
 const FormRegisterAdmin = () => {
+    // Initial state for the admin user form
     const initialState: UserAdmin = {
         name: "",
         lastName: "",
@@ -21,6 +22,7 @@ const FormRegisterAdmin = () => {
         rol_id: "2"
     };
 
+    // Initial state for the residential unit form
     const initialStateUnit: ResidentialUnit = {
         name: "",
         city: "",
@@ -41,7 +43,7 @@ const FormRegisterAdmin = () => {
         if (!admin.name || !admin.email || !admin.password || !admin.phone || !admin.tower || !unit.name || !unit.city || !unit.address) {
             await showAlert({
                 title: "Error",
-                text: "Por favor, completa todos los campos.",
+                text: "Please fill in all the fields.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
@@ -51,8 +53,8 @@ const FormRegisterAdmin = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(admin.email)) {
             await showAlert({
-                title: "Correo inválido",
-                text: "Por favor ingresa un correo electrónico válido.",
+                title: "Invalid Email",
+                text: "Please enter a valid email address.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
@@ -61,8 +63,8 @@ const FormRegisterAdmin = () => {
     
         if (admin.password !== confirmPassword) {
             await showAlert({
-                title: "Error de contraseña",
-                text: "Las contraseñas no coinciden.",
+                title: "Password Error",
+                text: "Passwords do not match.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
@@ -71,8 +73,8 @@ const FormRegisterAdmin = () => {
     
         if (admin.password.length < 6) {
             await showAlert({
-                title: "Contraseña débil",
-                text: "La contraseña debe tener al menos 6 caracteres.",
+                title: "Weak Password",
+                text: "Password must be at least 6 characters long.",
                 icon: "error",
                 confirmButtonText: "OK"
             });
@@ -80,13 +82,13 @@ const FormRegisterAdmin = () => {
         }
     
         try {
-            // Paso 1: Crear el administrador en Firebase Authentication
+            // Step 1: Create the admin user in Firebase Authentication
             const responseFirebase = await createUserWithEmailAndPassword(admin.email, admin.password);
     
             if (responseFirebase) {
                 await sendEmailVerification(responseFirebase.user);
                 
-                // Paso 2: Guardar la unidad en la base de datos local
+                // Step 2: Save the residential unit in the local database
                 const responseDBUnit = await fetch('http://localhost:3004/units', {
                     method: 'POST',
                     headers: {
@@ -96,15 +98,15 @@ const FormRegisterAdmin = () => {
                 });
     
                 if (!responseDBUnit.ok) {
-                    throw new Error('Error al guardar los datos de la unidad en la base de datos local.');
+                    throw new Error('Error saving the residential unit in the local database.');
                 }
     
-                // Obtener el ID de la unidad recién creada
+                // Get the ID of the newly created residential unit
                 const createdUnit = await responseDBUnit.json();
                 const unitId = createdUnit.id;
     
-                // Actualizar el objeto del administrador con el ID de la unidad
-                const updatedAdmin = { ...admin, residential_id: unitId }; // Asignar residential_id al objeto admin
+                // Update the admin object with the residential unit ID
+                const updatedAdmin = { ...admin, residential_id: unitId }; // Assign residential_id to the admin object
                 const responseDBOwner = await fetch('http://localhost:3004/users', {
                     method: 'POST',
                     headers: {
@@ -114,15 +116,15 @@ const FormRegisterAdmin = () => {
                 });
     
                 if (!responseDBOwner.ok) {
-                    throw new Error('Error al guardar los datos del administrador en la base de datos local.');
+                    throw new Error('Error saving the admin data in the local database.');
                 }
     
-                // Obtener el ID del administrador recién creado
+                // Get the ID of the newly created admin
                 const createdAdmin = await responseDBOwner.json();
                 const adminId = createdAdmin.id;
     
-                // Actualizar la unidad con el ID del administrador
-                const updatedUnitWithAdmin = { ...unit, admin_id: adminId }; // Asignar admin_id al objeto unit
+                // Update the residential unit with the admin ID
+                const updatedUnitWithAdmin = { ...unit, admin_id: adminId }; // Assign admin_id to the unit object
                 const responseUpdateUnit = await fetch(`http://localhost:3004/units/${unitId}`, {
                     method: 'PUT',
                     headers: {
@@ -132,26 +134,27 @@ const FormRegisterAdmin = () => {
                 });
     
                 if (!responseUpdateUnit.ok) {
-                    throw new Error('Error al actualizar los datos de la unidad en la base de datos local.');
+                    throw new Error('Error updating the residential unit in the local database.');
                 }
     
                 await showAlert({
-                    title: "Registro exitoso",
-                    text: "Se envió un correo de verificación.",
+                    title: "Registration Successful",
+                    text: "A verification email has been sent.",
                     icon: "success",
                     confirmButtonText: "OK"
                 });
     
+                // Reset form state
                 setAdmin(initialState);
-                setUnit(initialStateUnit); // Reiniciar la unidad
+                setUnit(initialStateUnit); // Reset the unit
                 setConfirmPassword("");
                 window.location.reload();
             }
         } catch (error) {
-            console.error('Error en el proceso de registro:', error);
+            console.error('Registration process error:', error);
             await showAlert({
                 title: "Error",
-                text: "Hubo un error al procesar tu registro. Intenta nuevamente.",
+                text: "There was an error processing your registration. Please try again.",
                 icon: "error",
                 confirmButtonText: "OK"
             });

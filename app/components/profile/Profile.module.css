@@ -52,7 +52,7 @@
   font-size: 14px;
   color: #888;
   background-color: #f7f7f7;
-  pointer-events: none; /* Hace los inputs no editables */
+  pointer-events: none; 
 }
 
 .logoutButton {

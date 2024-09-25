@@ -1,3 +1,4 @@
+/* styles.module.css */
 
 .container {
   display: flex; 
@@ -15,7 +16,6 @@
 }
 
 .containers{
-  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,7 +24,7 @@
 }
 
 .containerPin {
-  width: 450px; 
+  width: 350px; 
   max-height: 69vh; 
   overflow-y: auto; 
   padding-left: 16px; 

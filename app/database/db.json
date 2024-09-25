@@ -9,7 +9,7 @@
       "tower": "123",
       "apto": "3",
       "rol_id": "1",
-      "residential_id": "3eg32",
+      "residential_id": "3eg3245",
       "lastName": "Amezquita"
     },
     {
@@ -18,22 +18,11 @@
       "lastName": "calderon",
       "email": "jsamezquia@eafit.edu.co",
       "password": "abc.123",
-      "phone": "1376980852",
+      "phone": "3125467687",
       "tower": "N/A",
       "residential_id": "b8ba",
-      "rol_id": "3",
+      "rol_id": "2",
       "apto": "805"
-    },
-    {
-      "id": "79cd",
-      "name": "juan",
-      "lastName": "calderon",
-      "email": "jsamezquia@eafit.edu.co",
-      "password": "abc.123",
-      "phone": "1376980852",
-      "tower": "N/A",
-      "residential_id": "b8ba",
-      "rol_id": "2"
     },
     {
       "id": "dac9",
@@ -41,130 +30,281 @@
       "lastName": "dado",
       "email": "ejempl@gmial.ejemplo",
       "password": "abc.123",
-      "phone": "12342",
+      "phone": "3219876547",
       "tower": "3",
       "apto": "123",
       "rol_id": "2",
       "residential_id": "3eg32",
       "active": true
+    },
+    {
+      "id": "8766",
+      "name": "Juan",
+      "lastName": "Pablo",
+      "email": "jparbol@gmail.com",
+      "password": "abc.123",
+      "phone": "326789876",
+      "tower": "N/A",
+      "residential_id": "ea7d",
+      "rol_id": "2"
+    },
+    {
+      "id": "92fd",
+      "name": "Carlos",
+      "lastName": "Garcia",
+      "email": "cgarcia@gmail.com",
+      "password": "abc.123",
+      "phone": "3145678901",
+      "tower": "2",
+      "apto": "405",
+      "rol_id": "2",
+      "residential_id": "3eg32",
+      "active": true
+    },
+    {
+      "id": "dac9",
+      "name": "Sofia",
+      "lastName": "Perez",
+      "email": "sperez@hotmail.com",
+      "password": "abc.123",
+      "phone": "3152345678",
+      "tower": "3",
+      "apto": "202",
+      "rol_id": "2",
+      "residential_id": "f6b8",
+      "active": true
+    },
+    {
+      "id": "79cdde",
+      "name": "Maria",
+      "lastName": "Lopez",
+      "email": "mlopez@ejemplo.com",
+      "password": "abc.123",
+      "phone": "3225678903",
+      "tower": "1",
+      "apto": "101",
+      "rol_id": "2",
+      "residential_id": "g7cd",
+      "active": true
+    },
+    {
+      "id": "8766",
+      "name": "Pedro",
+      "lastName": "Ramirez",
+      "email": "pramirez@correo.com",
+      "password": "abc.123",
+      "phone": "3198765432",
+      "tower": "6",
+      "apto": "305",
+      "rol_id": "2",
+      "residential_id": "h4fr",
+      "active": true
+    },
+    {
+      "id": "dac9",
+      "name": "Daniela",
+      "lastName": "Torres",
+      "email": "dtorres@dominio.com",
+      "password": "abc.123",
+      "phone": "3113456789",
+      "tower": "2",
+      "apto": "503",
+      "rol_id": "2",
+      "residential_id": "j8jk",
+      "active": true
+    },
+    {
+      "id": "bf30",
+      "name": "Juan Camilo",
+      "lastName": "Arboleda",
+      "email": "juan.1999@hotmail.es",
+      "password": "abc.123",
+      "phone": "3165679865",
+      "tower": "2",
+      "apto": "201",
+      "rol_id": "3",
+      "residential_id": "b8ba",
+      "active": true
+    },
+    {
+      "id": "a1b2",
+      "name": "Pedro",
+      "lastName": "Gutierrez",
+      "email": "pedro.gutierrez@example.com",
+      "password": "abc.123",
+      "phone": "3123456789",
+      "tower": "1",
+      "apto": "101",
+      "rol_id": "3",
+      "residential_id": "b8ba",
+      "active": true
+    },
+    {
+      "id": "b3c4",
+      "name": "Ana",
+      "lastName": "Lopez",
+      "email": "ana.lopez@example.com",
+      "password": "abc.123",
+      "phone": "3109876543",
+      "tower": "2",
+      "apto": "202",
+      "rol_id": "3",
+      "residential_id": "b8ba",
+      "active": true
+    },
+    {
+      "id": "c5d6",
+      "name": "Luis",
+      "lastName": "Ramirez",
+      "email": "luis.ramirez@example.com",
+      "password": "abc.123",
+      "phone": "3191234567",
+      "tower": "3",
+      "apto": "303",
+      "rol_id": "3",
+      "residential_id": "b8ba",
+      "active": true
+    },
+    {
+      "id": "d7e8",
+      "name": "Maria",
+      "lastName": "Castro",
+      "email": "maria.castro@example.com",
+      "password": "abc.123",
+      "phone": "3179876543",
+      "tower": "4",
+      "apto": "404",
+      "rol_id": "3",
+      "residential_id": "b8ba",
+      "active": true
+    },
+    {
+      "id": "e9f0",
+      "name": "Jorge",
+      "lastName": "Mendez",
+      "email": "jorge.mendez@example.com",
+      "password": "abc.123",
+      "phone": "3183456789",
+      "tower": "5",
+      "apto": "505",
+      "rol_id": "3",
+      "residential_id": "b8ba",
+      "active": true
+    },
+    {
+      "id": "f1a2",
+      "name": "Claudia",
+      "lastName": "Morales",
+      "email": "claudia.morales@example.com",
+      "password": "abc.123",
+      "phone": "3139876543",
+      "tower": "6",
+      "apto": "606",
+      "rol_id": "3",
+      "residential_id": "b8ba",
+      "active": true
     }
   ],
   "posts": [
     {
-      "id": "04c3",
-      "title": "carro en venta",
+      "id": "8ac6",
+      "title": "Mis Empanadas",
+      "description": "Estoy vendiendo empanadas en la torre A 506",
       "user": "juan",
-      "description": "vendo carro",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975075/proyecto/bjqon7w1mf6oc29yjri3.jpg"
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727146805/proyecto/ltqonny2ofsu1ayo9rgb.webp",
+      "timePosted": "23/9/2024, 22:00:06"
     },
     {
-      "id": "e1de",
-      "title": "sofa",
-      "user": "carlos",
-      "description": "vendo sofa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+      "id": "58b2",
+      "title": "Habitacion Disponible",
+      "description": "Tengo habitacion disponible en la torre B 203",
+      "user": "juan",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727146894/proyecto/apj4hkfe27hsbcvd7j4n.webp",
+      "timePosted": "23/9/2024, 22:01:36"
     },
     {
-      "id": "04c9",
-      "title": "nuevo",
-      "user": "nuevo",
-      "description": "nuevo",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725985094/proyecto/aeg87bbqlnzxuakmqakr.png"
+      "id": "de96",
+      "title": "Desalojo",
+      "description": "Para el residente del apto 507 d la torre A, por favor comunicarse URGENTE con el administrador del complejo",
+      "user": "juan",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727147048/proyecto/tsvwu8tipjyrm61vjenp.jpg",
+      "timePosted": "23/9/2024, 22:04:09"
     },
     {
-      "id": "7be3",
-      "title": "casa",
-      "description": "yo soy juan",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726157458/proyecto/yvs9nzufmzv3o9lowyvl.jpg"
-    },
-    {
-      "id": "3dbb",
-      "title": "juan",
-      "description": "jbsusus",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726157519/proyecto/piyrlbdz2ygx2iwbuylq.png"
-    },
-    {
-      "id": "04c5",
-      "title": "mi casa",
-      "description": "ksksksk",
-      "user": "",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726158218/proyecto/hftu57sckgdhdlhaqa7y.jpg"
-    },
-    {
-      "id": "c498",
-      "title": "casa",
-      "description": "vendo casa",
-      "user": "",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726160737/proyecto/qdqsmvaneyw0weimgs0s.png"
-    },
-    {
-      "id": "01a0",
-      "title": "nuevo",
-      "description": "nuevo",
-      "user": "",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1726485735/proyecto/u3rr3bgeborefyefv9z4.png"
+      "id": "3974",
+      "title": "Lasaña",
+      "description": "Compañeros voy a vender lasaña para el fin de semana a $8.000 ::)\n",
+      "user": "Juan Camilo",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727148875/proyecto/nhvcpbhjev0glk1yexa8.jpg",
+      "timePosted": "23/9/2024, 22:34:37"
     }
   ],
   "units": [
     {
-      "name": "maderos 2",
-      "city": "medellin",
-      "address": "pope",
+      "name": "Maderos del campo 1",
+      "city": "Medellin",
+      "address": "Calle 77 sur#35a-105",
       "has_tower": "4",
       "admin_id": "dac9",
       "id": "3eg32"
     },
     {
-      "name": "maderos 1",
-      "city": "medellin",
-      "address": "pope",
+      "name": "Maderos del campo 2",
+      "city": "Medellin",
+      "address": "Calle 77 sur#35a-106",
       "has_tower": "4",
-      "admin_id": "79cd",
+      "admin_id": "79cdde",
       "id": "b8ba"
+    },
+    {
+      "name": "Vegas del poblado",
+      "city": "Medellin",
+      "address": "calle 4 sur n 34-1010",
+      "has_tower": "12",
+      "admin_id": "8766",
+      "id": "ea7d"
+    },
+    {
+      "name": "Conjunto Sol Naciente",
+      "city": "Bogotá",
+      "address": "Carrera 45 #26-15",
+      "has_tower": "5",
+      "admin_id": "dac9",
+      "id": "f6b8"
+    },
+    {
+      "name": "Parques de la Colina",
+      "city": "Bogotá",
+      "address": "Calle 150 #58-80",
+      "has_tower": "7",
+      "admin_id": "79cdde",
+      "id": "g7cd"
+    },
+    {
+      "name": "Bosques de la Castellana",
+      "city": "Medellín",
+      "address": "Calle 50 #60-101",
+      "has_tower": "10",
+      "admin_id": "8766",
+      "id": "h4fr"
+    },
+    {
+      "name": "Altos del Country",
+      "city": "Cali",
+      "address": "Carrera 12 #35-40",
+      "has_tower": "8",
+      "admin_id": "dac9",
+      "id": "j8jk"
     }
   ],
   "pin": [
     {
-      "id": "04c3",
-      "title": "carro en venta",
+      "id": "de96",
+      "title": "Desalojo",
       "user": "juan",
-      "description": "vendo carro",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975075/proyecto/bjqon7w1mf6oc29yjri3.jpg"
-    },
-    {
-      "id": "e1de",
-      "title": "sofa",
-      "user": "carlos",
-      "description": "vendo sofa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
-    },
-    {
-      "id": "f1de",
-      "title": "mesa",
-      "user": "carlos",
-      "description": "vendo mesa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
-    },
-    {
-      "id": "f1de",
-      "title": "mesa",
-      "user": "carlos",
-      "description": "vendo mesa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
-    },
-    {
-      "id": "f1de",
-      "title": "mesa",
-      "user": "carlos",
-      "description": "vendo mesa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
-    },
-    {
-      "id": "f1de",
-      "title": "mesa",
-      "user": "carlos",
-      "description": "vendo mesa",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1725975229/proyecto/hosfapje86hwg7xrh24r.jpg"
+      "timePosted": "23/9/2024, 22:04:09",
+      "description": "Para el residente del apto 507 d la torre A, por favor comunicarse URGENTE con el administrador del complejo",
+      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727147048/proyecto/tsvwu8tipjyrm61vjenp.jpg"
     }
   ]
 }
