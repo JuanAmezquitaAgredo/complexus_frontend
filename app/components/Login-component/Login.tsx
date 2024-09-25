@@ -10,16 +10,32 @@ import { auth } from "@/app/firebase/config";
 import showAlert from "../alertcomponent/alertcomponent";
 import Spinner from "../common/spinner/spinner";
 
-const Login: React.FC = () => {
 
+interface AuthResponse {
+    id: number;
+    email: string;
+    message: string;
+    token: string;
+}
+
+const Login: React.FC = () => {
     const initialState: UserLogin = {
         email: "",
         password: "",
     };
-    
+
     const [user, setUser] = useState<UserLogin>(initialState);
-    const [signInWithEmailAndPassword, , loading] = useSignInWithEmailAndPassword(auth); // Firebase `loading` state
+    const [signInWithEmailAndPassword, , loading] = useSignInWithEmailAndPassword(auth);
     const router = useRouter();
+
+    function extractIdFromMessage(response: AuthResponse): number | null {
+        // Utilizamos una expresión regular para encontrar el id dentro del mensaje
+        const regex = /id=(\d+)/; // Busca 'id=' seguido de uno o más dígitos
+        const match = response.message.match(regex); // Busca coincidencias en el mensaje
+    
+        // Si hay una coincidencia, devolvemos el primer grupo (el id), si no, devolvemos null
+        return match ? parseInt(match[1], 10) : null;
+    }
 
     useEffect(() => {
         const token = sessionStorage.getItem('token');
@@ -47,39 +63,28 @@ const Login: React.FC = () => {
     
             if (response) {
                 const userEmailVerified = response.user.emailVerified;
+                console.log(JSON.stringify({ identifier: user.email, password: user.password }));
                 
                 if (userEmailVerified) {
-                    // Fetch user information from the Next.js API
-                    const userResponse = await fetch('/api/login', {
+                    const userResponse = await fetch('/api/auth/login', { // Cambia aquí
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ email: user.email, password: user.password }),
+                        body: JSON.stringify({ identifier: user.email, password: user.password }),
                     });
 
                     const userData = await userResponse.json();
+                    console.log(userData);
 
                     if (userResponse.ok && userData.email) {
                         sessionStorage.setItem('token', response.user.uid);
 
                         if (userData.email === user.email) {
                             sessionStorage.setItem('email', userData.email);
-                            sessionStorage.setItem('role', userData.role_id);
-                            if (userData.role_id === "1") {
-                                router.push('/superadmin');
-                            } else if (userData.role_id === "2") {
-                                router.push('/admin');
-                            } else if (userData.role_id === "3") {
-                                router.push('/owner');
-                            }else {
-                                await showAlert({
-                                    title: "Error",
-                                    text: "Invalid role.",
-                                    icon: "error",
-                                    confirmButtonText: "OK"
-                                });
-                            }
+                            const extractedID = extractIdFromMessage(userData);
+                            const rol_id = extractedID?.toString();
+                            sessionStorage.setItem('role', rol_id || 'Not identified');
 
                             await showAlert({
                                 title: "Session Started",
