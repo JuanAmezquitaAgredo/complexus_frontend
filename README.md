@@ -21,10 +21,14 @@ To install and configure the project, follow these steps:
    git clone <https://github.com/JuanAmezquitaAgredo/complexus_frontend.git>
    cd complexus
 2. **Install dependencies**
+    ```bash
     npm install
 3. **Start the development server**
+    ```bash
     npm run dev
+    ```
     project: http://localhost:3002
+
     Json-Server: http://localhost:3004/
 
 ## Estructure
@@ -67,8 +71,7 @@ Complexus/
 │   ├── redux/                     # Redux store configuration and slices
 │   ├── service/                   # Service files for API and external logic
 │   ├── superadmin/                # Super admin pages and management
-│   ├── types/                     # Time-related functions and utilities
-│   ├── utils/                     # Utility functions
+│   ├── types/                     # Types from project
 │   ├── global.css                 # Global CSS styles
 │   ├── layout.tsx                 # Layout configuration for pages
 │   ├── page.tsx                   # Main entry point for pages
