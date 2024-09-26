@@ -25,6 +25,7 @@ export const createPost = createAsyncThunk(
                 ...postData,
                 user: sessionStorage.getItem('name'), // Assuming you have the user's name
                 timePosted: currentTime,
+                likes: 0
             };
 
             const response = await axios.post('http://localhost:3004/posts', updatedPostData); // Adjust URL to your endpoint

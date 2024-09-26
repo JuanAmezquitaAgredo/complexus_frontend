@@ -12,6 +12,17 @@ import FormRegisterOwner from "../components/form-register-owner/form-register-o
 import FormEditOwner from "../components/form-edit-owner/form-edit-owner";
 import * as XLSX from 'xlsx';
 import showAlert from "../components/alertcomponent/alertcomponent";
+import { reload } from "firebase/auth";
+
+interface UserEntry {
+    "Name": string;
+    "Last Name": string;
+    "Email": string;
+    "Password": string;
+    "Phone": string | number;
+    "Tower": string | number;
+    "Apto": string | number;
+}
 
 const OwnersCrud = () => {
     const [users, setUsers] = useState<User[]>([]);
@@ -19,15 +30,6 @@ const OwnersCrud = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState<string>("");
     const [file, setFile] = useState<File | null>(null);
-    const [excelData, setExcelData] = useState<any[]>([]);
-
-    // Cargar datos de Excel desde localStorage al iniciar
-    useEffect(() => {
-        const storedExcelData = localStorage.getItem('excelData');
-        if (storedExcelData) {
-            setExcelData(JSON.parse(storedExcelData));
-        }
-    }, []);
 
     useEffect(() => {
         // Fetch users from json-server
@@ -89,7 +91,12 @@ const OwnersCrud = () => {
 
     const handleUploadClick = async () => {
         if (!file) {
-            alert("Please select a file first.");
+            showAlert({
+                title: "Upload a file!",
+                text: "",
+                icon: "warning",
+                confirmButtonText: "OK"
+            });
             return;
         }
 
@@ -101,17 +108,51 @@ const OwnersCrud = () => {
 
             const sheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[sheetName];
-            const jsonData = XLSX.utils.sheet_to_json(worksheet); // Convierte la hoja de Excel a JSON
+            const jsonData: UserEntry[] = XLSX.utils.sheet_to_json(worksheet); // Añadimos el tipo UserEntry
 
-            setExcelData(jsonData); // Actualiza el estado con los datos del Excel
-            localStorage.setItem('excelData', JSON.stringify(jsonData)); // Guardar en localStorage para persistencia
-            showAlert({
-                title: 'Success',
-                text: 'Excel data uploaded successfully!',
-                icon: 'success'
-            });
+            if (jsonData.length > 0) {
+                for (const entry of jsonData) {
+                    const formattedData = {
+                        name: entry["Name"],
+                        lastName: entry["Last Name"],
+                        email: entry["Email"],
+                        password: entry["Password"],
+                        phone: entry["Phone"].toString(),
+                        tower: entry["Tower"].toString(),
+                        apto: entry["Apto"].toString(),
+                        rol_id: "3",
+                        residential_id: "b8ba",
+                        active: true,
+                    };
+
+                    try {
+                        const response = await fetch("http://localhost:3004/users", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(formattedData),
+                        });
+
+                        if (response.ok) {
+                            console.log(`User ${formattedData.name} uploaded successfully!`);
+                        } else {
+                            console.error(`Error uploading user ${formattedData.name}:`, response.statusText);
+                        }
+                    } catch (error) {
+                        console.error(`Error uploading user ${formattedData.name}:`, error);
+                    }
+                }
+
+                showAlert({
+                    title: "File uploaded successfully!",
+                    text: "Users uploaded successfully!",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                }); 
+            }
         };
-
+        window.location.reload();
         reader.readAsArrayBuffer(file);
     };
 
