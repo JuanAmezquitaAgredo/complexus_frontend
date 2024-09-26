@@ -60,7 +60,8 @@
       "description": "Para el residente del apto 507 d la torre A, por favor comunicarse URGENTE con el administrador del complejo",
       "user": "juan",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727147048/proyecto/tsvwu8tipjyrm61vjenp.jpg",
-      "timePosted": "23/9/2024, 22:04:09"
+      "timePosted": "23/9/2024, 22:04:09",
+      "likes": 2
     },
     {
       "id": "3974",
@@ -68,7 +69,8 @@
       "description": "Compañeros voy a vender lasaña para el fin de semana a $8.000 ::)\n",
       "user": "Juan Camilo",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727148875/proyecto/nhvcpbhjev0glk1yexa8.jpg",
-      "timePosted": "23/9/2024, 22:34:37"
+      "timePosted": "23/9/2024, 22:34:37",
+      "likes": 1
     }
   ],
   "units": [
