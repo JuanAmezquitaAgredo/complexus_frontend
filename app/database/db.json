@@ -44,7 +44,8 @@
       "description": "Estoy vendiendo empanadas en la torre A 506",
       "user": "juan",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727146805/proyecto/ltqonny2ofsu1ayo9rgb.webp",
-      "timePosted": "23/9/2024, 22:00:06"
+      "timePosted": "23/9/2024, 22:00:06",
+      "likes": 1
     },
     {
       "id": "58b2",
@@ -52,7 +53,8 @@
       "description": "Tengo habitacion disponible en la torre B 203",
       "user": "juan",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727146894/proyecto/apj4hkfe27hsbcvd7j4n.webp",
-      "timePosted": "23/9/2024, 22:01:36"
+      "timePosted": "23/9/2024, 22:01:36",
+      "likes": 1
     },
     {
       "id": "de96",
@@ -61,7 +63,7 @@
       "user": "juan",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727147048/proyecto/tsvwu8tipjyrm61vjenp.jpg",
       "timePosted": "23/9/2024, 22:04:09",
-      "likes": 2
+      "likes": 3
     },
     {
       "id": "3974",
@@ -70,7 +72,7 @@
       "user": "Juan Camilo",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727148875/proyecto/nhvcpbhjev0glk1yexa8.jpg",
       "timePosted": "23/9/2024, 22:34:37",
-      "likes": 1
+      "likes": 2
     }
   ],
   "units": [

@@ -8,7 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ConfirmDialog from '../alertDelete/alertDelete';
 
 interface Post {
-  id: number;
+  id: string;
   title: string;
   user: string;
   timePosted: string;
@@ -18,7 +18,7 @@ interface Post {
 }
 
 interface PostCardProps extends Post {
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -68,11 +68,11 @@ const PostCard: React.FC<PostCardProps> = ({
           const response = await fetch(`http://localhost:3004/posts/${id}`, {
             method: 'DELETE',
           });
-  
+
           if (!response.ok) {
             throw new Error('Error deleting post');
           }
-  
+
           // Llamar la función onDelete del componente padre para actualizar la lista de posts
           onDelete(id);
           window.location.reload();
