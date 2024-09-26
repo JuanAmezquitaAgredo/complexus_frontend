@@ -156,17 +156,6 @@ const OwnersCrud = () => {
         reader.readAsArrayBuffer(file);
     };
 
-    // Función para eliminar los datos de Excel del estado y de localStorage
-    const handleClearExcelData = () => {
-        setExcelData([]);
-        localStorage.removeItem('excelData');
-        showAlert({
-            title: 'Delete',
-            text: 'Excel data cleared successfully!',
-            icon: 'warning'
-        });
-    };
-
     return (
         <main>
             <Navbar />
@@ -200,17 +189,6 @@ const OwnersCrud = () => {
                                     </td>
                                 </tr>
                             ))}
-
-                            {/* Renderiza los datos del archivo Excel */}
-                            {excelData.map((row, index) => (
-                                <tr key={index} className={styles.tr}>
-                                    <td className={styles.td}>{row["Name"] || "N/A"}</td>
-                                    <td className={styles.td}>{row["Email"] || "N/A"}</td>
-                                    <td className={styles.td}>{row["Apto"] || "N/A"}</td>
-                                    <td className={styles.td}>{row["Phone"] || "N/A"}</td>
-                                    <td className={styles["action-icons"]}></td>
-                                </tr>
-                            ))}
                         </tbody>
                     </table>
                     <div className={styles.createAdmin}>
@@ -221,9 +199,6 @@ const OwnersCrud = () => {
                         <input type="file" id="fileUpload" accept=".xlsx, .xls" onChange={handleFileChange} />
                         <button className={styles.uploadButton} onClick={handleUploadClick} disabled={!file}>
                             Upload Excel
-                        </button>
-                        <button className={styles.clearButton} onClick={handleClearExcelData} disabled={excelData.length === 0}>
-                            Clear Excel
                         </button>
                     </div>
                 </div>
