@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import { User } from "../types/users"; 
+import { User } from "../types/users";
 import ConfirmDialog from "../components/alertDelete/alertDelete";
 import { Navbar } from "../components/navbar/navbar";
 import { Sidebar } from "../components/sidebar/sidebar";
@@ -9,15 +9,27 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from "../components/common/modal/modal";
 import FormRegisterOwner from "../components/form-register-owner/form-register-owner";
-import FormEditOwner from "../components/form-edit-owner/form-edit-owner"; 
-import * as XLSX from 'xlsx'; 
+import FormEditOwner from "../components/form-edit-owner/form-edit-owner";
+import * as XLSX from 'xlsx';
+import showAlert from "../components/alertcomponent/alertcomponent";
+import { reload } from "firebase/auth";
+
+interface UserEntry {
+    "Name": string;
+    "Last Name": string;
+    "Email": string;
+    "Password": string;
+    "Phone": string | number;
+    "Tower": string | number;
+    "Apto": string | number;
+}
 
 const OwnersCrud = () => {
     const [users, setUsers] = useState<User[]>([]);
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); 
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false); 
-    const [selectedUserId, setSelectedUserId] = useState<string>(""); 
-    const [file, setFile] = useState<File | null>(null); 
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState<string>("");
+    const [file, setFile] = useState<File | null>(null);
 
     useEffect(() => {
         // Fetch users from json-server
@@ -25,7 +37,7 @@ const OwnersCrud = () => {
             try {
                 const response = await fetch("http://localhost:3004/users");
                 const data = await response.json();
-                
+
                 const owners = data.filter((user: User) => user.rol_id === '3');
                 setUsers(owners);
             } catch (error) {
@@ -73,13 +85,18 @@ const OwnersCrud = () => {
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
-            setFile(file); 
+            setFile(file);
         }
     };
 
     const handleUploadClick = async () => {
         if (!file) {
-            alert("Please select a file first.");
+            showAlert({
+                title: "Upload a file!",
+                text: "",
+                icon: "warning",
+                confirmButtonText: "OK"
+            });
             return;
         }
 
@@ -91,34 +108,51 @@ const OwnersCrud = () => {
 
             const sheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[sheetName];
-            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+            const jsonData: UserEntry[] = XLSX.utils.sheet_to_json(worksheet); // Añadimos el tipo UserEntry
 
-            if (jsonData) {
-                alert("File uploaded successfully!");
+            if (jsonData.length > 0) {
+                for (const entry of jsonData) {
+                    const formattedData = {
+                        name: entry["Name"],
+                        lastName: entry["Last Name"],
+                        email: entry["Email"],
+                        password: entry["Password"],
+                        phone: entry["Phone"].toString(),
+                        tower: entry["Tower"].toString(),
+                        apto: entry["Apto"].toString(),
+                        rol_id: "3",
+                        residential_id: "b8ba",
+                        active: true,
+                    };
+
+                    try {
+                        const response = await fetch("http://localhost:3004/users", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(formattedData),
+                        });
+
+                        if (response.ok) {
+                            console.log(`User ${formattedData.name} uploaded successfully!`);
+                        } else {
+                            console.error(`Error uploading user ${formattedData.name}:`, response.statusText);
+                        }
+                    } catch (error) {
+                        console.error(`Error uploading user ${formattedData.name}:`, error);
+                    }
+                }
+
+                showAlert({
+                    title: "File uploaded successfully!",
+                    text: "Users uploaded successfully!",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                }); 
             }
-
-            // try {
-            //     // Envía los datos al backend
-            //     const response = await fetch("http://localhost:3004/upload", {
-            //         method: "POST",
-            //         headers: {
-            //             "Content-Type": "application/json",
-            //         },
-            //         body: JSON.stringify({ data: jsonData }),
-            //     });
-
-            //     if (response.ok) {
-            //         alert("File uploaded successfully!");
-            //     } else {
-            //         console.error("Error uploading file:", response.statusText);
-            //         alert("Error uploading file.");
-            //     }
-            // } catch (error) {
-            //     console.error("Error uploading file:", error);
-            //     alert("Error uploading file.");
-            // }
         };
-
+        window.location.reload();
         reader.readAsArrayBuffer(file);
     };
 
