@@ -36,7 +36,7 @@ To install and configure the project, follow these steps:
 Complexus/
 │
 ├── app/                           # Main application folder
-│   ├── admin/                     # Admin-related pages and components
+│   ├── admin/                    # Admin-related pages and components
 │   ├── components/                # Reusable UI components
 │   │   ├── alertcomponent/        # Alert messages
 │   │   ├── alertDelete/           # Delete confirmation alerts
