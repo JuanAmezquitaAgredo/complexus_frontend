@@ -1,0 +1,85 @@
+.card {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 300px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  
+  .imageContainer {
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 15px;
+  }
+  
+  .image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .user {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 5px;
+  }
+  
+  .text {
+    font-size: 0.95em;
+    color: #333;
+    margin-top: 8px;
+    /* Agrega estas líneas para habilitar el scroll */
+    overflow-y: auto;
+    max-height: 60px; /* Ajusta esta altura según tus necesidades */
+  }
+
+  .text::-webkit-scrollbar{
+    width: 10px;
+  }
+  
+  .text::-webkit-scrollbar-thumb{
+    background-color: #260e69;
+    border-radius: 10px;
+    border: 2px solid #260e69;
+  }
+  
+  .text::-webkit-scrollbar-thumb:hover{
+    background-color: #6c30cc;
+  }
+
+  .pinIconContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pinIcon{
+    cursor: pointer;
+    color: #b2b2b2;
+  }
+  
+  .deleteIcon{
+    cursor: pointer;
+    color: #b2b2b2;
+  }

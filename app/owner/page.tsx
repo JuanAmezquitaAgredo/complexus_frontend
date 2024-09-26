@@ -12,6 +12,8 @@ import PinnedPostCard from '../components/pinnedCard/PinnedPostCard';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import { SidebarOwner } from '../components/sidebarOwner/sidebarOwner';
 import { useRouter } from 'next/navigation';
+import PostCardOwner from '../components/postcardOwner/PostCardOwner';
+import PinnedPostCardOwner from '../components/pinnedCardOwner/PinnedPostCardOwner';
 
 const OwnerPage: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -58,16 +60,16 @@ const OwnerPage: React.FC = () => {
           {posts.length > 0 && (
             <div className={styles.postCardContainer}>
               {posts.map((post) => (
-                <PostCard
-                  key={post.id} 
+                <PostCardOwner
+                  key={post.id}
                   id={post.id}
                   title={post.title}
                   user={post.user}
                   timePosted={post.timePosted}
                   description={post.description}
                   likes={post.likes}
-                  imageUrl={post.imageUrl}
-                />
+                  imageUrl={post.imageUrl} 
+                  />
               ))}
             </div>
           )}
@@ -82,7 +84,7 @@ const OwnerPage: React.FC = () => {
                 <PushPinIcon className={styles.icons} />
               </div>
               {pinnedPosts.map((post) => (
-                <PinnedPostCard
+                <PinnedPostCardOwner
                   key={post.id}
                   title={post.title}
                   user={post.user}

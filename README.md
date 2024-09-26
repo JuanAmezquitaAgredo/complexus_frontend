@@ -55,7 +55,9 @@ Complexus/
 │   │   ├── login-Component/       # Login component
 │   │   ├── navbar/                # Navigation bar
 │   │   ├── pinnedCard/            # Pinned post card component
+│   │   ├── pinnedCardOwner/       # Pinned post card component Owner
 │   │   ├── postCard/              # General post card component
+│   │   ├── postCardOwner/         # General post card component Owner
 │   │   ├── profile/               # User profile component
 │   │   ├── sidebar/               # General navigation sidebar
 │   │   ├── sidebarOwner/          # Sidebar for owner users

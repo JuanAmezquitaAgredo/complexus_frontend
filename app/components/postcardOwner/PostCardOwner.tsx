@@ -17,11 +17,11 @@ interface Post {
   imageUrl: string;
 }
 
-interface PostCardProps extends Post {
-  onDelete: (id: string) => void;
-}
+// interface PostCardProps extends Post {
+//   onDelete: (id: string) => void;
+// }
 
-const PostCard: React.FC<PostCardProps> = ({
+const PostCardOwner: React.FC<Post> = ({
   id,
   title,
   user,
@@ -29,8 +29,7 @@ const PostCard: React.FC<PostCardProps> = ({
   description,
   likes,
   imageUrl,
-  onDelete,
-}: PostCardProps) => {
+}: Post) => {
   const [currentLikes, setCurrentLikes] = useState(likes);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -58,58 +57,58 @@ const PostCard: React.FC<PostCardProps> = ({
   };
 
   // Función para manejar la eliminación del post
-  const handleDeleteClick = () => {
-    ConfirmDialog({
-      title: 'Are you sure?',
-      text: 'You won’t be able to revert this!',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const response = await fetch(`http://localhost:3004/posts/${id}`, {
-            method: 'DELETE',
-          });
+  // const handleDeleteClick = () => {
+  //   ConfirmDialog({
+  //     title: 'Are you sure?',
+  //     text: 'You won’t be able to revert this!',
+  //     confirmButtonText: 'Yes, delete it!',
+  //     cancelButtonText: 'Cancel',
+  //   }).then(async (result) => {
+  //     if (result.isConfirmed) {
+  //       try {
+  //         const response = await fetch(`http://localhost:3004/posts/${id}`, {
+  //           method: 'DELETE',
+  //         });
 
-          if (!response.ok) {
-            throw new Error('Error deleting post');
-          }
+  //         if (!response.ok) {
+  //           throw new Error('Error deleting post');
+  //         }
 
-          // Llamar la función onDelete del componente padre para actualizar la lista de posts
-          onDelete(id.toString());
-          window.location.reload();
-        } catch (error) {
-          console.error('Error deleting post:', error);
-        }
-      }
-    });
-  };
+  //         // Llamar la función onDelete del componente padre para actualizar la lista de posts
+  //         onDelete(id.toString());
+  //         window.location.reload();
+  //       } catch (error) {
+  //         console.error('Error deleting post:', error);
+  //       }
+  //     }
+  //   });
+  // };
 
-  // Función para manejar el "Pin" del post
-  const handlePinPost = async () => {
-    try {
-      const response = await fetch('http://localhost:3004/pin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id,
-          title,
-          user,
-          description,
-          imageUrl,
-        }),
-      });
+  // // Función para manejar el "Pin" del post
+  // const handlePinPost = async () => {
+  //   try {
+  //     const response = await fetch('http://localhost:3004/pin', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         id,
+  //         title,
+  //         user,
+  //         description,
+  //         imageUrl,
+  //       }),
+  //     });
 
-      if (!response.ok) {
-        throw new Error('Error pinning post');
-      }
-      window.location.reload();
-    } catch (error) {
-      console.error('Error pinning post:', error);
-    }
-  };
+  //     if (!response.ok) {
+  //       throw new Error('Error pinning post');
+  //     }
+  //     window.location.reload();
+  //   } catch (error) {
+  //     console.error('Error pinning post:', error);
+  //   }
+  // };
 
   return (
     <div className={styles.card} key={id}>
@@ -117,11 +116,6 @@ const PostCard: React.FC<PostCardProps> = ({
         <div className={styles.userInfo}>
           <h3>{title}</h3>
           <span>{user} • {timePosted}</span>
-        </div>
-        <div className={styles.more}>
-          <EditIcon className={styles.icons1} />
-          <DeleteIcon className={styles.icons1} onClick={handleDeleteClick} /> {/* Manejar clic de eliminar */}
-          <PushPinIcon className={styles.icons1} onClick={handlePinPost} /> {/* Manejar clic de pin */}
         </div>
       </div>
       <div className={styles.cardContent}>
@@ -146,4 +140,4 @@ const PostCard: React.FC<PostCardProps> = ({
   );
 };
 
-export default PostCard;
+export default PostCardOwner;

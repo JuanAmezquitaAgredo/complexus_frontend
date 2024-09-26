@@ -61,6 +61,7 @@ const Login: React.FC = () => {
                             sessionStorage.setItem('residential_id', userFound.residential_id);
                             sessionStorage.setItem('id', userFound.id);
                             sessionStorage.setItem('name', userFound.name);
+                            sessionStorage.setItem('userRole', userFound.rol_id);
     
                             // Store token immediately
                             sessionStorage.setItem('token', response.user.uid);

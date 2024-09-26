@@ -207,31 +207,14 @@
   ],
   "posts": [
     {
-      "id": "8ac6",
-      "title": "Mis Empanadas",
-      "description": "Estoy vendiendo empanadas en la torre A 506",
-      "user": "juan",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727146805/proyecto/ltqonny2ofsu1ayo9rgb.webp",
-      "timePosted": "23/9/2024, 22:00:06",
-      "likes": 1
-    },
-    {
-      "id": "58b2",
-      "title": "Habitacion Disponible",
-      "description": "Tengo habitacion disponible en la torre B 203",
-      "user": "juan",
-      "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727146894/proyecto/apj4hkfe27hsbcvd7j4n.webp",
-      "timePosted": "23/9/2024, 22:01:36",
-      "likes": 1
-    },
-    {
       "id": "de96",
       "title": "Desalojo",
       "description": "Para el residente del apto 507 d la torre A, por favor comunicarse URGENTE con el administrador del complejo",
       "user": "juan",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727147048/proyecto/tsvwu8tipjyrm61vjenp.jpg",
       "timePosted": "23/9/2024, 22:04:09",
-      "likes": 1
+      "likes": 2,
+      "pinned": true
     },
     {
       "id": "3974",
@@ -240,7 +223,8 @@
       "user": "Juan Camilo",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727148875/proyecto/nhvcpbhjev0glk1yexa8.jpg",
       "timePosted": "23/9/2024, 22:34:37",
-      "likes": 1
+      "likes": 1,
+      "pinned": true
     }
   ],
   "units": [
@@ -306,7 +290,6 @@
       "id": "de96",
       "title": "Desalojo",
       "user": "juan",
-      "timePosted": "23/9/2024, 22:04:09",
       "description": "Para el residente del apto 507 d la torre A, por favor comunicarse URGENTE con el administrador del complejo",
       "imageUrl": "https://res.cloudinary.com/dnwpj75xg/image/upload/v1727147048/proyecto/tsvwu8tipjyrm61vjenp.jpg"
     }

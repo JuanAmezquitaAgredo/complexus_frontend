@@ -128,7 +128,7 @@ const AdminPage: React.FC = () => {
                   likes={post.likes}
                   imageUrl={post.imageUrl}
                   onDelete={() => handleDeletePost(post.id)} // Pasar la función de eliminación a PostCard
-                />
+               />
               ))}
             </div>
           )}
