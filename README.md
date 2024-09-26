@@ -38,7 +38,7 @@ To install and configure the project, follow these steps:
 Complexus/
 │
 ├── app/                           # Main application folder
-│   ├── admin/                     # Admin-related pages and components
+│   ├── admin/                    # Admin-related pages and components
 │   ├── components/                # Reusable UI components
 │   │   ├── alertcomponent/        # Alert messages
 │   │   ├── alertDelete/           # Delete confirmation alerts
@@ -57,7 +57,9 @@ Complexus/
 │   │   ├── login-Component/       # Login component
 │   │   ├── navbar/                # Navigation bar
 │   │   ├── pinnedCard/            # Pinned post card component
+│   │   ├── pinnedCardOwner/       # Pinned post card component Owner
 │   │   ├── postCard/              # General post card component
+│   │   ├── postCardOwner/         # General post card component Owner
 │   │   ├── profile/               # User profile component
 │   │   ├── sidebar/               # General navigation sidebar
 │   │   ├── sidebarOwner/          # Sidebar for owner users
