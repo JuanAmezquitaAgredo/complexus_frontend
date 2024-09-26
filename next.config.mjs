@@ -4,8 +4,8 @@ const nextConfig = {
         return [
             {
                 // Cambia '/api/auth' a la ruta que quieras utilizar en tu aplicación
-                source: '/api/auth/:path*',
-                destination: 'https://complexusproject-production-e80b.up.railway.app/auth/:path*', // La URL de tu API
+                source: '/api/:path*',
+                destination: 'https://complexusproject-production-e80b.up.railway.app/:path*', // La URL de tu API
             },
         ];
     },

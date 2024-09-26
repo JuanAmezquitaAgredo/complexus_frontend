@@ -36,18 +36,18 @@ const SuperadminPage = () => {
     
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const unitsResponse = await fetch("http://localhost:3004/units");
-                const unitsData = await unitsResponse.json();
+            // try {
+            //     const unitsResponse = await fetch("http://localhost:3004/units");
+            //     const unitsData = await unitsResponse.json();
 
-                const usersResponse = await fetch("http://localhost:3004/users");
-                const usersData = await usersResponse.json();
+            //     const usersResponse = await fetch("http://localhost:3004/users");
+            //     const usersData = await usersResponse.json();
 
-                setUnits(unitsData);
-                setUsers(usersData);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
+            //     setUnits(unitsData);
+            //     setUsers(usersData);
+            // } catch (error) {
+            //     console.error("Error fetching data:", error);
+            // }
         };
 
         if (token) {
@@ -70,18 +70,18 @@ const SuperadminPage = () => {
         });
 
         if (result.isConfirmed) {
-            try {
-                await fetch(`http://localhost:3004/units/${unit.id}`, {
-                    method: 'DELETE',
-                });
-                await fetch(`http://localhost:3004/users/${unit.admin_id}`, {
-                    method: 'DELETE',
-                });
-                setUnits(units.filter(u => u.id !== unit.id));
-                setUsers(users.filter(user => user.id !== unit.admin_id));
-            } catch (error) {
-                console.error("Error deleting unit or admin:", error);
-            }
+            // try {
+            //     await fetch(`http://localhost:3004/units/${unit.id}`, {
+            //         method: 'DELETE',
+            //     });
+            //     await fetch(`http://localhost:3004/users/${unit.admin_id}`, {
+            //         method: 'DELETE',
+            //     });
+            //     setUnits(units.filter(u => u.id !== unit.id));
+            //     setUsers(users.filter(user => user.id !== unit.admin_id));
+            // } catch (error) {
+            //     console.error("Error deleting unit or admin:", error);
+            // }
         }
     };
 

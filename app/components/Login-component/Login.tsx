@@ -9,6 +9,7 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
 import showAlert from "../alertcomponent/alertcomponent";
 import Spinner from "../common/spinner/spinner";
+import { Token } from "@mui/icons-material";
 
 
 interface AuthResponse {
@@ -75,7 +76,6 @@ const Login: React.FC = () => {
                     });
 
                     const userData = await userResponse.json();
-                    console.log(userData);
 
                     if (userResponse.ok && userData.email) {
                         sessionStorage.setItem('token', response.user.uid);
@@ -85,7 +85,18 @@ const Login: React.FC = () => {
                             const extractedID = extractIdFromMessage(userData);
                             const rol_id = extractedID?.toString();
                             sessionStorage.setItem('role', rol_id || 'Not identified');
+                            sessionStorage.setItem('BearerToken', userData.token);
+                            sessionStorage.setItem('id', userData.id);
 
+                            if (user.email === "jagredo03@gmail.com"){
+                                router.replace("/superadmin")
+                            } else if(rol_id === "1"){
+                                router.replace("/admin")
+                            } else if (rol_id === "2"){
+                                router.replace("/owner")
+                            } else{
+                                alert("User not found")
+                            }
                             await showAlert({
                                 title: "Session Started",
                                 text: "Welcome back!",

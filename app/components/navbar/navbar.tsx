@@ -25,26 +25,29 @@ export const Navbar = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [user, setUser] = useState<UserAdmin>(initialStateUser);
-  const [unitName, setUnitName] = useState<string>('');
   const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
       const userId = sessionStorage.getItem('id');
+      const token = sessionStorage.getItem('BearerToken');
       if (!userId) return;
 
       try {
         // Fetch user data
-        const userResponse = await fetch(`http://localhost:3004/users/${userId}`);
-        const userData = await userResponse.json();
-        setUser(userData);
+        const userResponse = await fetch(`/api/user/readById/${userId}`, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}`, // Aquí colocas tu Bearer Token
+              'Content-Type': 'application/json',  // Especificamos que es JSON
+          }
+      });
+      
+      const userData = await userResponse.json();
+      console.log(userData);
+      setUser(userData);
+      
 
-        // Fetch residential unit name
-        if (userData.residential_id) {
-          const unitResponse = await fetch(`http://localhost:3004/units/${userData.residential_id}`);
-          const unitData = await unitResponse.json();
-          setUnitName(unitData.name);
-        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -73,7 +76,9 @@ export const Navbar = () => {
       });
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('id');
-      sessionStorage.removeItem('residential_id');
+      sessionStorage.removeItem('email');
+      sessionStorage.removeItem('role');
+      sessionStorage.removeItem('BearerToken');
       router.push('/login');
     } catch (error) {
       console.error('Error logging out:', error);
@@ -93,7 +98,7 @@ export const Navbar = () => {
           <img className={style.logo} src="/Logo_name.png" alt="Logo" />
         </div>
         <ul className={style.ul}>
-          <h3 className={style.h3}>{unitName || 'Residential Unit Name'}</h3>
+          <h3 className={style.h3}>{'Residential Unit Name'}</h3>
         </ul>
         <div className={style.user}>
           <a href="#" onClick={toggleModal}>

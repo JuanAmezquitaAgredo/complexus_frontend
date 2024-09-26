@@ -89,7 +89,7 @@ const FormRegisterAdmin = () => {
                 await sendEmailVerification(responseFirebase.user);
                 
                 // Step 2: Save the residential unit in the local database
-                const responseDBUnit = await fetch('http://localhost:3004/units', {
+                const responseDBUnit = await fetch('/api/user/admin/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
