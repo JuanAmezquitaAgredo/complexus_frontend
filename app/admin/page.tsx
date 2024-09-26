@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Navbar } from '@/app/components/navbar/navbar';
@@ -12,21 +13,11 @@ import PinnedPostCard from '../components/pinnedCard/PinnedPostCard';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import { useRouter } from 'next/navigation';
 
-interface Post {
-  id: number;
-  title: string;
-  user: string;
-  timePosted: string;
-  description: string;
-  likes: number;
-  imageUrl: string;
-}
-
 interface PinnedPost {
   id: number;
   title: string;
   user: string;
-  description: string; // Or description, depending on your structure
+  description: string;
   imageUrl: string;
 }
 
@@ -73,7 +64,7 @@ const AdminPage: React.FC = () => {
   }, [dispatch, token]);
 
   // Handle the deletion of pinned posts
-  const handleDeletePost = async (postId: number): Promise<void> => {
+  const handleDeletePinnedPost = async (postId: number): Promise<void> => {
     try {
       const response = await fetch(`http://localhost:3004/pin/${postId}`, {
         method: 'DELETE',
@@ -87,6 +78,24 @@ const AdminPage: React.FC = () => {
       setPinnedPosts(pinnedPosts.filter((post) => post.id !== postId));
     } catch (error) {
       console.error('Error deleting pinned post:', error);
+    }
+  };
+
+  // Handle the deletion of normal posts
+  const handleDeletePost = async (postId: number): Promise<void> => {
+    try {
+      const response = await fetch(`http://localhost:3004/posts/${postId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Error deleting post');
+      }
+
+      // Dispatch fetchPosts again to refresh the list of posts
+      dispatch(fetchPosts());
+    } catch (error) {
+      console.error('Error deleting post:', error);
     }
   };
 
@@ -118,6 +127,7 @@ const AdminPage: React.FC = () => {
                   description={post.description}
                   likes={post.likes}
                   imageUrl={post.imageUrl}
+                  onDelete={() => handleDeletePost(post.id)} // Pasar la función de eliminación a PostCard
                 />
               ))}
             </div>
@@ -139,7 +149,7 @@ const AdminPage: React.FC = () => {
                   user={post.user}
                   description={post.description}
                   imageUrl={post.imageUrl}
-                  onDelete={() => handleDeletePost(post.id)}
+                  onDelete={() => handleDeletePinnedPost(post.id)} // Pasar la función de eliminación a PinnedPostCard
                 />
               ))}
             </div>
