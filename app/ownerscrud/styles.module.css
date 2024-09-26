@@ -38,6 +38,7 @@
 .action-icons {
     display: flex;
     justify-content: center;
+    margin-top: 7px;
 }
 
 .action-icons button {
@@ -71,6 +72,22 @@
         background-color: #7833c2;
     }
 }
+
+.clearButton {
+    background-color: #9340ff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.clearButton:hover {
+    background-color: #7833c2;
+}
+
 
 
 .fileUpload {
@@ -111,6 +128,11 @@
 }
 
 .uploadButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.clearButton:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }

@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import { User } from "../types/users"; 
+import { User } from "../types/users";
 import ConfirmDialog from "../components/alertDelete/alertDelete";
 import { Navbar } from "../components/navbar/navbar";
 import { Sidebar } from "../components/sidebar/sidebar";
@@ -9,15 +9,25 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from "../components/common/modal/modal";
 import FormRegisterOwner from "../components/form-register-owner/form-register-owner";
-import FormEditOwner from "../components/form-edit-owner/form-edit-owner"; 
-import * as XLSX from 'xlsx'; 
+import FormEditOwner from "../components/form-edit-owner/form-edit-owner";
+import * as XLSX from 'xlsx';
+import showAlert from "../components/alertcomponent/alertcomponent";
 
 const OwnersCrud = () => {
     const [users, setUsers] = useState<User[]>([]);
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); 
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false); 
-    const [selectedUserId, setSelectedUserId] = useState<string>(""); 
-    const [file, setFile] = useState<File | null>(null); 
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState<string>("");
+    const [file, setFile] = useState<File | null>(null);
+    const [excelData, setExcelData] = useState<any[]>([]);
+
+    // Cargar datos de Excel desde localStorage al iniciar
+    useEffect(() => {
+        const storedExcelData = localStorage.getItem('excelData');
+        if (storedExcelData) {
+            setExcelData(JSON.parse(storedExcelData));
+        }
+    }, []);
 
     useEffect(() => {
         // Fetch users from json-server
@@ -25,7 +35,7 @@ const OwnersCrud = () => {
             try {
                 const response = await fetch("http://localhost:3004/users");
                 const data = await response.json();
-                
+
                 const owners = data.filter((user: User) => user.rol_id === '3');
                 setUsers(owners);
             } catch (error) {
@@ -73,7 +83,7 @@ const OwnersCrud = () => {
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
-            setFile(file); 
+            setFile(file);
         }
     };
 
@@ -91,35 +101,29 @@ const OwnersCrud = () => {
 
             const sheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[sheetName];
-            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+            const jsonData = XLSX.utils.sheet_to_json(worksheet); // Convierte la hoja de Excel a JSON
 
-            if (jsonData) {
-                alert("File uploaded successfully!");
-            }
-
-            // try {
-            //     // Envía los datos al backend
-            //     const response = await fetch("http://localhost:3004/upload", {
-            //         method: "POST",
-            //         headers: {
-            //             "Content-Type": "application/json",
-            //         },
-            //         body: JSON.stringify({ data: jsonData }),
-            //     });
-
-            //     if (response.ok) {
-            //         alert("File uploaded successfully!");
-            //     } else {
-            //         console.error("Error uploading file:", response.statusText);
-            //         alert("Error uploading file.");
-            //     }
-            // } catch (error) {
-            //     console.error("Error uploading file:", error);
-            //     alert("Error uploading file.");
-            // }
+            setExcelData(jsonData); // Actualiza el estado con los datos del Excel
+            localStorage.setItem('excelData', JSON.stringify(jsonData)); // Guardar en localStorage para persistencia
+            showAlert({
+                title: 'Success',
+                text: 'Excel data uploaded successfully!',
+                icon: 'success'
+            });
         };
 
         reader.readAsArrayBuffer(file);
+    };
+
+    // Función para eliminar los datos de Excel del estado y de localStorage
+    const handleClearExcelData = () => {
+        setExcelData([]);
+        localStorage.removeItem('excelData');
+        showAlert({
+            title: 'Delete',
+            text: 'Excel data cleared successfully!',
+            icon: 'warning'
+        });
     };
 
     return (
@@ -155,6 +159,17 @@ const OwnersCrud = () => {
                                     </td>
                                 </tr>
                             ))}
+
+                            {/* Renderiza los datos del archivo Excel */}
+                            {excelData.map((row, index) => (
+                                <tr key={index} className={styles.tr}>
+                                    <td className={styles.td}>{row["Name"] || "N/A"}</td>
+                                    <td className={styles.td}>{row["Email"] || "N/A"}</td>
+                                    <td className={styles.td}>{row["Apto"] || "N/A"}</td>
+                                    <td className={styles.td}>{row["Phone"] || "N/A"}</td>
+                                    <td className={styles["action-icons"]}></td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                     <div className={styles.createAdmin}>
@@ -165,6 +180,9 @@ const OwnersCrud = () => {
                         <input type="file" id="fileUpload" accept=".xlsx, .xls" onChange={handleFileChange} />
                         <button className={styles.uploadButton} onClick={handleUploadClick} disabled={!file}>
                             Upload Excel
+                        </button>
+                        <button className={styles.clearButton} onClick={handleClearExcelData} disabled={excelData.length === 0}>
+                            Clear Excel
                         </button>
                     </div>
                 </div>
